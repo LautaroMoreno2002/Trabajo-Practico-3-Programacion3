@@ -1,7 +1,12 @@
 package model;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class Grafo {
 	private int[][] _MA;
@@ -73,5 +78,22 @@ public class Grafo {
 		MA.setLength(MA.length()-2);
 		MA.append("]");
 		return MA.toString();
+	}
+	
+	// Prueba
+	public String generarGrafoEnJSON() {
+		Gson gson = new GsonBuilder().create();
+		String json = gson.toJson(this);
+		
+		return json;
+	}
+	public void guardarGrafoEnJSON(String grafo, String nombreArchivo) {
+		try {
+			FileWriter writer = new FileWriter(nombreArchivo);
+			writer.write(grafo);
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

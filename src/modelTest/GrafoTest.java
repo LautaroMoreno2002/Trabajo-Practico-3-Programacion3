@@ -31,7 +31,7 @@ public class GrafoTest {
 	public void vertificarSiExisteAristaEnAmbosSentidos() {
 		Grafo g = new Grafo(3);
 		g.agregarArista(1, 0);
-		assertTrue(g.existeArista(0, 1) && g.existeArista(0, 1));
+		assertTrue(g.existeArista(0, 1) && g.existeArista(1, 0));
 	}
 	@Test
 	public void eliminarArista() {
