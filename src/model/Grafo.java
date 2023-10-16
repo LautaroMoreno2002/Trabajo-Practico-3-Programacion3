@@ -40,6 +40,9 @@ public class Grafo {
 	public HashSet<Integer> vecinoDelVertice(int vertice){
 		return _vecinos.get(vertice);
 	}
+	public int cantidadVertices() {
+		return _MA.length;
+	}
 		
 	private void validarIndices(int verticeA,int verticeB) {
 		if (verticeA == verticeB) 
@@ -87,6 +90,7 @@ public class Grafo {
 		
 		return json;
 	}
+	// Prueba
 	public void guardarGrafoEnJSON(String grafo, String nombreArchivo) {
 		try {
 			FileWriter writer = new FileWriter(nombreArchivo);
