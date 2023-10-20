@@ -24,6 +24,7 @@ public class Grafo {
 		_MA[verticeA][verticeB] = _MA[verticeB][verticeA] = 1;
 		_vecinos.get(verticeA).add(verticeB);
 		_vecinos.get(verticeB).add(verticeA);
+		System.out.println();
 		System.out.println(imprimirMatriz());
 	}
 	public boolean existeArista(int verticeA,int verticeB) {
@@ -99,5 +100,8 @@ public class Grafo {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	public ArrayList<HashSet<Integer>> getVecinos() {
+		return _vecinos;
 	}
 }
