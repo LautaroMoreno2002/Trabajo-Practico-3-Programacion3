@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 
 public class ConjuntoDominante {
@@ -19,19 +20,22 @@ public class ConjuntoDominante {
 		int vertice = 0;
 		
 		while (vertice < _verticesOrdenados.size()){
+			System.out.println("Inicia: "+_verticesMarcados.toString());
+			fijarmeSiLosVecinosEstanAñadidos(_verticesOrdenados.get(vertice),_verticesMarcados, vecinosDeVertices);
 			if (!_verticesMarcados.contains(_verticesOrdenados.get(vertice)))
 				_verticesMarcados.add(_verticesOrdenados.get(vertice));
-			fijarmeSiLosVecinosEstanAñadidos(_verticesOrdenados.get(vertice),_verticesMarcados, vecinosDeVertices);
-			_conjuntoMinimo.add(_verticesOrdenados.get(vertice));
 			if (_verticesMarcados.size() == _verticesOrdenados.size())
 				return _conjuntoMinimo;
 			
+			_conjuntoMinimo.add(_verticesOrdenados.get(vertice));
 			vertice++;
+			System.out.println("Termina: "+_verticesMarcados.toString());
 		}
-		return null;
+		return _conjuntoMinimo;
 	}
 	private static void fijarmeSiLosVecinosEstanAñadidos(Integer vertice, ArrayList<Integer> _verticesMarcados2, ArrayList<HashSet<Integer>> vecinosDeVertices) {
 		HashSet<Integer> vecinos = vecinosDeVertices.get(vertice);
+		System.out.println("vecinos de " + vertice+ " son " + vecinos.toString());
 		for (Integer vecino : vecinos)
 			if (!_verticesMarcados.contains(vecino))
 				_verticesMarcados.add(vecino);
@@ -68,12 +72,11 @@ public class ConjuntoDominante {
 		Grafo g = new Grafo(6);
 		g.agregarArista(0, 1);
 		g.agregarArista(0, 4);
-		g.agregarArista(1, 2);
 		g.agregarArista(1, 4);
+		g.agregarArista(1, 2);
 		g.agregarArista(2, 3);
-		g.agregarArista(3, 4);
 		g.agregarArista(3, 5);
-		
+		g.agregarArista(3, 4);
 		System.out.println(conjuntoDominante(g.getVecinos()).toString());
 	}
 	
