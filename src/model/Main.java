@@ -19,18 +19,18 @@ public class Main {
 //		g.guardarGrafoEnJSON(grafoJSON, "EjemploGrafo.JSON");
 //	}
 	public static void main(String[] args) {
-		Vertice v1 = new Vertice(1,new HashSet<Integer>());
-		Vertice v2 = new Vertice(2,new HashSet<Integer>());
-		Vertice v3 = new Vertice(3,new HashSet<Integer>());
-		Vertice v4 = new Vertice(4,new HashSet<Integer>());
-		Vertice v5 = new Vertice(5,new HashSet<Integer>());
-		Vertice v6 = new Vertice(6,new HashSet<Integer>());
+		Vertice v1 = new Vertice(1);
+		Vertice v2 = new Vertice(2);
+		Vertice v3 = new Vertice(3);
+		Vertice v4 = new Vertice(4);
+		Vertice v5 = new Vertice(5);
+		Vertice v6 = new Vertice(6);
 
 		v1.agregarVecino(2);v1.agregarVecino(5);
 		v2.agregarVecino(3);v2.agregarVecino(1);v2.agregarVecino(5);
-		v5.agregarVecino(2);v5.agregarVecino(1);v5.agregarVecino(4);
-		v4.agregarVecino(3);v4.agregarVecino(5);v4.agregarVecino(6);
 		v3.agregarVecino(4);v3.agregarVecino(2);
+		v4.agregarVecino(3);v4.agregarVecino(5);v4.agregarVecino(6);
+		v5.agregarVecino(2);v5.agregarVecino(1);v5.agregarVecino(4);
 		v6.agregarVecino(4);
 		
 		ArrayList<Vertice> vertices = new ArrayList<Vertice>();
@@ -52,9 +52,9 @@ public class Main {
 		System.out.println("Copia inversa ordenada: \n"+ vertices2);
 		Collections.reverse(vertices2);
 		System.out.println("Copia inversa ordenada de mayor a menor: \n"+vertices2);
-		
-		System.out.println("Conjunto minimo del conjunto vertices1: "+ConjuntoDominante.conjuntoMinimo(vertices2).toString());
-		System.out.println("Conjunto minimo del conjunto vertices2: "+ConjuntoDominante.conjuntoMinimo(vertices).toString());
+		System.out.println();
+		System.out.println("Conjunto minimo del conjunto vertices1: "+ConjuntoDominante.conjuntoMinimo(vertices).toString());
+		System.out.println("Conjunto minimo del conjunto vertices2: "+ConjuntoDominante.conjuntoMinimo(vertices2).toString());
 		
 	}
 }

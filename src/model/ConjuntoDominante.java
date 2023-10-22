@@ -100,7 +100,7 @@ public class ConjuntoDominante {
 		int i = 0;
 		while (_verticesMarcados.size() < _verticesOrdenados.size()) {
 			marcarVecinos(_verticesOrdenados.get(i),_verticesMarcados);
-			_conjuntoMinimo.add(_verticesOrdenados.get(i).get_vertice());
+			_conjuntoMinimo.add(_verticesOrdenados.get(i).get_idVertice());
 			i++;
 		}
 		return _conjuntoMinimo;
@@ -111,6 +111,6 @@ public class ConjuntoDominante {
 			if (!_verticesMarcados.contains(vecino))
 				_verticesMarcados.add(vecino);
 		}
-		if (!_verticesMarcados.contains(vertice.get_vertice()))_verticesMarcados.add(vertice.get_vertice());
+		if (!_verticesMarcados.contains(vertice.get_idVertice())) _verticesMarcados.add(vertice.get_idVertice());
 	}
 }
