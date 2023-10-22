@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 
 public class ConjuntoDominante {
@@ -93,6 +94,8 @@ public class ConjuntoDominante {
 	 [5,4,3,2,1,0] [5,4,2,3,...]
 	 */
 	public static ArrayList<Integer> conjuntoMinimo(ArrayList<Vertice> vertices2){
+		ordenarVerticesSegunCantidadDeVecinos(vertices2);
+		
 		_verticesOrdenados = vertices2;
 		_verticesMarcados = new ArrayList<Integer>();
 		_conjuntoMinimo = new ArrayList<Integer>();
@@ -100,17 +103,25 @@ public class ConjuntoDominante {
 		int i = 0;
 		while (_verticesMarcados.size() < _verticesOrdenados.size()) {
 			marcarVecinos(_verticesOrdenados.get(i),_verticesMarcados);
-			_conjuntoMinimo.add(_verticesOrdenados.get(i).get_idVertice());
+			_conjuntoMinimo.add(_verticesOrdenados.get(i).getIdVertice());
 			i++;
 		}
 		return _conjuntoMinimo;
 	}
+	private static void ordenarVerticesSegunCantidadDeVecinos(ArrayList<Vertice> vertices2) {
+		if (revertir()) Collections.reverse(vertices2);
+		Collections.sort(vertices2);
+		Collections.reverse(vertices2);
+	}
+	private static boolean revertir() {
+		return Math.floor(Math.random()*2) == 0 ? true : false;
+	}
 	private static void marcarVecinos(Vertice vertice, ArrayList<Integer> _verticesMarcados) {
-		HashSet<Integer> vecinos = vertice.get_vecinos();
+		HashSet<Integer> vecinos = vertice.getVecinos();
 		for (Integer vecino : vecinos) {
 			if (!_verticesMarcados.contains(vecino))
 				_verticesMarcados.add(vecino);
 		}
-		if (!_verticesMarcados.contains(vertice.get_idVertice())) _verticesMarcados.add(vertice.get_idVertice());
+		if (!_verticesMarcados.contains(vertice.getIdVertice())) _verticesMarcados.add(vertice.getIdVertice());
 	}
 }

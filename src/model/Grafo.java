@@ -26,16 +26,6 @@ public class Grafo {
 		//_vecinos.get(verticeA).add(verticeB);
 		//_vecinos.get(verticeB).add(verticeA);
 		agregarVecinosEnLosVertices(verticeA,verticeB);
-		System.out.println();
-		System.out.println(imprimirMatriz());
-	}
-	private void agregarVecinosEnLosVertices(int verticeA, int verticeB) {
-		for (Vertice vertice : _verticesConVecinos) {
-			if (vertice.get_idVertice() == verticeA)
-				vertice.agregarVecino(verticeB);
-			if (vertice.get_idVertice() == verticeB)
-				vertice.agregarVecino(verticeA);
-		}	
 	}
 	public boolean existeArista(int verticeA,int verticeB) {
 		validarIndices(verticeA, verticeB);
@@ -49,19 +39,11 @@ public class Grafo {
 		eliminarVecinoDeLosVertices(verticeA,verticeB);
 		System.out.println(imprimirMatriz());
 	}
-	private void eliminarVecinoDeLosVertices(int verticeA, int verticeB) {
-		for (Vertice vertice : _verticesConVecinos) {
-			if (vertice.get_idVertice() == verticeA)
-				vertice.eliminarVecino(verticeB);
-			if (vertice.get_idVertice() == verticeB)
-				vertice.eliminarVecino(verticeA);
-		}	
-	}
 	public HashSet<Integer> vecinoDelVertice(int vertice){
 //		return _vecinos.get(vertice);
 		for (Vertice verticeActual : _verticesConVecinos)
-			if (verticeActual.get_idVertice() == vertice) 
-				return verticeActual.get_vecinos();
+			if (verticeActual.getIdVertice() == vertice) 
+				return verticeActual.getVecinos();
 		return null;
 	}
 	public int cantidadVertices() {
@@ -80,13 +62,6 @@ public class Grafo {
 		inicializarMAConCeroAristas();
 //		inicializarVecinos();
 		inicializarVertices();
-		System.out.println(imprimirMatriz());
-	}
-	private void inicializarVertices() {
-		for (int id = 0; id < _MA.length; id++) {
-			_verticesConVecinos.get(id).set_idVertice(id);
-		}
-		
 	}
 	private void inicializarMAConCeroAristas() {
 		for (int fila = 0; fila < _MA.length; fila++) {
@@ -95,11 +70,33 @@ public class Grafo {
 			}
 		}
 	}
+	private void inicializarVertices() {
+		for (int id = 0; id < _MA.length; id++) {
+			Vertice v = new Vertice(id);
+			_verticesConVecinos.add(v);
+		}
+	}
 //	private void inicializarVecinos() {
 //		for (int vertice = 0; vertice < _MA.length; vertice++) {
 //			_vecinos.add(new HashSet<Integer>());
 //		}
 //	}
+	private void agregarVecinosEnLosVertices(int verticeA, int verticeB) {
+		for (Vertice vertice : _verticesConVecinos) {
+			if (vertice.getIdVertice() == verticeA)
+				vertice.agregarVecino(verticeB);
+			if (vertice.getIdVertice() == verticeB)
+				vertice.agregarVecino(verticeA);
+		}	
+	}
+	private void eliminarVecinoDeLosVertices(int verticeA, int verticeB) {
+		for (Vertice vertice : _verticesConVecinos) {
+			if (vertice.getIdVertice() == verticeA)
+				vertice.eliminarVecino(verticeB);
+			if (vertice.getIdVertice() == verticeB)
+				vertice.eliminarVecino(verticeA);
+		}	
+	}
 	private String imprimirMatriz() {
 		StringBuilder MA = new StringBuilder();
 		MA.append("[");

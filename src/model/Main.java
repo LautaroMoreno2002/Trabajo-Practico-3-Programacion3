@@ -1,24 +1,25 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 
 public class Main {
-//	public static void main(String[] args) {
-//		Grafo g = new Grafo(6);
-//		g.agregarArista(0, 1);
-//		g.agregarArista(0, 4);
-//		g.agregarArista(1, 2);
-//		g.agregarArista(1, 4);
-//		g.agregarArista(2, 3);
-//		g.agregarArista(3, 4);
-//		g.agregarArista(3, 5);
-//		
-//		String grafoJSON = g.generarGrafoEnJSON();
-//		g.guardarGrafoEnJSON(grafoJSON, "EjemploGrafo.JSON");
-//	}
 	public static void main(String[] args) {
+		Grafo g = new Grafo(6);
+		g.agregarArista(0, 1);
+		g.agregarArista(0, 4);
+		g.agregarArista(1, 2);
+		g.agregarArista(1, 4);
+		g.agregarArista(2, 3);
+		g.agregarArista(3, 4);
+		g.agregarArista(3, 5);
+		
+		System.out.println("Conjunto minimo del grafo: "+ConjuntoDominante.conjuntoMinimo(g.getVerticesConVecinos()));
+		System.out.println("Y su conjunto de vertices queda ordenado de la siguiente forma: \n"+g.getVerticesConVecinos());
+		
+		String grafoJSON = g.generarGrafoEnJSON();
+		g.guardarGrafoEnJSON(grafoJSON, "EjemploGrafo.JSON");
+		
+
 		Vertice v1 = new Vertice(1);
 		Vertice v2 = new Vertice(2);
 		Vertice v3 = new Vertice(3);
@@ -39,20 +40,20 @@ public class Main {
 		vertices.add(v1);vertices.add(v2);vertices.add(v3);vertices.add(v4);vertices.add(v5);vertices.add(v6);
 		vertices2.add(v1);vertices2.add(v2);vertices2.add(v3);vertices2.add(v4);vertices2.add(v5);vertices2.add(v6);
 		
-		System.out.println("Original: \n"+vertices);
-		Collections.sort(vertices);
-		System.out.println("Original ordenado de menor a mayor: \n"+vertices);
-		Collections.reverse(vertices);
-		System.out.println("Original ordenado de mayor a menor:  \n"+vertices);
-		System.out.println();
-		System.out.println("Copia: \n"+vertices2);
-		Collections.reverse(vertices2);
-		System.out.println("Copia inversa: \n" + vertices2);
-		Collections.sort(vertices2);
-		System.out.println("Copia inversa ordenada: \n"+ vertices2);
-		Collections.reverse(vertices2);
-		System.out.println("Copia inversa ordenada de mayor a menor: \n"+vertices2);
-		System.out.println();
+//		System.out.println("Original: \n"+vertices);
+//		Collections.sort(vertices);
+//		System.out.println("Original ordenado de menor a mayor: \n"+vertices);
+//		Collections.reverse(vertices);
+//		System.out.println("Original ordenado de mayor a menor:  \n"+vertices);
+//		System.out.println();
+//		System.out.println("Copia: \n"+vertices2);
+//		Collections.reverse(vertices2);
+//		System.out.println("Copia inversa: \n" + vertices2);
+//		Collections.sort(vertices2);
+//		System.out.println("Copia inversa ordenada: \n"+ vertices2);
+//		Collections.reverse(vertices2);
+//		System.out.println("Copia inversa ordenada de mayor a menor: \n"+vertices2);
+//		System.out.println();
 		System.out.println("Conjunto minimo del conjunto vertices1: "+ConjuntoDominante.conjuntoMinimo(vertices).toString());
 		System.out.println("Conjunto minimo del conjunto vertices2: "+ConjuntoDominante.conjuntoMinimo(vertices2).toString());
 		
