@@ -3,11 +3,11 @@ package model;
 import java.util.HashSet;
 
 public class Vertice implements Comparable<Vertice>{
-	private int _id;
+	private int _vertice;
 	private HashSet<Integer> _vecinos;
 	
-	Vertice(int vertice){
-		_id = vertice;
+	public Vertice(int vertice){
+		_vertice = vertice;
 		_vecinos = new HashSet<Integer>();
 	}
 
@@ -22,7 +22,7 @@ public class Vertice implements Comparable<Vertice>{
 	}
 	
 	public int getIdVertice() {
-		return _id;
+		return _vertice;
 	}
 
 	public HashSet<Integer> getVecinos() {
@@ -33,11 +33,15 @@ public class Vertice implements Comparable<Vertice>{
 		return _vecinos.size();
 	}
 	public String toString() {
-		return "<"+_id+ ", vecinos: " +_vecinos.toString()+">";
+		return "<"+_vertice+ ", vecinos: " +_vecinos.toString()+">";
 	}
 
 	@Override
 	public int compareTo(Vertice otroVertice) {
 		return this.cantidadDeVecinos() - otroVertice.cantidadDeVecinos();
+	}
+
+	public void setVecinos(HashSet<Integer> vecinos) {
+		_vecinos = vecinos;
 	}
 }

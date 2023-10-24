@@ -49,6 +49,5 @@ public class GrafoTest {
 		String esperado = "[0, 2]";
 		String vecinosDelUno = g.vecinoDelVertice(1).toString();
 		assertEquals(esperado, vecinosDelUno);
-	}
-	
+	}	
 }

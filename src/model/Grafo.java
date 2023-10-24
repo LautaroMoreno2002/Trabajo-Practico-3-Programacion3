@@ -1,5 +1,7 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +21,9 @@ public class Grafo {
 //		_vecinos = new ArrayList<HashSet<Integer>>();
 		_verticesConVecinos = new ArrayList<Vertice>();
 		inicializarGrafo();
+	}
+	public Grafo(ArrayList<Vertice> vertices) {
+		_verticesConVecinos = vertices;
 	}
 	public void agregarArista(int verticeA,int verticeB) {
 		validarIndices(verticeA, verticeB);
@@ -113,8 +118,8 @@ public class Grafo {
 	
 	// Prueba
 	public String generarGrafoEnJSON() {
-		Gson gson = new GsonBuilder().create();
-		String json = gson.toJson(this);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json = gson.toJson(_verticesConVecinos);
 		
 		return json;
 	}
@@ -128,6 +133,18 @@ public class Grafo {
 			e.printStackTrace();
 		}
 	}
+	public static Grafo leerGrafoJSON(String archivo) {
+		Gson gson = new Gson();
+		Grafo g = null;
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(archivo));
+			g = new Grafo(gson.fromJson(br, ArrayList.class));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return g;
+	}
+
 //	public ArrayList<HashSet<Integer>> getVecinos() {
 //		return _vecinos;
 //	}

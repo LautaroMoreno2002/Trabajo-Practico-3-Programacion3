@@ -13,13 +13,15 @@ public class Main {
 		g.agregarArista(3, 4);
 		g.agregarArista(3, 5);
 		
-		System.out.println("Conjunto minimo del grafo: "+ConjuntoDominante.conjuntoMinimo(g.getVerticesConVecinos()));
+		System.out.println("Conjunto minimo del grafo: "+ConjuntoDominanteMinimo.conjuntoMinimo(g.getVerticesConVecinos()));
 		System.out.println("Y su conjunto de vertices queda ordenado de la siguiente forma: \n"+g.getVerticesConVecinos());
 		
 		String grafoJSON = g.generarGrafoEnJSON();
 		g.guardarGrafoEnJSON(grafoJSON, "EjemploGrafo.JSON");
+		Grafo g2 = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
+		System.out.println("El grafo leido del JSON es \n"+g2.getVerticesConVecinos().toString());
+		System.out.println("Y un vertice comun del g2 es: "+g2.getVerticesConVecinos().get(0).toString());
 		
-
 		Vertice v1 = new Vertice(1);
 		Vertice v2 = new Vertice(2);
 		Vertice v3 = new Vertice(3);
@@ -54,8 +56,8 @@ public class Main {
 //		Collections.reverse(vertices2);
 //		System.out.println("Copia inversa ordenada de mayor a menor: \n"+vertices2);
 //		System.out.println();
-		System.out.println("Conjunto minimo del conjunto vertices1: "+ConjuntoDominante.conjuntoMinimo(vertices).toString());
-		System.out.println("Conjunto minimo del conjunto vertices2: "+ConjuntoDominante.conjuntoMinimo(vertices2).toString());
+		System.out.println("Conjunto minimo del conjunto vertices1: "+ConjuntoDominanteMinimo.conjuntoMinimo(vertices).toString());
+		System.out.println("Conjunto minimo del conjunto vertices2: "+ConjuntoDominanteMinimo.conjuntoMinimo(vertices2).toString());
 		
 	}
 }

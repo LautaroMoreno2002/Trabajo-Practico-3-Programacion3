@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
-public class ConjuntoDominante {
+public class ConjuntoDominanteMinimo {
 	private static ArrayList<Vertice> _verticesOrdenados;
 	private static ArrayList<Integer> _verticesMarcados;
 	private static ArrayList<Integer> _conjuntoMinimo;
