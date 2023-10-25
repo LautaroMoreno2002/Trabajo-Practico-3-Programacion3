@@ -9,18 +9,17 @@ import java.util.HashSet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+
 public class Grafo {
-	private int _cantVertices;
 	private ArrayList<Vertice> _verticesConVecinos;
 	
-	public Grafo(int cantVertices) {
+	public Grafo(int cantVertices) { // Para crear el grafo de 0
 		if (cantVertices < 0) 
 			throw new IllegalArgumentException("La cantidad de vértices para un grafo debe ser mayor o igual a cero");
-		_cantVertices = cantVertices;
 		_verticesConVecinos = new ArrayList<Vertice>();
-		inicializarGrafo();
+		inicializarVertices(cantVertices);
 	}
-	public Grafo(ArrayList<Vertice> vertices) {
+	public Grafo(ArrayList<Vertice> vertices) { // Para crear el grafo a partir del ingreso de los  vértices con un archivo JSON
 		_verticesConVecinos = vertices;
 	}
 	public void agregarArista(int verticeA,int verticeB) {
@@ -49,7 +48,7 @@ public class Grafo {
 		return null;
 	}
 	public int cantidadVertices() {
-		return _cantVertices;
+		return _verticesConVecinos.size();
 	}
 		
 	private void validarIndices(int verticeA,int verticeB) {
@@ -57,15 +56,13 @@ public class Grafo {
 			throw new IllegalArgumentException("Los vértices deben ser distintos para no generar un loop");
 		if (verticeA < 0 || verticeB < 0) 
 			throw new IllegalArgumentException("Los vértices deben ser positivos y existir dentro del grafo");
-		else if (verticeA >= _cantVertices || verticeB >= _cantVertices) 
+		if (verticeA >= cantidadVertices() || verticeB >= cantidadVertices()) 
 			throw new IllegalArgumentException("Los vértices deben existir dentro del grafo");
 	}
-	private void inicializarGrafo() {
-		inicializarVertices();
-	}
-	private void inicializarVertices() {
-		for (int id = 0; id < _cantVertices; id++) {
+	private void inicializarVertices(int cantVertices) {
+		for (int id = 0; id < cantVertices; id++) {
 			Vertice v = new Vertice(id);
+			v.setIdVertice(id);
 			_verticesConVecinos.add(v);
 		}
 	}
@@ -89,7 +86,7 @@ public class Grafo {
 	// Prueba
 	public String generarGrafoEnJSON() {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		String json = gson.toJson(_verticesConVecinos);
+		String json = gson.toJson(this);
 		
 		return json;
 	}
@@ -104,15 +101,31 @@ public class Grafo {
 		}
 	}
 	public static Grafo leerGrafoJSON(String archivo) {
+//		Gson gson = new Gson();
+//		String json = "";
+//		try {
+//			BufferedReader br = new BufferedReader(new FileReader(archivo));
+//			String linea;
+//			while ((linea = br.readLine()) != null) {
+//				json += linea;
+//			}
+//			br.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println(json);
+//		Vertice v = gson.fromJson(json.substring(1,34), Vertice.class);
+//		System.out.println(v);
+//		return null;
 		Gson gson = new Gson();
-		Grafo g = null;
+		Grafo ret = null;
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(archivo));
-			g = new Grafo(gson.fromJson(br, ArrayList.class));
+			ret = gson.fromJson(br, Grafo.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return g;
+		return ret;
 	}
 	public ArrayList<Vertice> getVerticesConVecinos(){
 		return _verticesConVecinos;

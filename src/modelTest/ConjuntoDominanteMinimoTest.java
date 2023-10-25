@@ -3,7 +3,7 @@ package modelTest;
 import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
-import model.ConjuntoDominanteMinimo;
+import model.CDM;
 import model.Grafo;
 
 public class ConjuntoDominanteMinimoTest {
@@ -14,7 +14,7 @@ public class ConjuntoDominanteMinimoTest {
 		g.agregarArista(1, 2);
 		g.agregarArista(1, 4);
 		g.agregarArista(4, 3);
-		ArrayList<Integer> cm = ConjuntoDominanteMinimo.conjuntoMinimo(g.getVerticesConVecinos());
+		ArrayList<Integer> cm = CDM.conjuntoMinimo(g.getVerticesConVecinos());
 		assertTrue(cm.size() == 2);
 	}
 	@Test
@@ -23,7 +23,7 @@ public class ConjuntoDominanteMinimoTest {
 		g.agregarArista(0, 1);
 		g.agregarArista(1, 2);
 		g.agregarArista(4, 3);
-		ArrayList<Integer> cm = ConjuntoDominanteMinimo.conjuntoMinimo(g.getVerticesConVecinos());
+		ArrayList<Integer> cm = CDM.conjuntoMinimo(g.getVerticesConVecinos());
 		assertTrue(cm.size() == 2);
 	}
 }

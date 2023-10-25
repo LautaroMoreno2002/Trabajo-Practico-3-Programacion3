@@ -44,4 +44,8 @@ public class Vertice implements Comparable<Vertice>{
 	public void setVecinos(HashSet<Integer> vecinos) {
 		_vecinos = vecinos;
 	}
+
+	public void setIdVertice(int id) {
+		_vertice = id;
+	}
 }
