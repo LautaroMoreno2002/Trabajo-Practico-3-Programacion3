@@ -1,6 +1,6 @@
 package model;
 
-public class Main {
+public class Controlador {
 	public static void main(String[] args) {
 		Grafo gEjemploTP = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
 		System.out.println("El grafo ingresado tiene : "+ gEjemploTP.cantidadVertices()+ " vertices");

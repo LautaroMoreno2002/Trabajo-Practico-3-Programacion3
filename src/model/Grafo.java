@@ -82,15 +82,13 @@ public class Grafo {
 				vertice.eliminarVecino(verticeA);
 		}	
 	}
-	
-	// Prueba
+		
 	public String generarGrafoEnJSON() {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(this);
 		
 		return json;
 	}
-	// Prueba
 	public void guardarGrafoEnJSON(String grafo, String nombreArchivo) {
 		try {
 			FileWriter writer = new FileWriter(nombreArchivo);
@@ -101,22 +99,6 @@ public class Grafo {
 		}
 	}
 	public static Grafo leerGrafoJSON(String archivo) {
-//		Gson gson = new Gson();
-//		String json = "";
-//		try {
-//			BufferedReader br = new BufferedReader(new FileReader(archivo));
-//			String linea;
-//			while ((linea = br.readLine()) != null) {
-//				json += linea;
-//			}
-//			br.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		System.out.println(json);
-//		Vertice v = gson.fromJson(json.substring(1,34), Vertice.class);
-//		System.out.println(v);
-//		return null;
 		Gson gson = new Gson();
 		Grafo ret = null;
 		try {
