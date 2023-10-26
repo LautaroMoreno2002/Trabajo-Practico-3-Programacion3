@@ -89,7 +89,7 @@ public class Grafo {
 		
 		return json;
 	}
-	public void guardarGrafoEnJSON(String grafo, String nombreArchivo) {
+	public static void guardarGrafoEnJSON(String grafo, String nombreArchivo) {
 		try {
 			FileWriter writer = new FileWriter(nombreArchivo);
 			writer.write(grafo);

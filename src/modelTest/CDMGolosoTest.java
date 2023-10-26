@@ -49,7 +49,7 @@ public class CDMGolosoTest {
 		ArrayList<ArrayList<Integer>> soluciones = new ArrayList<ArrayList<Integer>>();
 		for (int i = 0; i < 10; i++){
 			ArrayList<Integer> solucion = CDMGoloso.conjuntoMinimo(gEjemplo.getVerticesConVecinos());
-			if (!soluciones.contains(solucion)) 
+			if (!soluciones.contains(solucion)) // Corregir, {2,4} y {4,2} son el mismo conjunto
 				soluciones.add(solucion);
 		}
 		assertTrue(soluciones.size() == 2);

@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Random;
 
 public class CDMGoloso {
 	private static ArrayList<Vertice> _verticesOrdenados;
@@ -114,7 +115,9 @@ public class CDMGoloso {
 		Collections.reverse(vertices2);
 	}
 	private static boolean revertir() {
-		return Math.floor(Math.random()*2) == 0 ? true : false;
+		//return Math.floor(Math.random()*2) == 0 ? true : false;
+		Random r = new Random();
+		return r.nextBoolean();
 	}
 	private static void marcarVecinos(Vertice vertice, ArrayList<Integer> _verticesMarcados) {
 		HashSet<Integer> vecinos = vertice.getVecinos();

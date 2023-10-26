@@ -8,5 +8,9 @@ public class Presenter {
 	public Presenter() {
 		controlador = new Controlador();
 	}
+
+	public void calcularCGMGoloso(int idOpcion) {
+		
+	}
 	
 }
