@@ -32,7 +32,12 @@ public class InterfazPresentacion {
 	private JFrame interfazPresentacion;
 	private Presenter presenter;
 	private final String[] opciones = new String[] {"Ejemplo Grafo 1", "Ejemplo Grafo 2", "Ejemplo Grafo 3", "Grafo Personalizado"};
-
+	private final Font tipografiaBarra = new Font("Arial", Font.BOLD, 11);
+	private final Font tipografiaBoton = new Font("Arial", Font.BOLD, 12);
+	private final Font tipografiaComboBox = new Font("Arial", Font.BOLD, 13);
+	private final Font tipografiaEtiqueta = new Font("Arial", Font.BOLD, 14);
+	private final Font tipografiaTitulo = new Font("Arial", Font.BOLD, 18);
+	
 	/**
 	 * Launch the application.
 	 */
@@ -68,7 +73,6 @@ public class InterfazPresentacion {
 		interfazPresentacion.setResizable(false);
 		interfazPresentacion.setType(Type.POPUP);
 		interfazPresentacion.setTitle("Trabajo Práctico 3 - Conjunto Generador Mínimo");
-		interfazPresentacion.setFont(new Font("Arial", Font.PLAIN, 12));
 		interfazPresentacion.getContentPane().setBackground(Color.BLACK);
 		interfazPresentacion.setBounds(400, 200, 800, 500);
 		interfazPresentacion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,14 +83,14 @@ public class InterfazPresentacion {
 		barraProgreso.setStringPainted(true);
 		barraProgreso.setIndeterminate(true);
 		barraProgreso.setForeground(Color.RED);
-		barraProgreso.setFont(new Font("Arial", Font.BOLD, 11));
+		barraProgreso.setFont(tipografiaBarra);
 		barraProgreso.setBounds(99, 386, 600, 28);
 		interfazPresentacion.getContentPane().add(barraProgreso);
 		
 		JLabel titulo = new JLabel("Conjunto Generador Mínimo");
-		titulo.setForeground(new Color(255, 255, 255));
-		titulo.setBackground(new Color(255, 255, 255));
-		titulo.setFont(new Font("Arial", Font.BOLD, 18));
+		titulo.setForeground(Color.WHITE);
+		titulo.setBackground(Color.WHITE);
+		titulo.setFont(tipografiaTitulo);
 		titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		titulo.setBounds(235, 21, 306, 28);
 		interfazPresentacion.getContentPane().add(titulo);
@@ -96,24 +100,28 @@ public class InterfazPresentacion {
 		bienvenida.setForeground(Color.WHITE);
 		bienvenida.setBackground(Color.BLACK);
 		bienvenida.setEditable(false);
-		bienvenida.setFont(new Font("Arial", Font.BOLD, 14));
+		bienvenida.setFont(tipografiaEtiqueta);
 		bienvenida.setText("Bienvenido/a. En este programa, se usa un grafo, previamente ingresado por un archivo JSON, del cual se calculará un posible Conjunto Generador Mínimo. Es un \"posible\" ya que pueden haber más de un conjunto, con distintos vértices. No siempre se obtendrá la misma solución.\r\nPara calcular el conjunto se puede usar un algortimo goloso, que brinda la posible solución y luego se visualizarán los datos.\r\nHay ejemplos de grafos cargados en formato JSON para elegir y poder visualizar el programa. En caso de que el usuario lo quiera, puede hacer su propio grafo respetando su estructura (vértices y los vecinos del vértice).");
 		bienvenida.setBounds(10, 70, 764, 142);
 		interfazPresentacion.getContentPane().add(bienvenida);
 
 		JLabel lblImplementar = new JLabel("Implementar el algoritmo con:");
-		lblImplementar.setFont(new Font("Arial", Font.BOLD, 14));
-		lblImplementar.setForeground(new Color(255, 255, 255));
+		lblImplementar.setFont(tipografiaEtiqueta);
+		lblImplementar.setForeground(Color.WHITE);
 		lblImplementar.setBounds(145, 248, 234, 28);
 		interfazPresentacion.getContentPane().add(lblImplementar);
 		
 		JComboBox<String> comboBoxGrafo = new JComboBox<String>();
-		comboBoxGrafo.setFont(new Font("Arial", Font.BOLD, 13));
+		comboBoxGrafo.setFont(tipografiaComboBox);
 		comboBoxGrafo.setModel(new DefaultComboBoxModel<String>(opciones));
 		comboBoxGrafo.setBounds(456, 249, 182, 28);
 		interfazPresentacion.getContentPane().add(comboBoxGrafo);
 		
 		JButton btnAlgGoloso = new JButton("CGM con algoritmo Goloso");
+		btnAlgGoloso.setForeground(Color.BLACK);
+		btnAlgGoloso.setBackground(Color.WHITE);
+		btnAlgGoloso.setFont(tipografiaBoton);
+		btnAlgGoloso.setBounds(167, 317, 192, 35);
 		btnAlgGoloso.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -121,11 +129,21 @@ public class InterfazPresentacion {
 				presenter.calcularCGMGoloso(idOpcion);
 			}
 		});
-		btnAlgGoloso.setForeground(Color.BLACK);
-		btnAlgGoloso.setBackground(Color.WHITE);
-		btnAlgGoloso.setFont(new Font("Arial", Font.BOLD, 12));
-		btnAlgGoloso.setBounds(187, 317, 192, 35);
 		interfazPresentacion.getContentPane().add(btnAlgGoloso);
+		
+		JButton btnBacktracking = new JButton("CGM con backtracking");
+		btnBacktracking.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int idOpcion = comboBoxGrafo.getSelectedIndex();
+				presenter.calcularCGMBacktracking(idOpcion);
+			}
+		});
+		btnBacktracking.setForeground(Color.BLACK);
+		btnBacktracking.setFont(tipografiaBoton);
+		btnBacktracking.setBackground(Color.WHITE);
+		btnBacktracking.setBounds(416, 317, 192, 35);
+		interfazPresentacion.getContentPane().add(btnBacktracking);
 		
 		
 	}

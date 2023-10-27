@@ -10,7 +10,11 @@ public class Presenter {
 	}
 
 	public void calcularCGMGoloso(int idOpcion) {
-		
+		controlador.armarCGMGoloso(idOpcion);
+	}
+
+	public void calcularCGMBacktracking(int idOpcion) {
+		controlador.armarCGMBacktracking(idOpcion);
 	}
 	
 }

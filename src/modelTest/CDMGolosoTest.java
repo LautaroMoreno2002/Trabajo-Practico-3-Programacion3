@@ -2,8 +2,11 @@ package modelTest;
 
 import java.util.ArrayList;
 import org.junit.Test;
+
+import conjuntoMinimo.SolverGoloso;
+
 import static org.junit.Assert.assertTrue;
-import model.CDMGoloso;
+
 import model.Grafo;
 import model.Vertice;
 
@@ -11,20 +14,20 @@ public class CDMGolosoTest {
 	@Test
 	public void CMDDeUnGrafoVacio(){
 		Grafo g = new Grafo(0);
-		ArrayList<Integer> cm = CDMGoloso.conjuntoMinimo(g.getVerticesConVecinos());
+		ArrayList<Integer> cm = SolverGoloso.conjuntoMinimo(g.getVerticesConVecinos());
 		assertTrue(cm.isEmpty());
 	}
 	@Test
 	public void CDMDeunGrafoConUnVertice(){
 		Grafo g = new Grafo(1);
-		ArrayList<Integer> cm = CDMGoloso.conjuntoMinimo(g.getVerticesConVecinos());
+		ArrayList<Integer> cm = SolverGoloso.conjuntoMinimo(g.getVerticesConVecinos());
 		assertTrue(cm.size() == 1);
 	}
 	@Test
 	public void CDMDeunGrafoConDosVertices(){
 		Grafo g = new Grafo(2);
 		g.agregarArista(0, 1);
-		ArrayList<Integer> cm = CDMGoloso.conjuntoMinimo(g.getVerticesConVecinos());
+		ArrayList<Integer> cm = SolverGoloso.conjuntoMinimo(g.getVerticesConVecinos());
 		assertTrue(cm.size() == 1);
 	}
 	@Test
@@ -34,13 +37,13 @@ public class CDMGolosoTest {
 		g.agregarArista(1, 2);
 		g.agregarArista(1, 4);
 		g.agregarArista(4, 3);
-		ArrayList<Integer> cm = CDMGoloso.conjuntoMinimo(g.getVerticesConVecinos());
+		ArrayList<Integer> cm = SolverGoloso.conjuntoMinimo(g.getVerticesConVecinos());
 		assertTrue(cm.size() == 2);
 	}
 	@Test
 	public void CDMGrafoConsigna(){
 		Grafo gEjemplo = crearGrafoDeLaConsigna();
-		ArrayList<Integer> cm = CDMGoloso.conjuntoMinimo(gEjemplo.getVerticesConVecinos());
+		ArrayList<Integer> cm = SolverGoloso.conjuntoMinimo(gEjemplo.getVerticesConVecinos());
 		assertTrue(cm.size() == 2);
 	}
 	@Test
@@ -48,7 +51,7 @@ public class CDMGolosoTest {
 		Grafo gEjemplo = crearGrafoDeLaConsigna();
 		ArrayList<ArrayList<Integer>> soluciones = new ArrayList<ArrayList<Integer>>();
 		for (int i = 0; i < 10; i++){
-			ArrayList<Integer> solucion = CDMGoloso.conjuntoMinimo(gEjemplo.getVerticesConVecinos());
+			ArrayList<Integer> solucion = SolverGoloso.conjuntoMinimo(gEjemplo.getVerticesConVecinos());
 			if (!soluciones.contains(solucion)) // Corregir, {2,4} y {4,2} son el mismo conjunto
 				soluciones.add(solucion);
 		}

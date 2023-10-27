@@ -1,11 +1,13 @@
-package model;
+package conjuntoMinimo;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 
-public class CDMGoloso {
+import model.Vertice;
+
+public class SolverGoloso {
 	private static ArrayList<Vertice> _verticesOrdenados;
 	private static ArrayList<Integer> _verticesMarcados;
 	private static ArrayList<Integer> _conjuntoMinimo;
