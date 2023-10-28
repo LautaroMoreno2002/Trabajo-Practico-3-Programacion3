@@ -19,7 +19,9 @@ public class SolverBacktracking {
 	
 	public Set<Integer> resolver() 
 	{
-		resolverBack(0);
+		if (_grafo.cantidadVertices()==0) 
+			return _conjuntoDominanteMinimo;
+		resolverBack(0); // Mejorar para que el primer vertice sea 0 o 1,2,3,...
 		return _conjuntoDominanteMinimo;
 	}
 	
@@ -29,7 +31,7 @@ public class SolverBacktracking {
 		// Llegamos a una hoja.
 		if(vertice == _grafo.cantidadVertices()) 
 		{
-			if(esConjuntoDominante(_marcados)) 
+			if(esConjuntoDominante()) 
 			{
 				if(_marcados.size() < _conjuntoDominanteMinimo.size() || _conjuntoDominanteMinimo.isEmpty()) 
 						_conjuntoDominanteMinimo = new HashSet<>(_marcados);		
@@ -60,11 +62,11 @@ public class SolverBacktracking {
 	}
 
 	// Chequea que sea un conjunto dominante el conjunto que tengo hasta ahora.
-	private boolean esConjuntoDominante(Set<Integer> conjunto) 
+	private boolean esConjuntoDominante() 
 	{
 		Set<Integer> grafoCompleto = new HashSet<>();
 		grafoCompleto.addAll(vecinosDeMarcados());
-		grafoCompleto.addAll(conjunto);
+		grafoCompleto.addAll(_marcados);
 		
 		return grafoCompleto.size() == _grafo.cantidadVertices();
 	}

@@ -1,0 +1,48 @@
+{
+  "_verticesConVecinos": [
+    {
+      "_vertice": 1,
+      "_vecinos": [
+        2,
+        5
+      ]
+    },
+    {
+      "_vertice": 2,
+      "_vecinos": [
+        3,
+        5,
+        1
+      ]
+    },
+    {
+      "_vertice": 3,
+      "_vecinos": [
+        4,
+        2
+      ]
+    },
+    {
+      "_vertice": 4,
+      "_vecinos": [
+        3,
+        5,
+        6
+      ]
+    },
+    {
+      "_vertice": 5,
+      "_vecinos": [
+        1,
+        2,
+        4
+      ]
+    },
+    {
+      "_vertice": 6,
+      "_vecinos": [
+        4
+      ]
+    }
+  ]
+}
