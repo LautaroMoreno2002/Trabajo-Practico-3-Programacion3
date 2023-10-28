@@ -1,5 +1,6 @@
 package presenter;
 
+import java.util.ArrayList;
 import model.Controlador;
 
 public class Presenter {
@@ -9,8 +10,8 @@ public class Presenter {
 		controlador = new Controlador();
 	}
 
-	public void calcularCGMGoloso(int idOpcion) {
-		controlador.armarCGMGoloso(idOpcion);
+	public ArrayList<Integer> calcularCGMGoloso(int idOpcion) {
+		return controlador.armarCGMGoloso(idOpcion);
 	}
 
 	public void calcularCGMBacktracking(int idOpcion) {

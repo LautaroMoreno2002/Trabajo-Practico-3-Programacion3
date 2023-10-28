@@ -23,6 +23,8 @@ import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
@@ -126,7 +128,9 @@ public class InterfazPresentacion {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int idOpcion = comboBoxGrafo.getSelectedIndex();
-				presenter.calcularCGMGoloso(idOpcion);
+				System.out.println();
+				ArrayList<Integer> cm = presenter.calcularCGMGoloso(idOpcion);
+				System.out.println(cm);
 			}
 		});
 		interfazPresentacion.getContentPane().add(btnAlgGoloso);

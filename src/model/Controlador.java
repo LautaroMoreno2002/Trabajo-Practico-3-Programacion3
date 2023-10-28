@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import conjuntoMinimo.SolverBacktracking;
 import conjuntoMinimo.SolverGoloso;
 
@@ -26,17 +27,19 @@ public class Controlador {
 //		SolverBacktracking sol = new SolverBacktracking(grafo);
 //		System.out.println(sol.resolver());
 		
-		Grafo grafo = Grafo.leerGrafoJSON("EjemploGrafo2.JSON");
-		SolverBacktracking sol = new SolverBacktracking(grafo);
-		System.out.println("Con el Backtracking "+sol.resolver());
+//		Grafo grafo = Grafo.leerGrafoJSON("EjemploGrafo2.JSON");
+//		SolverBacktracking sol = new SolverBacktracking(grafo);
+//		System.out.println("Con el Backtracking "+sol.resolver());
 	}
-	public void armarCGMGoloso(int idOpcion) {
+	public ArrayList<Integer> armarCGMGoloso(int idOpcion) {
 		switch (idOpcion) {
 		case 0 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
-		case 1 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo2.JSON");
+		case 1 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo2.JSON"); // cm = 4,5,7,10,15,17 posible
 		case 2 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo3.JSON");
 		case 3 -> _grafo = Grafo.leerGrafoJSON("templateGrafo.JSON");
 		}
+		ArrayList<Integer> conjuntoMinimoGoloso = SolverGoloso.conjuntoMinimo(_grafo.getVerticesConVecinos());
+		return conjuntoMinimoGoloso;
 	}
 	public void armarCGMBacktracking(int idOpcion) {
 		
