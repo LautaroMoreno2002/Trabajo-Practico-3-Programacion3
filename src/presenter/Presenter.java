@@ -1,6 +1,7 @@
 package presenter;
 
 import java.util.ArrayList;
+import java.util.Set;
 import model.Controlador;
 
 public class Presenter {
@@ -14,8 +15,7 @@ public class Presenter {
 		return controlador.armarCGMGoloso(idOpcion);
 	}
 
-	public void calcularCGMBacktracking(int idOpcion) {
-		controlador.armarCGMBacktracking(idOpcion);
+	public Set<Integer> calcularCGMBacktracking(int idOpcion) {
+		return  controlador.armarCGMBacktracking(idOpcion);
 	}
-	
 }

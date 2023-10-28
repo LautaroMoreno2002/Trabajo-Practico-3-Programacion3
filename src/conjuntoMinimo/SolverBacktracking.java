@@ -2,7 +2,6 @@ package conjuntoMinimo;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import model.Grafo;
 
 public class SolverBacktracking {
@@ -17,11 +16,12 @@ public class SolverBacktracking {
         _marcados = new HashSet<>();
     }
 	
-	public Set<Integer> resolver() 
+	public Set<Integer> resolver(Integer inicio) 
 	{
 		if (_grafo.cantidadVertices()==0) 
 			return _conjuntoDominanteMinimo;
-		resolverBack(0); // Mejorar para que el primer vertice sea 0 o 1,2,3,...
+		resolverBack(inicio); 
+
 		return _conjuntoDominanteMinimo;
 	}
 	
@@ -60,7 +60,6 @@ public class SolverBacktracking {
 		
 		return vecinosDeMarcados;
 	}
-
 	// Chequea que sea un conjunto dominante el conjunto que tengo hasta ahora.
 	private boolean esConjuntoDominante() 
 	{
@@ -71,4 +70,3 @@ public class SolverBacktracking {
 		return grafoCompleto.size() == _grafo.cantidadVertices();
 	}
 }
-

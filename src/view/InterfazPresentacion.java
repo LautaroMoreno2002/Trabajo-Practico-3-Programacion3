@@ -24,9 +24,12 @@ import javax.swing.JFormattedTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Set;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class InterfazPresentacion {
@@ -123,14 +126,14 @@ public class InterfazPresentacion {
 		btnAlgGoloso.setForeground(Color.BLACK);
 		btnAlgGoloso.setBackground(Color.WHITE);
 		btnAlgGoloso.setFont(tipografiaBoton);
-		btnAlgGoloso.setBounds(167, 317, 192, 35);
+		btnAlgGoloso.setBounds(44, 317, 192, 35);
 		btnAlgGoloso.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int idOpcion = comboBoxGrafo.getSelectedIndex();
 				System.out.println();
 				ArrayList<Integer> cm = presenter.calcularCGMGoloso(idOpcion);
-				System.out.println(cm);
+				System.out.println("Goloso: "+ cm);
 			}
 		});
 		interfazPresentacion.getContentPane().add(btnAlgGoloso);
@@ -139,15 +142,23 @@ public class InterfazPresentacion {
 		btnBacktracking.setForeground(Color.BLACK);
 		btnBacktracking.setFont(tipografiaBoton);
 		btnBacktracking.setBackground(Color.WHITE);
-		btnBacktracking.setBounds(416, 317, 192, 35);
+		btnBacktracking.setBounds(545, 317, 192, 35);
 		btnBacktracking.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int idOpcion = comboBoxGrafo.getSelectedIndex();
-				presenter.calcularCGMBacktracking(idOpcion);
+				Set<Integer> cm = presenter.calcularCGMBacktracking(idOpcion);
+				System.out.println("BackTracking: "+cm);
 			}
 		});
 		interfazPresentacion.getContentPane().add(btnBacktracking);
+		
+		JButton btnAmbos = new JButton("Goloso vs Back");
+		btnAmbos.setForeground(Color.BLACK);
+		btnAmbos.setFont(new Font("Arial", Font.BOLD, 12));
+		btnAmbos.setBackground(Color.WHITE);
+		btnAmbos.setBounds(289, 317, 192, 35);
+		interfazPresentacion.getContentPane().add(btnAmbos);
 		
 		
 	}
