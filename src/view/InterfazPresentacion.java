@@ -134,6 +134,10 @@ public class InterfazPresentacion {
 		interfazPresentacion.getContentPane().add(btnAlgGoloso);
 		
 		JButton btnBacktracking = new JButton("CGM con backtracking");
+		btnBacktracking.setForeground(Color.BLACK);
+		btnBacktracking.setFont(tipografiaBoton);
+		btnBacktracking.setBackground(Color.WHITE);
+		btnBacktracking.setBounds(416, 317, 192, 35);
 		btnBacktracking.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -141,10 +145,6 @@ public class InterfazPresentacion {
 				presenter.calcularCGMBacktracking(idOpcion);
 			}
 		});
-		btnBacktracking.setForeground(Color.BLACK);
-		btnBacktracking.setFont(tipografiaBoton);
-		btnBacktracking.setBackground(Color.WHITE);
-		btnBacktracking.setBounds(416, 317, 192, 35);
 		interfazPresentacion.getContentPane().add(btnBacktracking);
 		
 		
