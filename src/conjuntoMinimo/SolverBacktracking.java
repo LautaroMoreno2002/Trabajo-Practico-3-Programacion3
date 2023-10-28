@@ -17,9 +17,9 @@ public class SolverBacktracking {
         _marcados = new HashSet<>();
     }
 	
-	public Set<Integer> resolver() 
+	public Set<Integer> resolver(Integer inicio) 
 	{
-		resolverBack(0);
+		resolverBack(inicio);
 		return _conjuntoDominanteMinimo;
 	}
 	
@@ -58,7 +58,9 @@ public class SolverBacktracking {
 		
 		return vecinosDeMarcados;
 	}
-
+/*
+ * OJO, CONJUNTO NO HACE FALTA PASARLO POR PARAMETRO, HAY QUE USAR DIRECTAMENTE _MARCADOS
+ */
 	// Chequea que sea un conjunto dominante el conjunto que tengo hasta ahora.
 	private boolean esConjuntoDominante(Set<Integer> conjunto) 
 	{

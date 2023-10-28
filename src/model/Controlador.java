@@ -1,10 +1,14 @@
 package model;
 
+import java.util.Set;
+
 import conjuntoMinimo.SolverBacktracking;
 import conjuntoMinimo.SolverGoloso;
 
 public class Controlador {
 	private Grafo _grafo;
+	private SolverBacktracking _solverB;
+	
 	
 	public static void main(String[] args) {
 		Grafo gEjemploTP = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
@@ -24,20 +28,27 @@ public class Controlador {
 		grafo.agregarArista(3, 5);
 		
 		SolverBacktracking sol = new SolverBacktracking(grafo);
-		System.out.println(sol.resolver());
+		System.out.println(sol.resolver(0));
 	}
 	public void armarCGMGoloso(int idOpcion) {
-		switch (idOpcion) {
-		case 0 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
-		case 1 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
-		case 2 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
-		case 3 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
+		switch (idOpcion){
+			case 0 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
+			case 1 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
+			case 2 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
+			case 3 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
 		}
-		
 	}
-	public void armarCGMBacktracking(int idOpcion) {
-		
+	public Set<Integer> armarCGMBacktracking(int idOpcion) {
+		switch (idOpcion){
+			case 0 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
+			case 1 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
+			case 2 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
+			case 3 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
+		}
+		return new SolverBacktracking(_grafo).resolver(0);
 	}
+	
+	
 
 //	public void calcularCGMGoloso() {
 //		grafo = leerGrafoDelJSON();
