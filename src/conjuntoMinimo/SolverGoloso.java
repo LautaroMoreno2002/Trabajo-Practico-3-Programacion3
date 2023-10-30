@@ -12,9 +12,9 @@ public class SolverGoloso {
 	private static ArrayList<Integer> _verticesMarcados;
 	private static ArrayList<Integer> _conjuntoMinimo;
 	
-	public static ArrayList<Integer> conjuntoMinimo(ArrayList<Vertice> vertices2){
+	public static ArrayList<Integer> conjuntoMinimo(ArrayList<Vertice> vertices2)
+	{
 		ordenarVerticesSegunCantidadDeVecinos(vertices2);
-		
 		_verticesOrdenados = vertices2;
 		_verticesMarcados = new ArrayList<Integer>();
 		_conjuntoMinimo = new ArrayList<Integer>();
@@ -27,16 +27,19 @@ public class SolverGoloso {
 		}
 		return _conjuntoMinimo;
 	}
-	private static void ordenarVerticesSegunCantidadDeVecinos(ArrayList<Vertice> vertices2) {
+	private static void ordenarVerticesSegunCantidadDeVecinos(ArrayList<Vertice> vertices2) 
+	{
 		if (revertir()) Collections.reverse(vertices2);
 		Collections.sort(vertices2);
 		Collections.reverse(vertices2);
 	}
-	private static boolean revertir() {
+	private static boolean revertir() 
+	{
 		Random r = new Random();
 		return r.nextBoolean();
 	}
-	private static void marcarVecinos(Vertice vertice, ArrayList<Integer> _verticesMarcados) {
+	private static void marcarVecinos(Vertice vertice, ArrayList<Integer> _verticesMarcados) 
+	{
 		HashSet<Integer> vecinos = vertice.getVecinos();
 		for (Integer vecino : vecinos) {
 			if (!_verticesMarcados.contains(vecino))

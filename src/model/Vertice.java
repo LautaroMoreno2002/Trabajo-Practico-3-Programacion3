@@ -6,38 +6,48 @@ public class Vertice implements Comparable<Vertice>{
 	private int _vertice;
 	private HashSet<Integer> _vecinos;
 	
-	public Vertice(int vertice){
+	public Vertice(int vertice)
+	{
 		_vertice = vertice;
 		_vecinos = new HashSet<Integer>();
 	}
-	public void agregarVecino(int vecino) {
+	public void agregarVecino(int vecino) 
+	{
 		if (!_vecinos.contains(vecino))
 			_vecinos.add(vecino);
 	}
-	public void eliminarVecino(int vecino) {
+	public void eliminarVecino(int vecino) 
+	{
 		if (_vecinos.contains(vecino))
 			_vecinos.remove(vecino);
 	}
-	public int getIdVertice() {
+	public int getIdVertice() 
+	{
 		return _vertice;
 	}
-	public HashSet<Integer> getVecinos() {
+	public HashSet<Integer> getVecinos() 
+	{
 		return _vecinos;
 	}
-	public int cantidadDeVecinos() {
+	public int cantidadDeVecinos() 
+	{
 		return _vecinos.size();
 	}
-	public String toString() {
+	public String toString() 
+	{
 		return "<"+_vertice+ ", vecinos: " +_vecinos.toString()+">";
 	}
-	public void setVecinos(HashSet<Integer> vecinos) {
+	public void setVecinos(HashSet<Integer> vecinos)
+	{
 		_vecinos = vecinos;
 	}
-	public void setIdVertice(int id) {
+	public void setIdVertice(int id) 
+	{
 		_vertice = id;
 	}
 	@Override
-	public int compareTo(Vertice otroVertice) {
+	public int compareTo(Vertice otroVertice) 
+	{
 		return this.cantidadDeVecinos() - otroVertice.cantidadDeVecinos();
 	}
 }

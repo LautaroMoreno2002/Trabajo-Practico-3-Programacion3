@@ -1,36 +1,24 @@
 package view;
 
 import java.awt.EventQueue;
-
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
-
 import presenter.Presenter;
-
 import javax.swing.JButton;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Window.Type;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
-import javax.swing.DropMode;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JFormattedTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Set;
-
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 
 public class InterfazPresentacion {
 
@@ -46,9 +34,12 @@ public class InterfazPresentacion {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run() 
+			{
 				try {
 					InterfazPresentacion window = new InterfazPresentacion();
 					window.interfazPresentacion.setVisible(true);
@@ -65,7 +56,8 @@ public class InterfazPresentacion {
 	/**
 	 * Create the application.
 	 */
-	public InterfazPresentacion() {
+	public InterfazPresentacion() 
+	{
 		presenter = new Presenter();
 		initialize();
 	}
@@ -73,7 +65,8 @@ public class InterfazPresentacion {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() 
+	{
 		interfazPresentacion = new JFrame();
 		interfazPresentacion.setResizable(false);
 		interfazPresentacion.setType(Type.POPUP);
@@ -127,12 +120,14 @@ public class InterfazPresentacion {
 		btnAlgGoloso.setBackground(Color.WHITE);
 		btnAlgGoloso.setFont(tipografiaBoton);
 		btnAlgGoloso.setBounds(44, 317, 192, 35);
-		btnAlgGoloso.addMouseListener(new MouseAdapter() {
+		btnAlgGoloso.addMouseListener(new MouseAdapter() 
+		{
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) 
+			{
 				int idOpcion = comboBoxGrafo.getSelectedIndex();
-				System.out.println();
-				ArrayList<Integer> cm = presenter.calcularCGMGoloso(idOpcion);
+				presenter.elegirGrafo(idOpcion);
+				ArrayList<Integer> cm = presenter.calcularCGMGoloso();
 				System.out.println("Goloso: "+ cm);
 			}
 		});
@@ -143,23 +138,34 @@ public class InterfazPresentacion {
 		btnBacktracking.setFont(tipografiaBoton);
 		btnBacktracking.setBackground(Color.WHITE);
 		btnBacktracking.setBounds(545, 317, 192, 35);
-		btnBacktracking.addMouseListener(new MouseAdapter() {
+		btnBacktracking.addMouseListener(new MouseAdapter() 
+		{
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e)
+			{
 				int idOpcion = comboBoxGrafo.getSelectedIndex();
-				Set<Integer> cm = presenter.calcularCGMBacktracking(idOpcion);
+				presenter.elegirGrafo(idOpcion);
+				Set<Integer> cm = presenter.calcularCGMBacktracking();
 				System.out.println("BackTracking: "+cm);
 			}
 		});
 		interfazPresentacion.getContentPane().add(btnBacktracking);
 		
-		JButton btnAmbos = new JButton("Goloso vs Back");
+		JButton btnAmbos = new JButton("Goloso vs Backtracking");
+		btnAmbos.addMouseListener(new MouseAdapter() 
+		{
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				int idOpcion = comboBoxGrafo.getSelectedIndex();
+				presenter.elegirGrafo(idOpcion);
+				presenter.calcularCGMBackYGoloso();
+			}
+		});
 		btnAmbos.setForeground(Color.BLACK);
-		btnAmbos.setFont(new Font("Arial", Font.BOLD, 12));
+		btnAmbos.setFont(tipografiaBoton);
 		btnAmbos.setBackground(Color.WHITE);
 		btnAmbos.setBounds(289, 317, 192, 35);
 		interfazPresentacion.getContentPane().add(btnAmbos);
-		
-		
 	}
 }

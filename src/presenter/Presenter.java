@@ -7,15 +7,29 @@ import model.Controlador;
 public class Presenter {
 	private Controlador controlador;
 	
-	public Presenter() {
+	public Presenter() 
+	{
 		controlador = new Controlador();
 	}
-
-	public ArrayList<Integer> calcularCGMGoloso(int idOpcion) {
-		return controlador.armarCGMGoloso(idOpcion);
+	
+	public void elegirGrafo(int indice) 
+	{
+		controlador.setIndice(indice);
+	}
+	
+	public ArrayList<Integer> calcularCGMGoloso() 
+	{
+		return controlador.armarCGMGoloso();
 	}
 
-	public Set<Integer> calcularCGMBacktracking(int idOpcion) {
-		return  controlador.armarCGMBacktracking(idOpcion);
+	public Set<Integer> calcularCGMBacktracking() 
+	{
+		return controlador.armarCGMBacktracking();
+	}
+
+	public void calcularCGMBackYGoloso()
+	{
+		
+		
 	}
 }
