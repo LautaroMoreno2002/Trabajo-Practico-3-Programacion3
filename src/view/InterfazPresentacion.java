@@ -78,8 +78,7 @@ public class InterfazPresentacion {
 		
 		JProgressBar barraProgreso = new JProgressBar();
 		barraProgreso.setToolTipText("Barra de progreso");
-		barraProgreso.setStringPainted(true);
-		barraProgreso.setIndeterminate(true);
+		barraProgreso.setStringPainted(false);
 		barraProgreso.setForeground(Color.RED);
 		barraProgreso.setFont(tipografiaBarra);
 		barraProgreso.setBounds(99, 386, 600, 28);
@@ -99,7 +98,7 @@ public class InterfazPresentacion {
 		bienvenida.setBackground(Color.BLACK);
 		bienvenida.setEditable(false);
 		bienvenida.setFont(tipografiaEtiqueta);
-		bienvenida.setText("Bienvenido/a. En este programa, se usa un grafo, previamente ingresado por un archivo JSON, del cual se calculará un posible Conjunto Generador Mínimo. Es un \"posible\" ya que pueden haber más de un conjunto, con distintos vértices. No siempre se obtendrá la misma solución.\r\nPara calcular el conjunto se puede usar un algortimo goloso, que brinda la posible solución y luego se visualizarán los datos.\r\nHay ejemplos de grafos cargados en formato JSON para elegir y poder visualizar el programa. En caso de que el usuario lo quiera, puede hacer su propio grafo respetando su estructura (vértices y los vecinos del vértice).");
+		bienvenida.setText("Bienvenido. Este programa se encarga de obtener un conjunto generador mínimo a partir de un grafo. \r\nHay dos formas de obtener el CGM:\r\n1) La primera es mediante un algoritmo goloso que da una solución pseudo-óptima. \r\n2) La segunda es con un algoritmo de tipo Backtracking que da la solución eficiente pero tarda más que el algoritmo goloso.\r\nPuede elegir entre 3 grafos de ejemplo o hacer su propio grafo en un archivo JSON. Luego calcular el CGM con alguno de los dos métodos o ejecutar los dos para comparar los resultados.\r\nEl CGM se visualizará en la siguiente pantalla junto con el grafo que haya elegido");
 		bienvenida.setBounds(10, 70, 764, 142);
 		interfazPresentacion.getContentPane().add(bienvenida);
 
@@ -128,6 +127,7 @@ public class InterfazPresentacion {
 				int idOpcion = comboBoxGrafo.getSelectedIndex();
 				presenter.elegirGrafo(idOpcion);
 				ArrayList<Integer> cm = presenter.calcularCGMGoloso();
+				barraProgreso.setIndeterminate(true);
 				System.out.println("Goloso: "+ cm);
 			}
 		});
@@ -152,6 +152,10 @@ public class InterfazPresentacion {
 		interfazPresentacion.getContentPane().add(btnBacktracking);
 		
 		JButton btnAmbos = new JButton("Goloso vs Backtracking");
+		btnAmbos.setForeground(Color.BLACK);
+		btnAmbos.setFont(tipografiaBoton);
+		btnAmbos.setBackground(Color.WHITE);
+		btnAmbos.setBounds(289, 317, 192, 35);
 		btnAmbos.addMouseListener(new MouseAdapter() 
 		{
 			@Override
@@ -159,13 +163,11 @@ public class InterfazPresentacion {
 			{
 				int idOpcion = comboBoxGrafo.getSelectedIndex();
 				presenter.elegirGrafo(idOpcion);
-				presenter.calcularCGMBackYGoloso();
+				Set<Integer> cmB = presenter.calcularCGMBacktracking();
+				ArrayList<Integer> cmG = presenter.calcularCGMGoloso();
+				System.out.println("Algoritmo por cmb: "+ cmB + "\nAlgoritmo por cmG: "+ cmG);
 			}
 		});
-		btnAmbos.setForeground(Color.BLACK);
-		btnAmbos.setFont(tipografiaBoton);
-		btnAmbos.setBackground(Color.WHITE);
-		btnAmbos.setBounds(289, 317, 192, 35);
 		interfazPresentacion.getContentPane().add(btnAmbos);
 	}
 }

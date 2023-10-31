@@ -1,13 +1,13 @@
-package conjuntoMinimo;
+package conjuntoDominanteMinimo;
 
 import java.util.HashSet;
 import java.util.Set;
 import model.Grafo;
 
 public class SolverBacktracking {
-	private static Grafo _grafo;
-	private static Set<Integer> _conjuntoDominanteMinimo;
-	private  Set<Integer> _marcados;
+	private Grafo _grafo;
+	private Set<Integer> _conjuntoDominanteMinimo;
+	private Set<Integer> _marcados;
 	
 	public SolverBacktracking(Grafo grafo) 
 	{
@@ -15,16 +15,20 @@ public class SolverBacktracking {
         _conjuntoDominanteMinimo = new HashSet<>();
         _marcados = new HashSet<>();
     }
-	
-	public Set<Integer> resolver(Integer inicio) 
+	public Set<Integer> resolver() 
 	{
 		if (_grafo.cantidadVertices()==0) 
 			return _conjuntoDominanteMinimo;
-		resolverBack(inicio); 
-
+		resolverBack(_grafo.getVerticesConVecinos().get(0).getIdVertice()); 
 		return _conjuntoDominanteMinimo;
 	}
-	
+	public void run()
+	{
+		resolver();
+	}
+	public Set<Integer> get_conjuntoDominanteMinimo() {
+		return _conjuntoDominanteMinimo;
+	}
 	// Resuelve el problema de conjunto dominante de forma recursiva, usando backtracking
 	private void resolverBack(int vertice) 
 	{
@@ -38,26 +42,20 @@ public class SolverBacktracking {
 			}
 			return;
 		}
-
 		// Si superamos el que tenemos, cortamos. (Backtracking)
 		if(!_conjuntoDominanteMinimo.isEmpty() &&_marcados.size() >  _conjuntoDominanteMinimo.size())
 			return;	
-		
 		// Caso recursivo
 		_marcados.add(vertice);
 		resolverBack(vertice + 1);
-	
 		_marcados.remove(vertice);
 		resolverBack(vertice + 1);
 	}
-
 	private Set<Integer> vecinosDeMarcados() 
 	{
 		Set<Integer> vecinosDeMarcados = new HashSet<>();
-	
 		for(Integer vertice: _marcados) 
 			vecinosDeMarcados.addAll(_grafo.vecinoDelVertice(vertice));
-		
 		return vecinosDeMarcados;
 	}
 	// Chequea que sea un conjunto dominante el conjunto que tengo hasta ahora.
@@ -66,7 +64,6 @@ public class SolverBacktracking {
 		Set<Integer> grafoCompleto = new HashSet<>();
 		grafoCompleto.addAll(vecinosDeMarcados());
 		grafoCompleto.addAll(_marcados);
-		
 		return grafoCompleto.size() == _grafo.cantidadVertices();
 	}
 }

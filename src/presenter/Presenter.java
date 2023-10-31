@@ -26,10 +26,4 @@ public class Presenter {
 	{
 		return controlador.armarCGMBacktracking();
 	}
-
-	public void calcularCGMBackYGoloso()
-	{
-		
-		
-	}
 }
