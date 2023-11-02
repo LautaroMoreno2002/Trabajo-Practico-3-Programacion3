@@ -2,13 +2,12 @@ package modelTest;
 
 import java.util.ArrayList;
 import org.junit.Test;
-
 import conjuntoDominanteMinimo.SolverGoloso;
-
 import static org.junit.Assert.assertTrue;
 import model.Grafo;
 
-public class CDMGolosoTest {
+public class CDMGolosoTest 
+{
 	@Test
 	public void CMDDeUnGrafoVacio()
 	{

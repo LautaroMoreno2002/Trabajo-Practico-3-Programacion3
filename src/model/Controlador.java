@@ -2,11 +2,11 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Set;
-
 import conjuntoDominanteMinimo.SolverBacktracking;
 import conjuntoDominanteMinimo.SolverGoloso;
 
-public class Controlador {
+public class Controlador
+{
 	private int _idOpcion;
 	private Grafo _grafo;
 	private ArrayList<Integer> _conjuntoMinimoGoloso;

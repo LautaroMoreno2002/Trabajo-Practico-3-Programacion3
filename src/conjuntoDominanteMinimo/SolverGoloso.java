@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
-
 import model.Grafo;
 import model.Vertice;
 
-public class SolverGoloso {
+public class SolverGoloso
+{
 	private Grafo _grafo;
 	private ArrayList<Integer> _conjuntoDominanteMinimo;
 

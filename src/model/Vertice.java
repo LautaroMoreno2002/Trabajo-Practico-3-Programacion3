@@ -2,7 +2,8 @@ package model;
 
 import java.util.HashSet;
 
-public class Vertice implements Comparable<Vertice>{
+public class Vertice implements Comparable<Vertice>
+{
 	private int _vertice;
 	private HashSet<Integer> _vecinos;
 	

@@ -9,7 +9,8 @@ import java.util.HashSet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class Grafo {
+public class Grafo 
+{
 	private ArrayList<Vertice> _verticesConVecinos;
 	
 	public Grafo(int cantVertices) 

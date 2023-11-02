@@ -6,7 +6,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import model.Grafo;
 
-public class GrafoTest {
+public class GrafoTest 
+{
 	@Test (expected = IllegalArgumentException.class)
 	public void iniciarGrafoConCantidadVerticesNegativa() 
 	{

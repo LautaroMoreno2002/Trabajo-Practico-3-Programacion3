@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Set;
 import model.Controlador;
 
-public class Presenter {
+public class Presenter 
+{
 	private Controlador controlador;
 	
 	public Presenter() 

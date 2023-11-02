@@ -4,7 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 import model.Grafo;
 
-public class SolverBacktracking {
+public class SolverBacktracking 
+{
 	private Grafo _grafo;
 	private Set<Integer> _conjuntoDominanteMinimo;
 	private Set<Integer> _marcados;
