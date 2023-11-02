@@ -75,7 +75,7 @@ public class InterfazPresentacion {
 		interfazPresentacion.getContentPane().setLayout(null);
 		
 		JLabel titulo = new JLabel("Conjunto Generador Mínimo");
-		titulo.setForeground(Color.WHITE);
+		titulo.setForeground(Color.GREEN);
 		titulo.setBackground(Color.WHITE);
 		titulo.setFont(tipografiaTitulo);
 		titulo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -84,7 +84,7 @@ public class InterfazPresentacion {
 		
 		JTextPane bienvenida = new JTextPane();
 		bienvenida.setToolTipText("");
-		bienvenida.setForeground(Color.WHITE);
+		bienvenida.setForeground(Color.GREEN);
 		bienvenida.setBackground(Color.BLACK);
 		bienvenida.setEditable(false);
 		bienvenida.setFont(tipografiaEtiqueta);
@@ -94,21 +94,19 @@ public class InterfazPresentacion {
 
 		JLabel lblImplementar = new JLabel("Implementar el algoritmo con:");
 		lblImplementar.setFont(tipografiaEtiqueta);
-		lblImplementar.setForeground(Color.WHITE);
+		lblImplementar.setForeground(Color.GREEN);
 		lblImplementar.setBounds(124, 275, 234, 28);
 		interfazPresentacion.getContentPane().add(lblImplementar);
 		
 		JComboBox<String> comboBoxGrafo = new JComboBox<String>();
+		comboBoxGrafo.setBackground(Color.WHITE);
 		comboBoxGrafo.setFont(tipografiaComboBox);
 		comboBoxGrafo.setModel(new DefaultComboBoxModel<String>(opciones));
 		comboBoxGrafo.setBounds(453, 276, 182, 28);
 		interfazPresentacion.getContentPane().add(comboBoxGrafo);
 		
 		JButton btnAlgGoloso = new JButton("CGM con algoritmo Goloso");
-		btnAlgGoloso.setForeground(Color.BLACK);
-		btnAlgGoloso.setBackground(Color.WHITE);
-		btnAlgGoloso.setFont(tipografiaBoton);
-		btnAlgGoloso.setBounds(46, 371, 192, 35);
+		asignarCaracteristicas(btnAlgGoloso,46,371,192,35);
 		btnAlgGoloso.addMouseListener(new MouseAdapter() 
 		{
 			@Override
@@ -122,29 +120,8 @@ public class InterfazPresentacion {
 		});
 		interfazPresentacion.getContentPane().add(btnAlgGoloso);
 		
-		JButton btnBacktracking = new JButton("CGM con backtracking");
-		btnBacktracking.setForeground(Color.BLACK);
-		btnBacktracking.setFont(tipografiaBoton);
-		btnBacktracking.setBackground(Color.WHITE);
-		btnBacktracking.setBounds(546, 371, 192, 35);
-		btnBacktracking.addMouseListener(new MouseAdapter() 
-		{
-			@Override
-			public void mouseClicked(MouseEvent e)
-			{
-				int idOpcion = comboBoxGrafo.getSelectedIndex();
-				presenter.elegirGrafo(idOpcion);
-				Set<Integer> cm = presenter.calcularCGMBacktracking();
-				System.out.println("BackTracking: "+cm);
-			}
-		});
-		interfazPresentacion.getContentPane().add(btnBacktracking);
-		
 		JButton btnAmbos = new JButton("Goloso vs Backtracking");
-		btnAmbos.setForeground(Color.BLACK);
-		btnAmbos.setFont(tipografiaBoton);
-		btnAmbos.setBackground(Color.WHITE);
-		btnAmbos.setBounds(288, 371, 192, 35);
+		asignarCaracteristicas(btnAmbos,288, 371, 192, 35);
 		btnAmbos.addMouseListener(new MouseAdapter() 
 		{
 			@Override
@@ -158,5 +135,43 @@ public class InterfazPresentacion {
 			}
 		});
 		interfazPresentacion.getContentPane().add(btnAmbos);
+		
+		JButton btnBacktracking = new JButton("CGM con backtracking");
+		asignarCaracteristicas(btnBacktracking,546, 371, 192, 35);
+		btnBacktracking.addMouseListener(new MouseAdapter() 
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				int idOpcion = comboBoxGrafo.getSelectedIndex();
+				presenter.elegirGrafo(idOpcion);
+				Set<Integer> cm = presenter.calcularCGMBacktracking();
+				System.out.println("BackTracking: "+cm);
+			}
+		});
+		interfazPresentacion.getContentPane().add(btnBacktracking);
+		
+	}
+
+	private void asignarCaracteristicas(JButton btn, int posX, int posY, int ancho, int largo) {
+		btn.setForeground(Color.BLACK);
+		btn.setBackground(Color.WHITE);
+		btn.setFont(tipografiaBoton);
+		btn.setBounds(posX, posY, ancho, largo);
+		btn.addMouseListener(new MouseAdapter() 
+		{
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btn.setForeground(Color.WHITE);
+				btn.setBackground(Color.BLACK);
+				btn.setBounds(posX-10, posY-10, ancho+32, largo+15);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btn.setForeground(Color.BLACK);
+				btn.setBackground(Color.WHITE);
+				btn.setBounds(posX, posY, ancho, largo);
+			}
+		});
 	}
 }

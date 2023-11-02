@@ -57,7 +57,7 @@ public class CDMGolosoTest {
 		assertTrue(cm.size() == 2);
 	}
 	@Test
-	public void CDMGrafoConsignoConDosConjuntosDistintos()
+	public void CDMGrafoConsignaConDosConjuntosDistintos()
 	{
 		Grafo grafo = crearGrafoDeLaConsigna();
 		ArrayList<ArrayList<Integer>> soluciones = new ArrayList<ArrayList<Integer>>();

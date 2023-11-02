@@ -48,8 +48,7 @@ public class SolverGoloso {
 	}
 	private boolean revertir() 
 	{
-		Random r = new Random();
-		return r.nextBoolean();
+		return new Random().nextBoolean();
 	}
 	public ArrayList<Integer> getConjuntoMinimo(){
 		return _conjuntoDominanteMinimo;
