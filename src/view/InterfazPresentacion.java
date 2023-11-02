@@ -124,6 +124,8 @@ public class InterfazPresentacion
 //				System.out.println("Goloso: "+ cm);
 				ProcesoGoloso procesoGoloso = new ProcesoGoloso(presenter, progressBar);
 				procesoGoloso.execute();
+				PantallaCargarGrupos pantallaCargarGrupos = new PantallaCargarGrupos();
+				pantallaCargarGrupos.getInterfazGrafos().setVisible(true);
 			}
 		});
 		interfazPresentacion.getContentPane().add(btnAlgGoloso);
