@@ -25,7 +25,8 @@ public class Controlador
 		_conjuntoMinimoGoloso = new SolverGoloso(_grafo).conjuntoGeneradorMinimo();
 		System.out.println("El tiempo que le tomo calcular CGM goloso es :" + (System.currentTimeMillis()- initialTime));
 		return _conjuntoMinimoGoloso;
-	}		
+	}
+	
 	public Set<Integer> armarCGMBacktracking()
 	{
 		long initialTime = System.currentTimeMillis();

@@ -28,6 +28,9 @@ import java.awt.Color;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PantallaCargarGrupos {
 
@@ -36,24 +39,23 @@ public class PantallaCargarGrupos {
     private ArrayList<Vertice> _setConVecinos;
 	private HashMap<Coordinate, Integer> coordenadasConIndice = new HashMap<>();
 	private ArrayList<Coordinate> coordinadas = new ArrayList<Coordinate>();
+	private ArrayList<Integer> _cgmGoloso;
 	private HashSet<Integer> _vecinos;
+	private JFrame _interfazPresentacion;
     /**
      * Create the application.
+     @wbp.parser.constructor
+
      */
-    public PantallaCargarGrupos(ArrayList<Vertice> setConVecinos) {
-		this._setConVecinos = setConVecinos;
-		initialize();
-	}
-    
-    
 
-	public PantallaCargarGrupos(ArrayList<Vertice> _setConVecinos, HashSet<Integer> _vecinos) {
+	public PantallaCargarGrupos(ArrayList<Vertice> _setConVecinos, ArrayList<Integer> _cgmGoloso,
+			HashSet<Integer> _vecinos, JFrame _interfazPresentacion) {
 		this._setConVecinos = _setConVecinos;
+		this._cgmGoloso = _cgmGoloso;
 		this._vecinos = _vecinos;
+		this._interfazPresentacion = _interfazPresentacion;
 		initialize();
 	}
-
-
 
 	/**
      * Initialize the contents of the frame.
@@ -76,6 +78,16 @@ public class PantallaCargarGrupos {
 		interfazGrafos.getContentPane().add(panelMapa);
 		panelMapa.add(plano, BorderLayout.CENTER); //
 		plano.setZoomControlsVisible(false);
+		
+		JButton btnCargarNuevoCGM = new JButton("Generar nuevo CGM goloso");
+		btnCargarNuevoCGM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				interfazGrafos.setVisible(false);
+				_interfazPresentacion.setVisible(true);
+			}
+		});
+		btnCargarNuevoCGM.setBounds(288, 422, 205, 21);
+		interfazGrafos.getContentPane().add(btnCargarNuevoCGM);
 		
 		
 		Coordinate coordinada = new Coordinate(-39.4, -30.19);
@@ -122,41 +134,18 @@ public class PantallaCargarGrupos {
 	    coordenadasConIndice.put(coordinadasPunto,i);
 	    coordinadas.add(coordinadasPunto);
 	    
-	    marker.getStyle().setBackColor(Color.PINK);
-	    marker.getStyle().setColor(Color.WHITE);
+	    if(_cgmGoloso.contains(_setConVecinos.get(i).getIdVertice())) {
+		    marker.getStyle().setBackColor(Color.GREEN);
+		    marker.getStyle().setColor(Color.BLACK);
+	    } else {
+		    marker.getStyle().setBackColor(Color.BLACK);
+		    marker.getStyle().setColor(Color.WHITE);
+	    }
+//	    System.out.println(_cgmGoloso);
 	    plano.addMapMarker(marker);
 	}
 
     public JFrame getInterfazGrafos() {
         return interfazGrafos;
     }
-    
-//	private void crearArista(ArrayList<Coordinate> coordinates, int vertice) {
-//		for (int i = 0; i < coordinates.size(); i += 2) {
-//			if (i + 1 < coordinates.size()) {
-//				List<Coordinate> route2 = new ArrayList<Coordinate>(Arrays.asList(coordinadas.get(vertice), coordinates.get(i), coordinates.get(i)));
-//				plano.addMapPolygon(new MapPolygonImpl(route2));
-//			}
-//		}
-//	}
-    
-//	private ArrayList<Coordinate> armarArregloConVecinosDelVertice(int vertice) {
-//		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>(); //Para guardar las coordenadasConIndice de cada vecino
-//		
-//		HashSet<Integer> vecinosDeI = _vecinos;
-//		
-//		for (int vecino : vecinosDeI) {
-//			// Para cada vecino en vecinosDeI, intenta encontrar la coordenada correspondiente en el HashMap coordenadasConIndice
-//		    for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet()) {
-//		        if (entry.getValue().equals(vecino)) {
-//		        	Coordinate coordenada = entry.getKey();
-//		        	coordinates.add(coordenada);
-//		        }
-//		    }
-//		}
-//		
-//		coordinates.add(coordinadas.get(vertice)); //agregamos la coordenada del vertice en el que nos paramos al array de las coordenadasConIndice de los vecinos
-//		
-//		return coordinates;
-//	}
 }

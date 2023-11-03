@@ -38,4 +38,5 @@ public class Presenter
 	public HashSet<Integer> listaDeVecinos(){
 		return controlador.listaDeVecinos();
 	}
+	
 }

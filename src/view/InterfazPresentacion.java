@@ -31,6 +31,12 @@ public class InterfazPresentacion
 	private final Font tipografiaEtiqueta = new Font("Arial", Font.BOLD, 14);
 	private final Font tipografiaTitulo = new Font("Arial", Font.BOLD, 18);
 	
+	
+	
+	public JFrame getInterfazPresentacion() {
+		return interfazPresentacion;
+	}
+
 	/**
 	 * Launch the application.
 	 */
@@ -122,14 +128,12 @@ public class InterfazPresentacion
 				presenter.elegirGrafo(idOpcion);
 //				ArrayList<Integer> cm = presenter.calcularCGMGoloso();
 //				System.out.println("Goloso: "+ cm);
-				ProcesoGoloso procesoGoloso = new ProcesoGoloso(presenter, progressBar);
+				ProcesoGoloso procesoGoloso = new ProcesoGoloso(presenter, progressBar,interfazPresentacion);
 				procesoGoloso.execute();
 				
 				//Me imprime un map del vértice con sus vecinos
 				System.out.println(presenter.get_setConVecinos());
-				
-				PantallaCargarGrupos pantallaCargarGrupos = new PantallaCargarGrupos(presenter.get_setConVecinos(),presenter.listaDeVecinos());
-				pantallaCargarGrupos.getInterfazGrafos().setVisible(true);
+
 			}
 		});
 		interfazPresentacion.getContentPane().add(btnAlgGoloso);
