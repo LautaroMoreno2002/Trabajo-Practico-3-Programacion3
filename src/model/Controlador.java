@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import conjuntoDominanteMinimo.SolverBacktracking;
 import conjuntoDominanteMinimo.SolverGoloso;
@@ -42,4 +43,18 @@ public class Controlador
 		case 3 -> _grafo = Grafo.leerGrafoJSON("templateGrafo.JSON");
 		}
 	}
+
+	//Mi método
+	public ArrayList<Vertice> get_setConVecinos() {
+		return _grafo.getVerticesConVecinos();
+	}
+	
+	public HashSet<Integer> listaDeVecinos(){
+		HashSet<Integer> listaDeVecinos = new HashSet<>();
+		for(Vertice vertice: get_setConVecinos()) {
+			listaDeVecinos.addAll(vertice.getVecinos());
+		}
+		return listaDeVecinos;
+	}
+
 }

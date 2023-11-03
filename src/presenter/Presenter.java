@@ -1,8 +1,11 @@
 package presenter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import model.Controlador;
+import model.Grafo;
+import model.Vertice;
 
 public class Presenter 
 {
@@ -26,5 +29,13 @@ public class Presenter
 	public Set<Integer> calcularCGMBacktracking() 
 	{
 		return controlador.armarCGMBacktracking();
+	}
+	
+	public ArrayList<Vertice> get_setConVecinos() {
+		return controlador.get_setConVecinos();
+	}
+	
+	public HashSet<Integer> listaDeVecinos(){
+		return controlador.listaDeVecinos();
 	}
 }

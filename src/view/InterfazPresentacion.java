@@ -124,7 +124,11 @@ public class InterfazPresentacion
 //				System.out.println("Goloso: "+ cm);
 				ProcesoGoloso procesoGoloso = new ProcesoGoloso(presenter, progressBar);
 				procesoGoloso.execute();
-				PantallaCargarGrupos pantallaCargarGrupos = new PantallaCargarGrupos();
+				
+				//Me imprime un map del vértice con sus vecinos
+				System.out.println(presenter.get_setConVecinos());
+				
+				PantallaCargarGrupos pantallaCargarGrupos = new PantallaCargarGrupos(presenter.get_setConVecinos(),presenter.listaDeVecinos());
 				pantallaCargarGrupos.getInterfazGrafos().setVisible(true);
 			}
 		});
@@ -162,8 +166,6 @@ public class InterfazPresentacion
 			}
 		});
 		interfazPresentacion.getContentPane().add(btnBacktracking);
-		
-		
 	}
 
 	private void asignarCaracteristicas(JButton btn, int posX, int posY, int ancho, int largo) 
