@@ -11,7 +11,7 @@ public class Controlador
 	private int _idOpcion;
 	private Grafo _grafo;
 	private ArrayList<Integer> _conjuntoMinimoGoloso;
-	private Set<Integer> _conjuntoMinimoBacktracking;
+	private ArrayList<Integer> _conjuntoMinimoBacktracking;
 	
 	public void setIndice(int indice) {
 		if (indice < 0 || indice > 3) throw new IllegalArgumentException("Indice invalido");
@@ -27,10 +27,10 @@ public class Controlador
 		return _conjuntoMinimoGoloso;
 	}
 	
-	public Set<Integer> armarCGMBacktracking()
+	public ArrayList<Integer> armarCGMBacktracking()
 	{
 		long initialTime = System.currentTimeMillis();
-		_conjuntoMinimoBacktracking = new SolverBacktracking(_grafo).resolver();
+		_conjuntoMinimoBacktracking = convertir(new SolverBacktracking(_grafo).resolver());
 		System.out.println("El tiempo que le tomo calcular CGM Back es :" + (System.currentTimeMillis() - initialTime));
 		return _conjuntoMinimoBacktracking;
 	}
@@ -58,4 +58,8 @@ public class Controlador
 		return listaDeVecinos;
 	}
 
+	private ArrayList<Integer> convertir(Set<Integer> set) {
+		ArrayList<Integer> ar = new ArrayList<Integer>(set);
+		return ar;
+	}
 }

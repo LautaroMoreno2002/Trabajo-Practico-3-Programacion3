@@ -31,11 +31,22 @@ public class SolverGoloso
 	}
 	private ArrayList<Vertice> ordenarVerticesSegunCantidadDeVecinos() 
 	{
-		ArrayList<Vertice> vertices = _grafo.getVerticesConVecinos();
+		ArrayList<Vertice> vertices = clonar(_grafo.getVerticesConVecinos());
 		if (revertir()) Collections.reverse(vertices);
 		Collections.sort(vertices);
 		Collections.reverse(vertices);
 		return vertices;
+	}
+	private ArrayList<Vertice> clonar(ArrayList<Vertice> verticesConVecinos) 
+	{
+		ArrayList<Vertice> copias = new ArrayList<Vertice>();
+		for (Vertice v: verticesConVecinos) 
+		{
+			Vertice copia = new Vertice(v.getIdVertice());
+			copia.setVecinos(v.getVecinos());
+			copias.add(copia);
+		}
+		return copias;
 	}
 	private void marcarVecinos(Vertice vertice, ArrayList<Integer> _verticesMarcados) 
 	{

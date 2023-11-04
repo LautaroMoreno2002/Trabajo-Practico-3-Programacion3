@@ -14,8 +14,6 @@ import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Set;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JProgressBar;
@@ -118,7 +116,8 @@ public class InterfazPresentacion
 		interfazPresentacion.getContentPane().add(progressBar);
 		
 		JButton btnAlgGoloso = new JButton("CGM con algoritmo Goloso");
-		asignarCaracteristicas(btnAlgGoloso,46,341,192,35);
+		btnAlgGoloso.setToolTipText("CGM con una posible solución");
+		asignarCaracteristicas(btnAlgGoloso,166,341,192,35);
 		btnAlgGoloso.addMouseListener(new MouseAdapter() 
 		{
 			@Override
@@ -139,7 +138,8 @@ public class InterfazPresentacion
 		interfazPresentacion.getContentPane().add(btnAlgGoloso);
 		
 		JButton btnAmbos = new JButton("Goloso vs Backtracking");
-		asignarCaracteristicas(btnAmbos,298, 341, 192, 35);
+		btnAmbos.setToolTipText("Comparación de resultados");
+		asignarCaracteristicas(btnAmbos,410, 341, 192, 35);
 		btnAmbos.addMouseListener(new MouseAdapter() 
 		{
 			@Override
@@ -147,29 +147,33 @@ public class InterfazPresentacion
 			{
 				int idOpcion = comboBoxGrafo.getSelectedIndex();
 				presenter.elegirGrafo(idOpcion);
-				Set<Integer> cmB = presenter.calcularCGMBacktracking();
-				ArrayList<Integer> cmG = presenter.calcularCGMGoloso();
-				System.out.println("Algoritmo por cmb: "+ cmB + "\nAlgoritmo por cmG: "+ cmG);
+//				Set<Integer> cmB = presenter.calcularCGMBacktracking();
+//				ArrayList<Integer> cmG = presenter.calcularCGMGoloso();
+//				System.out.println("Algoritmo por cmb: "+ cmB + "\nAlgoritmo por cmG: "+ cmG);
+				ProcesoGolosoBacktracking procesoVersus = new ProcesoGolosoBacktracking(presenter, progressBar);
+				procesoVersus.execute();
+				
+				System.out.println(presenter.get_setConVecinos());
 			}
 		});
 		interfazPresentacion.getContentPane().add(btnAmbos);
 		
-		JButton btnBacktracking = new JButton("CGM con backtracking");
-		asignarCaracteristicas(btnBacktracking,546, 341, 192, 35);
-		btnBacktracking.addMouseListener(new MouseAdapter() 
-		{
-			@Override
-			public void mouseClicked(MouseEvent e)
-			{
-				int idOpcion = comboBoxGrafo.getSelectedIndex();
-				presenter.elegirGrafo(idOpcion);
-//				Set<Integer> cm = presenter.calcularCGMBacktracking();
-//				System.out.println("BackTracking: "+cm);
-				ProcesoBacktracking procesoBacktracking = new ProcesoBacktracking(presenter, progressBar);
-				procesoBacktracking.execute();
-			}
-		});
-		interfazPresentacion.getContentPane().add(btnBacktracking);
+//		JButton btnBacktracking = new JButton("CGM con backtracking");
+//		asignarCaracteristicas(btnBacktracking,546, 341, 192, 35);
+//		btnBacktracking.addMouseListener(new MouseAdapter() 
+//		{
+//			@Override
+//			public void mouseClicked(MouseEvent e)
+//			{
+//				int idOpcion = comboBoxGrafo.getSelectedIndex();
+//				presenter.elegirGrafo(idOpcion);
+////				Set<Integer> cm = presenter.calcularCGMBacktracking();
+////				System.out.println("BackTracking: "+cm);
+//				ProcesoBacktracking procesoBacktracking = new ProcesoBacktracking(presenter, progressBar);
+//				procesoBacktracking.execute();
+//			}
+//		});
+//		interfazPresentacion.getContentPane().add(btnBacktracking);
 	}
 
 	private void asignarCaracteristicas(JButton btn, int posX, int posY, int ancho, int largo) 
