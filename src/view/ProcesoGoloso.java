@@ -21,8 +21,6 @@ public class ProcesoGoloso extends SwingWorker<ArrayList<Integer>,Long>
 	protected ArrayList<Integer> doInBackground() throws Exception
 	{
 		_barraProgreso.setStringPainted(true);
-		_barraProgreso.setMaximum(100);
-		_barraProgreso.setMinimum(1);
 		for (long carga= 1; carga <= 100;carga++) 
 		{
 			if (carga % 10 == 0) Thread.sleep(100);
