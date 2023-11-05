@@ -15,7 +15,8 @@ public class Controlador
 	
 	public void setIndice(int indice) 
 	{
-		if (indice < 0 || indice > 3) throw new IllegalArgumentException("Indice invalido");
+		if (indice < 0 || indice > 3) 
+			throw new IllegalArgumentException("Indice invalido");
 		_idOpcion = indice;
 		iniciarGrafo();
 	}
@@ -35,31 +36,28 @@ public class Controlador
 	{
 		switch (_idOpcion) 
 		{
-		case 0 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
-		case 1 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo2.JSON");
-		case 2 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo3.JSON");
-		case 3 -> _grafo = Grafo.leerGrafoJSON("templateGrafo.JSON");
+			case 0 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo.JSON");
+			case 1 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo2.JSON");
+			case 2 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo3.JSON");
+			case 3 -> _grafo = Grafo.leerGrafoJSON("templateGrafo.JSON");
 		}
 	}
-
-	//Mi método
 	public ArrayList<Vertice> get_setConVecinos()
 	{
 		return _grafo.getVerticesConVecinos();
 	}
-
-	
-	public HashSet<Integer> listaDeVecinos(){
+	public HashSet<Integer> listaDeVecinos()
+	{
 		HashSet<Integer> listaDeVecinos = new HashSet<>();
-		for(Vertice vertice: get_setConVecinos()) {
+		for(Vertice vertice: get_setConVecinos()) 
+		{
 			listaDeVecinos.addAll(vertice.getVecinos());
 		}
 		return listaDeVecinos;
 	}
-
 	private ArrayList<Integer> convertir(Set<Integer> set) 
 	{
-		ArrayList<Integer> ar = new ArrayList<Integer>(set);
-		return ar;
+		return new ArrayList<Integer>(set);
+		
 	}
 }

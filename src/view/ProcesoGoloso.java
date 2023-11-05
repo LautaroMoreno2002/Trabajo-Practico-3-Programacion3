@@ -44,7 +44,7 @@ public class ProcesoGoloso extends SwingWorker<ArrayList<Integer>,Long>
 			{
 				_barraProgreso.setStringPainted(false);
 				_barraProgreso.setValue(0);
-				PantallaCargarGrupos pantallaCargarGrupos = new PantallaCargarGrupos(_presenter.get_setConVecinos(),get(),_interfazPresentacion);
+				PantallaCargarCGMGoloso pantallaCargarGrupos = new PantallaCargarCGMGoloso(_presenter.get_setConVecinos(),get(),_interfazPresentacion);
 				pantallaCargarGrupos.getInterfazGrafos().setVisible(true);
 				_interfazPresentacion.setVisible(false);
 

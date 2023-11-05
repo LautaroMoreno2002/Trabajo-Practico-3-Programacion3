@@ -5,21 +5,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.plaf.multi.MultiPopupMenuUI;
-
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import model.Vertice;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.border.TitledBorder;
 
-public class PantallaCargarGrupos extends PantallaDibujar
+public class PantallaCargarCGMGoloso extends PantallaDibujar
 {
     private JFrame interfazGrafos;
     private JMapViewer plano;
@@ -32,7 +27,7 @@ public class PantallaCargarGrupos extends PantallaDibujar
      @wbp.parser.constructor
 
      */
-	public PantallaCargarGrupos(ArrayList<Vertice> _setConVecinos, ArrayList<Integer> _cgmGoloso, JFrame _interfazPresentacion) 
+	public PantallaCargarCGMGoloso(ArrayList<Vertice> _setConVecinos, ArrayList<Integer> _cgmGoloso, JFrame _interfazPresentacion) 
 	{
 		this._setConVecinos = _setConVecinos;
 		this._cgmGoloso = _cgmGoloso;
