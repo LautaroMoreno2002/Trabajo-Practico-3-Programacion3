@@ -12,7 +12,7 @@ public class Controlador
 	private Grafo _grafo;
 	private ArrayList<Integer> _conjuntoMinimoGoloso;
 	private ArrayList<Integer> _conjuntoMinimoBacktracking;
-	
+
 	public void setIndice(int indice) 
 	{
 		if (indice < 0 || indice > 3) 
@@ -20,13 +20,11 @@ public class Controlador
 		_idOpcion = indice;
 		iniciarGrafo();
 	}
-	
 	public ArrayList<Integer> armarCGMGoloso() 
 	{
 		_conjuntoMinimoGoloso = new SolverGoloso(_grafo).conjuntoGeneradorMinimo();
 		return _conjuntoMinimoGoloso;
 	}
-	
 	public ArrayList<Integer> armarCGMBacktracking()
 	{
 		_conjuntoMinimoBacktracking = convertir(new SolverBacktracking(_grafo).resolver());

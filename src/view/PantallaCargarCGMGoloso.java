@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class PantallaCargarCGMGoloso extends PantallaDibujar
+public class PantallaCargarCGMGoloso extends DiseñoInterfaz
 {
     private JFrame interfazGrafos;
     private JMapViewer plano;

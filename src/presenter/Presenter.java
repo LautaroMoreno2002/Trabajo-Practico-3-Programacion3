@@ -7,35 +7,30 @@ import model.Vertice;
 
 public class Presenter 
 {
-	private Controlador controlador;
+	private Controlador _controlador;
 	
 	public Presenter() 
 	{
-		controlador = new Controlador();
+		_controlador = new Controlador();
 	}
-	
 	public void elegirGrafo(int indice) 
 	{
-		controlador.setIndice(indice);
+		_controlador.setIndice(indice);
 	}
-	
 	public ArrayList<Integer> calcularCGMGoloso() 
 	{
-		return controlador.armarCGMGoloso();
+		return _controlador.armarCGMGoloso();
 	}
-
 	public ArrayList<Integer> calcularCGMBacktracking() 
 	{
-		return controlador.armarCGMBacktracking();
+		return _controlador.armarCGMBacktracking();
 	}
-	
 	public ArrayList<Vertice> get_setConVecinos() 
 	{
-		return controlador.get_setConVecinos();
+		return _controlador.get_setConVecinos();
 	}
-	
 	public HashSet<Integer> listaDeVecinos()
 	{
-		return controlador.listaDeVecinos();
+		return _controlador.listaDeVecinos();
 	}
 }

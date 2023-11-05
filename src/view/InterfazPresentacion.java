@@ -18,7 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JProgressBar;
 
-public class InterfazPresentacion extends PantallaDibujar
+public class InterfazPresentacion extends DiseñoInterfaz
 {
 	private JFrame interfazPresentacion;
 	private Presenter presenter;
@@ -28,9 +28,6 @@ public class InterfazPresentacion extends PantallaDibujar
 	private final Font tipografiaEtiqueta = new Font("Arial", Font.BOLD, 14);
 	private final Font tipografiaTitulo = new Font("Arial", Font.BOLD, 18);
 	
-	public JFrame getInterfazPresentacion() {
-		return interfazPresentacion;
-	}
 	/**
 	 * Launch the application.
 	 */
@@ -140,5 +137,8 @@ public class InterfazPresentacion extends PantallaDibujar
 			}
 		});
 		interfazPresentacion.getContentPane().add(btnAmbos);
+	}
+	public JFrame getInterfazPresentacion() {
+		return interfazPresentacion;
 	}
 }

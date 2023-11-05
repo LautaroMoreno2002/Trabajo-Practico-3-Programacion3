@@ -16,7 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.TitledBorder;
 
-public class PantallaCargarCGMBackvsGoloso extends PantallaDibujar
+public class PantallaCargarCGMBackvsGoloso extends DiseñoInterfaz
 {
 	private JMapViewer _planoGoloso;
 	private JMapViewer _planoBacktracking;

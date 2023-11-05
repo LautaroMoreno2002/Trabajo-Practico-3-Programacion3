@@ -47,8 +47,6 @@ public class Grafo
 		validarIndices(verticeA, verticeB);
 		eliminarVecinoDeLosVertices(verticeA,verticeB);
 	}
-	
-//	vecinoDelVertice(int vertice): Devuelve un conjunto de vecinos para un vértice dado.
 	public HashSet<Integer> vecinoDelVertice(int vertice)
 	{
 		for (Vertice verticeActual : _verticesConVecinos)
@@ -56,8 +54,6 @@ public class Grafo
 				return verticeActual.getVecinos();
 		return null;
 	}
-	
-	
 	public int cantidadVertices() 
 	{
 		return _verticesConVecinos.size();
@@ -100,7 +96,6 @@ public class Grafo
 				vertice.eliminarVecino(verticeA);
 		}	
 	}
-		
 	public String generarGrafoEnJSON() 
 	{
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();

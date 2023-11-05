@@ -21,7 +21,7 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 import model.Vertice;
 
-public abstract class PantallaDibujar {
+public abstract class DiseñoInterfaz {
 	public static ArrayList<HashSet<Integer>> obtenerVecinos(ArrayList<Vertice> setConVecinos) 
 	{
 		ArrayList<HashSet<Integer>> vecinosDeVertices = new ArrayList<>();
