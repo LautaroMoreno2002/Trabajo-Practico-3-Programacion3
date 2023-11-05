@@ -2,6 +2,8 @@ package view;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+
+import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
 import presenter.Presenter;
@@ -10,10 +12,12 @@ public class ProcesoGolosoBacktracking extends SwingWorker<ArrayList<ArrayList<I
 {
 	Presenter _presenter;
 	JProgressBar _barraProgreso;
-	public ProcesoGolosoBacktracking(Presenter p, JProgressBar bar) 
+	JFrame _interfazPresentacion;
+	public ProcesoGolosoBacktracking(Presenter p, JProgressBar bar,JFrame interfazPresentacion) 
 	{
 		_presenter = p;
 		_barraProgreso = bar;
+		_interfazPresentacion = interfazPresentacion;
 	}
 	@Override
 	protected ArrayList<ArrayList<Integer>> doInBackground() throws Exception 
@@ -36,6 +40,9 @@ public class ProcesoGolosoBacktracking extends SwingWorker<ArrayList<ArrayList<I
 			{
 				System.out.println(get().toString());
 				_barraProgreso.setIndeterminate(false);
+				PantallaCargarCGMBackvsGoloso pantallaCargarCGMBackvsGoloso = new PantallaCargarCGMBackvsGoloso(_presenter.get_setConVecinos(),get(),_interfazPresentacion);
+				pantallaCargarCGMBackvsGoloso.getPantallaCargarCGM().setVisible(true);
+				_interfazPresentacion.setVisible(false);
 			}
 		} catch (ExecutionException | InterruptedException e) 
 		{

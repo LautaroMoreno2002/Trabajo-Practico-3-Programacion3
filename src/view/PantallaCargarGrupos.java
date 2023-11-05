@@ -33,7 +33,6 @@ public class PantallaCargarGrupos {
     private JMapViewer plano;
     private ArrayList<Vertice> _setConVecinos;
 	private HashMap<Coordinate, Integer> coordenadasConIndice = new HashMap<>();
-	private ArrayList<Coordinate> coordinadas = new ArrayList<Coordinate>();
 	private ArrayList<Integer> _cgmGoloso;
 	private JFrame _interfazPresentacion;
     /**
@@ -85,31 +84,6 @@ public class PantallaCargarGrupos {
 		Coordinate coordinada = new Coordinate(-38.99, -30.19);
 		plano.setDisplayPosition(coordinada, 11); //PARA CAMBIAR EL ZOOM
 		
-		
-//		double latitud = -38.990380;
-//		double longitud = -30.197439;
-//		double cont= 0.0;
-//		
-//		
-//		for (int i = 0; i < _setConVecinos.size(); i++) {
-//			
-//			crearNuevoPuntoEnElPlano(latitud,longitud,i);
-//			
-//
-//		    double deltaLat = -0.1;
-//		    double deltaLon = -0.2;
-//		    
-//		    if (i % 2 == 0) {
-//		        latitud += deltaLat;
-//		        longitud += deltaLon + cont;
-//		    } else {
-//		        latitud += deltaLat;
-//		        longitud -= deltaLon + cont;
-//		    }
-//		    
-//		    cont+=0.2;
-//		}
-		
 		double centroLatitud = -38.990380; // Latitud del centro del círculo
 		double centroLongitud = -30.197439; // Longitud del centro del círculo
 		double radio = 0.1; // Radio del círculo en grados (ajusta según tus necesidades)
@@ -140,7 +114,7 @@ public class PantallaCargarGrupos {
 				        System.out.println(entry.getKey());
 				        System.out.println(entry.getValue());
 				        break; // Si encontramos el valor, podemos salir del bucle
-				    }																		//CAMBIAR
+				    }
 				}
 				List<Coordinate> route2 = new ArrayList<Coordinate>(Arrays.asList(obtenerCoordenadaNodoActual(contador), coordenadaCorrespondiente, coordenadaCorrespondiente));
 				plano.addMapPolygon(new MapPolygonImpl(route2));
@@ -171,7 +145,6 @@ public class PantallaCargarGrupos {
 	    //Agregamos las coordenadasConIndice al poligono
 	    coordenadasConIndice.put(coordinadasPunto,i); //acá se guarda las coordenadas adjuntadas al punto
 	    System.out.println(coordinadasPunto + "Indice" + i);
-	    coordinadas.add(coordinadasPunto);
 	    
 	    if(_cgmGoloso.contains(_setConVecinos.get(i).getIdVertice())) {
 		    marker.getStyle().setBackColor(Color.GREEN);

@@ -93,7 +93,7 @@ public class InterfazPresentacion
 		bienvenida.setBackground(Color.BLACK);
 		bienvenida.setEditable(false);
 		bienvenida.setFont(tipografiaEtiqueta);
-		bienvenida.setText("Bienvenido. Este programa se encarga de obtener un conjunto generador mínimo a partir de un grafo. \r\nHay dos formas de obtener el CGM:\r\n1) La primera es mediante un algoritmo goloso que da una solución pseudo-óptima. \r\n2) La segunda es con un algoritmo de tipo Backtracking que da la solución eficiente pero tarda más que el algoritmo goloso.\r\nPuede elegir entre 3 grafos de ejemplo o hacer su propio grafo en un archivo JSON. Luego calcular el CGM con alguno de los dos métodos o ejecutar los dos para comparar los resultados.\r\nEl CGM se visualizará en la siguiente pantalla junto con el grafo que haya elegido");
+		bienvenida.setText("Bienvenido. Este programa se encarga de obtener un conjunto generador mínimo a partir de un grafo. \r\nHay dos formas de obtener el CGM:\r\n1) La primera es mediante un algoritmo goloso que da una solución pseudo-óptima. \r\n2) La segunda es con un algoritmo de tipo Backtracking que da la solución eficiente pero tarda más que el algoritmo goloso.\r\nPuede elegir entre 3 grafos de ejemplo o hacer su propio grafo en un archivo JSON. Luego calcular el CGM con el algoritmo goloso o ejecutar los dos para comparar los resultados.\r\nEl CGM se visualizará en la siguiente pantalla junto con el grafo que haya elegido");
 		bienvenida.setBounds(31, 78, 725, 142);
 		interfazPresentacion.getContentPane().add(bienvenida);
 
@@ -125,8 +125,6 @@ public class InterfazPresentacion
 			{
 				int idOpcion = comboBoxGrafo.getSelectedIndex();
 				presenter.elegirGrafo(idOpcion);
-//				ArrayList<Integer> cm = presenter.calcularCGMGoloso();
-//				System.out.println("Goloso: "+ cm);
 				ProcesoGoloso procesoGoloso = new ProcesoGoloso(presenter, progressBar,interfazPresentacion);
 				procesoGoloso.execute();
 				
@@ -147,33 +145,13 @@ public class InterfazPresentacion
 			{
 				int idOpcion = comboBoxGrafo.getSelectedIndex();
 				presenter.elegirGrafo(idOpcion);
-//				Set<Integer> cmB = presenter.calcularCGMBacktracking();
-//				ArrayList<Integer> cmG = presenter.calcularCGMGoloso();
-//				System.out.println("Algoritmo por cmb: "+ cmB + "\nAlgoritmo por cmG: "+ cmG);
-				ProcesoGolosoBacktracking procesoVersus = new ProcesoGolosoBacktracking(presenter, progressBar);
+				ProcesoGolosoBacktracking procesoVersus = new ProcesoGolosoBacktracking(presenter,progressBar,interfazPresentacion);
 				procesoVersus.execute();
 				
 				System.out.println(presenter.get_setConVecinos());
 			}
 		});
 		interfazPresentacion.getContentPane().add(btnAmbos);
-		
-//		JButton btnBacktracking = new JButton("CGM con backtracking");
-//		asignarCaracteristicas(btnBacktracking,546, 341, 192, 35);
-//		btnBacktracking.addMouseListener(new MouseAdapter() 
-//		{
-//			@Override
-//			public void mouseClicked(MouseEvent e)
-//			{
-//				int idOpcion = comboBoxGrafo.getSelectedIndex();
-//				presenter.elegirGrafo(idOpcion);
-////				Set<Integer> cm = presenter.calcularCGMBacktracking();
-////				System.out.println("BackTracking: "+cm);
-//				ProcesoBacktracking procesoBacktracking = new ProcesoBacktracking(presenter, progressBar);
-//				procesoBacktracking.execute();
-//			}
-//		});
-//		interfazPresentacion.getContentPane().add(btnBacktracking);
 	}
 
 	private void asignarCaracteristicas(JButton btn, int posX, int posY, int ancho, int largo) 
