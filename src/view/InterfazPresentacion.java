@@ -141,27 +141,4 @@ public class InterfazPresentacion extends PantallaDibujar
 		});
 		interfazPresentacion.getContentPane().add(btnAmbos);
 	}
-	
-//	private void asignarCaracteristicas(JButton btn, int posX, int posY, int ancho, int largo) 
-//	{
-//		btn.setForeground(Color.BLACK);
-//		btn.setBackground(Color.WHITE);
-//		btn.setFont(tipografiaBoton);
-//		btn.setBounds(posX, posY, ancho, largo);
-//		btn.addMouseListener(new MouseAdapter() 
-//		{
-//			@Override
-//			public void mouseEntered(MouseEvent e) {
-//				btn.setForeground(Color.WHITE);
-//				btn.setBackground(Color.BLACK);
-//				btn.setBounds(posX-10, posY-10, ancho+35, largo+15);
-//			}
-//			@Override
-//			public void mouseExited(MouseEvent e) {
-//				btn.setForeground(Color.BLACK);
-//				btn.setBackground(Color.WHITE);
-//				btn.setBounds(posX, posY, ancho, largo);
-//			}
-//		});
-//	}
 }

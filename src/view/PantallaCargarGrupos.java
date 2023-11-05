@@ -5,14 +5,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.plaf.multi.MultiPopupMenuUI;
+
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import model.Vertice;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.TitledBorder;
 
 public class PantallaCargarGrupos extends PantallaDibujar
 {
@@ -43,21 +48,25 @@ public class PantallaCargarGrupos extends PantallaDibujar
 		interfazGrafos.setResizable(false);
 		interfazGrafos.setType(Type.POPUP);
 		interfazGrafos.setTitle("Trabajo Práctico 3 - Conjunto Generador Mínimo");
-		interfazGrafos.getContentPane().setBackground(Color.WHITE);
+		interfazGrafos.getContentPane().setBackground(new Color(0, 0, 0));
 		interfazGrafos.setBounds(400, 200, 800, 500);
 		interfazGrafos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		interfazGrafos.getContentPane().setLayout(null);
 		
 		plano = new JMapViewer();
+		plano.setBounds(10, 11, 774, 390);
 		
-		JPanel panelMapa = new JPanel(new BorderLayout());
-		panelMapa.setBounds(0, 0, 786, 412);
+		JPanel panelMapa = new JPanel();
+		panelMapa.setBackground(new Color(0, 0, 0));
+		panelMapa.setBounds(0, 0, 784, 412);
 		
 		interfazGrafos.getContentPane().add(panelMapa);
-		panelMapa.add(plano, BorderLayout.CENTER);
+		panelMapa.setLayout(null);
+		panelMapa.add(plano);
 		plano.setZoomControlsVisible(false);
 		
 		JButton btnCargarNuevoCGM = new JButton("Generar nuevo CGM goloso");
+		btnCargarNuevoCGM.setBounds(0, 0, 0, 0);
 		btnCargarNuevoCGM.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -66,7 +75,7 @@ public class PantallaCargarGrupos extends PantallaDibujar
 				_interfazPresentacion.setVisible(true);
 			}
 		});
-		btnCargarNuevoCGM.setBounds(288, 422, 205, 21);
+		asignarCaracteristicas(btnCargarNuevoCGM,new Font("Arial", Font.BOLD, 12),288, 422, 205, 30);
 		interfazGrafos.getContentPane().add(btnCargarNuevoCGM);
 		
 		Coordinate coordinada = new Coordinate(-38.99, -30.19);
@@ -86,59 +95,8 @@ public class PantallaCargarGrupos extends PantallaDibujar
 		    double longitudPunto = centroLongitud + radio * Math.cos(angulo);
 		    crearNuevoPuntoEnElPlano(plano,_cgmGoloso,_setConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, i);
 		}
-//		Integer contador = 0;
-//		for (HashSet<Integer> conjuntoVecinosVertice : obtenerVecinos(_setConVecinos)) 
-//		{	
-//			for(Integer vecino : conjuntoVecinosVertice)
-//			{
-//				Integer valorBuscado = vecino-1;
-//				Coordinate coordenadaCorrespondiente = null;
-//				for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet()) 
-//				{
-//				    if (entry.getValue().equals(valorBuscado)) 
-//				    {
-//				        coordenadaCorrespondiente = entry.getKey();
-//				        break;
-//				    }
-//				}
-//				List<Coordinate> route2 = new ArrayList<Coordinate>(Arrays.asList(obtenerCoordenadaNodoActual(contador), coordenadaCorrespondiente, coordenadaCorrespondiente));
-//				plano.addMapPolygon(new MapPolygonImpl(route2));
-//			}
-//			contador++;
-//		}
 		dibujarAristasEnPlano(_setConVecinos,plano,coordenadasConIndice);
     }
-    
-//    public Coordinate obtenerCoordenadaNodoActual(Integer contador)
-//    {
-//    	Integer valorBuscado = contador;
-//    	Coordinate coordenadaCorrespondiente = null;
-//		for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet())
-//		{
-//		    if (entry.getValue().equals(valorBuscado))
-//		    {
-//		        coordenadaCorrespondiente = entry.getKey();
-//		        break;
-//		    }																
-//		}
-//		return coordenadaCorrespondiente;
-//    }
-//	private void crearNuevoPuntoEnElPlano(double latitud, double longitud, int punto) 
-//	{
-//	    Coordinate coordinadasPunto = new Coordinate(latitud, longitud);
-//	    MapMarker marker = new MapMarkerDot(_setConVecinos.get(punto).toString(),coordinadasPunto);
-//	    coordenadasConIndice.put(coordinadasPunto,punto);
-//	    if(_cgmGoloso.contains(_setConVecinos.get(punto).getIdVertice())) 
-//	    {
-//		    marker.getStyle().setBackColor(Color.GREEN);
-//		    marker.getStyle().setColor(Color.BLACK);
-//	    } else 
-//	    {
-//		    marker.getStyle().setBackColor(Color.BLACK);
-//		    marker.getStyle().setColor(Color.WHITE);
-//	    }
-//	    plano.addMapMarker(marker);
-//	}
     public JFrame getInterfazGrafos() 
     {
         return interfazGrafos;

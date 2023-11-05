@@ -32,7 +32,8 @@ public class SolverGoloso
 	private ArrayList<Vertice> ordenarVerticesSegunCantidadDeVecinos() 
 	{
 		ArrayList<Vertice> vertices = clonar(_grafo.getVerticesConVecinos());
-		if (revertir()) Collections.reverse(vertices);
+		if (revertir()) 
+			Collections.reverse(vertices);
 		Collections.sort(vertices);
 		Collections.reverse(vertices);
 		return vertices;
@@ -51,17 +52,20 @@ public class SolverGoloso
 	private void marcarVecinos(Vertice vertice, ArrayList<Integer> _verticesMarcados) 
 	{
 		HashSet<Integer> vecinos = vertice.getVecinos();
-		for (Integer vecino : vecinos) {
+		for (Integer vecino : vecinos) 
+		{
 			if (!_verticesMarcados.contains(vecino))
 				_verticesMarcados.add(vecino);
 		}
-		if (!_verticesMarcados.contains(vertice.getIdVertice())) _verticesMarcados.add(vertice.getIdVertice());
+		if (!_verticesMarcados.contains(vertice.getIdVertice()))
+			_verticesMarcados.add(vertice.getIdVertice());
 	}
 	private boolean revertir() 
 	{
 		return new Random().nextBoolean();
 	}
-	public ArrayList<Integer> getConjuntoMinimo(){
+	public ArrayList<Integer> getConjuntoMinimo()
+	{
 		return _conjuntoDominanteMinimo;
 	}
 }

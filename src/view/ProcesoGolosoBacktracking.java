@@ -37,7 +37,6 @@ public class ProcesoGolosoBacktracking extends SwingWorker<ArrayList<ArrayList<I
 		{
 			if (!this.isCancelled()) 
 			{
-				System.out.println(get().toString());
 				_barraProgreso.setIndeterminate(false);
 				PantallaCargarCGMBackvsGoloso pantallaCargarCGMBackvsGoloso = new PantallaCargarCGMBackvsGoloso(_presenter.get_setConVecinos(),get(),_interfazPresentacion);
 				pantallaCargarCGMBackvsGoloso.getPantallaCargarCGM().setVisible(true);

@@ -22,17 +22,13 @@ public class Controlador
 	
 	public ArrayList<Integer> armarCGMGoloso() 
 	{
-		long initialTime = System.currentTimeMillis();
 		_conjuntoMinimoGoloso = new SolverGoloso(_grafo).conjuntoGeneradorMinimo();
-		System.out.println("El tiempo que le tomo calcular CGM goloso es :" + (System.currentTimeMillis()- initialTime));
 		return _conjuntoMinimoGoloso;
 	}
 	
 	public ArrayList<Integer> armarCGMBacktracking()
 	{
-		long initialTime = System.currentTimeMillis();
 		_conjuntoMinimoBacktracking = convertir(new SolverBacktracking(_grafo).resolver());
-		System.out.println("El tiempo que le tomo calcular CGM Back es :" + (System.currentTimeMillis() - initialTime));
 		return _conjuntoMinimoBacktracking;
 	}
 	private void iniciarGrafo() 
