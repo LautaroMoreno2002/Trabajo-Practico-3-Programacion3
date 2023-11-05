@@ -28,8 +28,12 @@ import java.util.Map;
 
 import javax.swing.JButton;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.border.TitledBorder;
 
 public class PantallaCargarCGMBackvsGoloso {
 	private JMapViewer _planoGoloso;
@@ -40,6 +44,8 @@ public class PantallaCargarCGMBackvsGoloso {
 	private JFrame _interfazPresentacion;
 	private HashMap<Coordinate, Integer> coordenadasConIndice = new HashMap<>();
 	private JFrame pantallaCargarCGM;
+	private final Font tipografiaBoton = new Font("Arial", Font.BOLD, 12);
+	private final Font tipografiaEtiqueta = new Font("Arial", Font.BOLD, 14);
 
 	/**
 	 * Launch the application.
@@ -64,6 +70,7 @@ public class PantallaCargarCGMBackvsGoloso {
 	 */
 	private void initialize() {
 		pantallaCargarCGM = new JFrame();
+		pantallaCargarCGM.getContentPane().setBackground(new Color(0, 0, 0));
 		pantallaCargarCGM.setResizable(false);
 		pantallaCargarCGM.setTitle("CGM Goloso vs CGM Backtracking");
 		pantallaCargarCGM.setBounds(400, 100, 800, 650);
@@ -72,37 +79,45 @@ public class PantallaCargarCGMBackvsGoloso {
 		
 		
 		JPanel grafoGoloso = new JPanel();
+		grafoGoloso.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
 		grafoGoloso.setBackground(new Color(0, 0, 0));
 		grafoGoloso.setBounds(10, 11, 382, 497);
 		pantallaCargarCGM.getContentPane().add(grafoGoloso);
 		
 		JPanel grafoBacktracking = new JPanel();
+		grafoBacktracking.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 255, 255)));
 		grafoBacktracking.setBackground(new Color(0, 0, 0));
 		grafoBacktracking.setBounds(402, 11, 372, 497);
 		pantallaCargarCGM.getContentPane().add(grafoBacktracking);
 
-		JLabel Goloso = new JLabel("Goloso");
-		Goloso.setHorizontalAlignment(SwingConstants.CENTER);
-		Goloso.setBounds(125, 519, 119, 17);
-		pantallaCargarCGM.getContentPane().add(Goloso);
+		JLabel lblGoloso = new JLabel("Goloso");
+		lblGoloso.setForeground(new Color(255, 255, 255));
+		lblGoloso.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGoloso.setBounds(125, 519, 119, 17);
+		lblGoloso.setFont(tipografiaEtiqueta);
+		pantallaCargarCGM.getContentPane().add(lblGoloso);
 		
 		JLabel lblBacktrancking = new JLabel("Backtrancking");
+		lblBacktrancking.setForeground(new Color(255, 255, 255));
 		lblBacktrancking.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBacktrancking.setBounds(535, 519, 119, 17);
+		lblBacktrancking.setFont(tipografiaEtiqueta);
 		pantallaCargarCGM.getContentPane().add(lblBacktrancking);
 		
 		JLabel lblVs = new JLabel("vs");
+		lblVs.setForeground(new Color(255, 255, 255));
 		lblVs.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVs.setBounds(335, 519, 119, 17);
+		lblVs.setFont(tipografiaEtiqueta);
 		pantallaCargarCGM.getContentPane().add(lblVs);
 		grafoGoloso.setLayout(null);
 		
 		_planoGoloso = new JMapViewer();
-		_planoGoloso.setBounds(10, 5, 362, 481);
+		_planoGoloso.setBounds(10, 11, 362, 475);
 		grafoGoloso.add(_planoGoloso);
 		grafoBacktracking.setLayout(null);
 		_planoBacktracking = new JMapViewer();
-		_planoBacktracking.setBounds(10, 5, 352, 481);
+		_planoBacktracking.setBounds(10, 11, 352, 475);
 		grafoBacktracking.add(_planoBacktracking);
 		_planoGoloso.setZoomControlsVisible(false);
 		_planoBacktracking.setZoomControlsVisible(false);
@@ -112,6 +127,7 @@ public class PantallaCargarCGMBackvsGoloso {
         _planoBacktracking.setDisplayPosition(coordinada, 11); //PARA CAMBIAR EL ZOOM
 		
 		JButton btnVolver = new JButton("Volver a cargar CGM");
+		asignarCaracteristicas(btnVolver, 305, 547, 188, 40);
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -119,7 +135,6 @@ public class PantallaCargarCGMBackvsGoloso {
 				_interfazPresentacion.setVisible(true);
 			}
 		});
-		btnVolver.setBounds(305, 547, 188, 40);
 		pantallaCargarCGM.getContentPane().add(btnVolver);
 		
 		double centroLatitud = -38.990380; // Latitud del centro del círculo
@@ -228,6 +243,28 @@ public class PantallaCargarCGMBackvsGoloso {
 			}
 			return coordenadaCorrespondiente;
 	    }
+	 private void asignarCaracteristicas(JButton btn, int posX, int posY, int ancho, int largo) 
+		{
+			btn.setForeground(Color.BLACK);
+			btn.setBackground(Color.WHITE);
+			btn.setFont(tipografiaBoton);
+			btn.setBounds(posX, posY, ancho, largo);
+			btn.addMouseListener(new MouseAdapter() 
+			{
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					btn.setForeground(Color.WHITE);
+					btn.setBackground(Color.BLACK);
+					btn.setBounds(posX-10, posY, ancho+35, largo+15);
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					btn.setForeground(Color.BLACK);
+					btn.setBackground(Color.WHITE);
+					btn.setBounds(posX, posY, ancho, largo);
+				}
+			});
+		}
 	public JFrame getPantallaCargarCGM() {
 		return pantallaCargarCGM;
 	}
