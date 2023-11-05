@@ -20,7 +20,6 @@ import javax.swing.JProgressBar;
 
 public class InterfazPresentacion 
 {
-
 	private JFrame interfazPresentacion;
 	private Presenter presenter;
 	private final String[] opciones = new String[] {"Ejemplo Grafo 1", "Ejemplo Grafo 2", "Ejemplo Grafo 3", "Grafo Personalizado"};
@@ -29,12 +28,9 @@ public class InterfazPresentacion
 	private final Font tipografiaEtiqueta = new Font("Arial", Font.BOLD, 14);
 	private final Font tipografiaTitulo = new Font("Arial", Font.BOLD, 18);
 	
-	
-	
 	public JFrame getInterfazPresentacion() {
 		return interfazPresentacion;
 	}
-
 	/**
 	 * Launch the application.
 	 */
@@ -56,7 +52,6 @@ public class InterfazPresentacion
 			}
 		});
 	}
-
 	/**
 	 * Create the application.
 	 */
@@ -65,7 +60,6 @@ public class InterfazPresentacion
 		presenter = new Presenter();
 		initialize();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -127,10 +121,6 @@ public class InterfazPresentacion
 				presenter.elegirGrafo(idOpcion);
 				ProcesoGoloso procesoGoloso = new ProcesoGoloso(presenter, progressBar,interfazPresentacion);
 				procesoGoloso.execute();
-				
-				//Me imprime un map del vértice con sus vecinos
-				System.out.println(presenter.get_setConVecinos());
-
 			}
 		});
 		interfazPresentacion.getContentPane().add(btnAlgGoloso);
@@ -147,13 +137,11 @@ public class InterfazPresentacion
 				presenter.elegirGrafo(idOpcion);
 				ProcesoGolosoBacktracking procesoVersus = new ProcesoGolosoBacktracking(presenter,progressBar,interfazPresentacion);
 				procesoVersus.execute();
-				
-				System.out.println(presenter.get_setConVecinos());
 			}
 		});
 		interfazPresentacion.getContentPane().add(btnAmbos);
 	}
-
+	
 	private void asignarCaracteristicas(JButton btn, int posX, int posY, int ancho, int largo) 
 	{
 		btn.setForeground(Color.BLACK);

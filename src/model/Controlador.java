@@ -13,7 +13,8 @@ public class Controlador
 	private ArrayList<Integer> _conjuntoMinimoGoloso;
 	private ArrayList<Integer> _conjuntoMinimoBacktracking;
 	
-	public void setIndice(int indice) {
+	public void setIndice(int indice) 
+	{
 		if (indice < 0 || indice > 3) throw new IllegalArgumentException("Indice invalido");
 		_idOpcion = indice;
 		iniciarGrafo();
@@ -46,7 +47,8 @@ public class Controlador
 	}
 
 	//Mi método
-	public ArrayList<Vertice> get_setConVecinos() {
+	public ArrayList<Vertice> get_setConVecinos()
+	{
 		return _grafo.getVerticesConVecinos();
 	}
 
@@ -59,7 +61,8 @@ public class Controlador
 		return listaDeVecinos;
 	}
 
-	private ArrayList<Integer> convertir(Set<Integer> set) {
+	private ArrayList<Integer> convertir(Set<Integer> set) 
+	{
 		ArrayList<Integer> ar = new ArrayList<Integer>(set);
 		return ar;
 	}

@@ -2,7 +2,6 @@ package view;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;

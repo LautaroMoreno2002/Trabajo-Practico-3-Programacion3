@@ -2,11 +2,9 @@ package view;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
-
 import presenter.Presenter;
 
 public class ProcesoGoloso extends SwingWorker<ArrayList<Integer>,Long> 
@@ -16,13 +14,12 @@ public class ProcesoGoloso extends SwingWorker<ArrayList<Integer>,Long>
 	ArrayList<Integer> cm;
 	JFrame _interfazPresentacion;
 
-	
-	public ProcesoGoloso(Presenter _presenter, JProgressBar _barraProgreso, JFrame _interfazPresentacion) {
+	public ProcesoGoloso(Presenter _presenter, JProgressBar _barraProgreso, JFrame _interfazPresentacion)
+	{
 		this._presenter = _presenter;
 		this._barraProgreso = _barraProgreso;
 		this._interfazPresentacion = _interfazPresentacion;
 	}
-	
 	@Override
 	protected ArrayList<Integer> doInBackground() throws Exception
 	{
@@ -58,6 +55,4 @@ public class ProcesoGoloso extends SwingWorker<ArrayList<Integer>,Long>
 			e.printStackTrace();
 		}
 	}
-
 }
-

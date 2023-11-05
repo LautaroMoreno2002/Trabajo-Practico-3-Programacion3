@@ -27,7 +27,8 @@ public class SolverBacktracking
 	{
 		resolver();
 	}
-	public Set<Integer> get_conjuntoDominanteMinimo() {
+	public Set<Integer> get_conjuntoDominanteMinimo() 
+	{
 		return _conjuntoDominanteMinimo;
 	}
 	// Resuelve el problema de conjunto dominante de forma recursiva, usando backtracking

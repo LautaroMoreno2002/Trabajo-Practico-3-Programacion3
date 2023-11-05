@@ -1,20 +1,17 @@
 package modelTest;
 
 import static org.junit.Assert.assertTrue;
-
 import java.util.HashSet;
 import java.util.Set;
-
 import org.junit.Test;
-
 import conjuntoDominanteMinimo.SolverBacktracking;
 import model.Grafo;
 
-public class SolverBacktringTest {
-	
-	
+public class SolverBacktringTest 
+{
 	@Test
-	public void CMDconGrafoVacio() {
+	public void CMDconGrafoVacio() 
+	{
 		Grafo grafo = new Grafo(0);
 		Set<Integer> conjuntoMinimo = new SolverBacktracking(grafo).resolver();
 		assertTrue(conjuntoMinimo.isEmpty());

@@ -1,8 +1,5 @@
 package view;
 
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Toolkit;
 import java.awt.Window.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,12 +9,9 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import model.Vertice;
-import presenter.Presenter;
-import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
@@ -27,8 +21,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class PantallaCargarGrupos {
-
+public class PantallaCargarGrupos extends PantallaDibujar
+{
     private JFrame interfazGrafos;
     private JMapViewer plano;
     private ArrayList<Vertice> _setConVecinos;
@@ -40,18 +34,18 @@ public class PantallaCargarGrupos {
      @wbp.parser.constructor
 
      */
-
-	public PantallaCargarGrupos(ArrayList<Vertice> _setConVecinos, ArrayList<Integer> _cgmGoloso, JFrame _interfazPresentacion) {
+	public PantallaCargarGrupos(ArrayList<Vertice> _setConVecinos, ArrayList<Integer> _cgmGoloso, JFrame _interfazPresentacion) 
+	{
 		this._setConVecinos = _setConVecinos;
 		this._cgmGoloso = _cgmGoloso;
 		this._interfazPresentacion = _interfazPresentacion;
 		initialize();
 	}
-
 	/**
      * Initialize the contents of the frame.
      */
-    private void initialize() {
+    private void initialize() 
+    {
 		interfazGrafos = new JFrame();
 		interfazGrafos.setResizable(false);
 		interfazGrafos.setType(Type.POPUP);
@@ -67,19 +61,20 @@ public class PantallaCargarGrupos {
 		panelMapa.setBounds(0, 0, 786, 412);
 		
 		interfazGrafos.getContentPane().add(panelMapa);
-		panelMapa.add(plano, BorderLayout.CENTER); //
+		panelMapa.add(plano, BorderLayout.CENTER);
 		plano.setZoomControlsVisible(false);
 		
 		JButton btnCargarNuevoCGM = new JButton("Generar nuevo CGM goloso");
-		btnCargarNuevoCGM.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnCargarNuevoCGM.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				interfazGrafos.setVisible(false);
 				_interfazPresentacion.setVisible(true);
 			}
 		});
 		btnCargarNuevoCGM.setBounds(288, 422, 205, 21);
 		interfazGrafos.getContentPane().add(btnCargarNuevoCGM);
-		
 		
 		Coordinate coordinada = new Coordinate(-38.99, -30.19);
 		plano.setDisplayPosition(coordinada, 11); //PARA CAMBIAR EL ZOOM
@@ -89,31 +84,28 @@ public class PantallaCargarGrupos {
 		double radio = 0.1; // Radio del círculo en grados (ajusta según tus necesidades)
 		int numPuntos = _setConVecinos.size();
 
-		for (int i = 0; i < numPuntos; i++) {
+		for (int i = 0; i < numPuntos; i++) 
+		{
 		    // Calcular el ángulo para distribuir los puntos uniformemente en el círculo
 		    double angulo = (2 * Math.PI * i) / numPuntos;
-
 		    // Calcular las coordenadas del punto en el círculo
 		    double latitudPunto = centroLatitud + radio * Math.sin(angulo);
 		    double longitudPunto = centroLongitud + radio * Math.cos(angulo);
-
-		    // Crea el punto en el plano usando latitudPunto y longitudPunto
 		    crearNuevoPuntoEnElPlano(latitudPunto, longitudPunto, i);
 		}
-		
 		Integer contador = 0;
-		for (HashSet<Integer> conjuntoVecinosVertice : obtenerVecinos()) { //accedes a cada conjuntoVecinosVertice
-			
-			for(Integer vecino : conjuntoVecinosVertice) { //accedes a cada vecino de ese conjunto en esa pos
-				
-				Integer valorBuscado = vecino-1; //ACÁ ESTABA EL MALDITO PROBLEMA
+		for (HashSet<Integer> conjuntoVecinosVertice : obtenerVecinos(_setConVecinos)) 
+		{	
+			for(Integer vecino : conjuntoVecinosVertice)
+			{
+				Integer valorBuscado = vecino-1;
 				Coordinate coordenadaCorrespondiente = null;
-				for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet()) {
-				    if (entry.getValue().equals(valorBuscado)) {
+				for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet()) 
+				{
+				    if (entry.getValue().equals(valorBuscado)) 
+				    {
 				        coordenadaCorrespondiente = entry.getKey();
-				        System.out.println(entry.getKey());
-				        System.out.println(entry.getValue());
-				        break; // Si encontramos el valor, podemos salir del bucle
+				        break;
 				    }
 				}
 				List<Coordinate> route2 = new ArrayList<Coordinate>(Arrays.asList(obtenerCoordenadaNodoActual(contador), coordenadaCorrespondiente, coordenadaCorrespondiente));
@@ -123,54 +115,38 @@ public class PantallaCargarGrupos {
 		}
     }
     
-    public Coordinate obtenerCoordenadaNodoActual(Integer contador) {
+    public Coordinate obtenerCoordenadaNodoActual(Integer contador)
+    {
     	Integer valorBuscado = contador;
     	Coordinate coordenadaCorrespondiente = null;
-		for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet()) {
-		    if (entry.getValue().equals(valorBuscado)) {
+		for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet())
+		{
+		    if (entry.getValue().equals(valorBuscado))
+		    {
 		        coordenadaCorrespondiente = entry.getKey();
-		        break; // Si encontramos el valor, podemos salir del bucle
-		    }																		//CAMBIAR
+		        break;
+		    }																
 		}
 		return coordenadaCorrespondiente;
     }
-    
-    
-	private void crearNuevoPuntoEnElPlano(double latitud, double longitud, int i) { //el i sería el punto
-	    Coordinate coordinadasPunto = new Coordinate(latitud, longitud); // Crea una nueva instancia en cada iteración
-	    
-	    MapMarker marker = new MapMarkerDot(_setConVecinos.get(i).toString(),coordinadasPunto);//En realidad acá tenemos que usar el getId()
-	    
-	    
-	    //Agregamos las coordenadasConIndice al poligono
-	    coordenadasConIndice.put(coordinadasPunto,i); //acá se guarda las coordenadas adjuntadas al punto
-	    System.out.println(coordinadasPunto + "Indice" + i);
-	    
-	    if(_cgmGoloso.contains(_setConVecinos.get(i).getIdVertice())) {
+	private void crearNuevoPuntoEnElPlano(double latitud, double longitud, int punto) 
+	{
+	    Coordinate coordinadasPunto = new Coordinate(latitud, longitud);
+	    MapMarker marker = new MapMarkerDot(_setConVecinos.get(punto).toString(),coordinadasPunto);
+	    coordenadasConIndice.put(coordinadasPunto,punto);
+	    if(_cgmGoloso.contains(_setConVecinos.get(punto).getIdVertice())) 
+	    {
 		    marker.getStyle().setBackColor(Color.GREEN);
 		    marker.getStyle().setColor(Color.BLACK);
-	    } else {
+	    } else 
+	    {
 		    marker.getStyle().setBackColor(Color.BLACK);
 		    marker.getStyle().setColor(Color.WHITE);
 	    }
-
 	    plano.addMapMarker(marker);
-	    System.out.println(obtenerVecinos());
 	}
-
-    public JFrame getInterfazGrafos() {
+    public JFrame getInterfazGrafos() 
+    {
         return interfazGrafos;
     }
-
-	private ArrayList<HashSet<Integer>> obtenerVecinos(){
-		ArrayList<HashSet<Integer>> vecinosDeVertices = new ArrayList<>();
-
-		for (Vertice vertice : _setConVecinos) {
-		    HashSet<Integer> vecinos = vertice.getVecinos();
-		    vecinosDeVertices.add(vecinos);
-		}
-		
-		return vecinosDeVertices;
-	}
-
 }
