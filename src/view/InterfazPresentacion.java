@@ -18,7 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JProgressBar;
 
-public class InterfazPresentacion 
+public class InterfazPresentacion extends PantallaDibujar
 {
 	private JFrame interfazPresentacion;
 	private Presenter presenter;
@@ -111,7 +111,7 @@ public class InterfazPresentacion
 		
 		JButton btnAlgGoloso = new JButton("CGM con algoritmo Goloso");
 		btnAlgGoloso.setToolTipText("CGM con una posible solución");
-		asignarCaracteristicas(btnAlgGoloso,166,341,192,35);
+		asignarCaracteristicas(btnAlgGoloso,tipografiaBoton,166,341,192,35);
 		btnAlgGoloso.addMouseListener(new MouseAdapter() 
 		{
 			@Override
@@ -127,7 +127,7 @@ public class InterfazPresentacion
 		
 		JButton btnAmbos = new JButton("Goloso vs Backtracking");
 		btnAmbos.setToolTipText("Comparación de resultados");
-		asignarCaracteristicas(btnAmbos,410, 341, 192, 35);
+		asignarCaracteristicas(btnAmbos,tipografiaBoton,410, 341, 192, 35);
 		btnAmbos.addMouseListener(new MouseAdapter() 
 		{
 			@Override
@@ -142,26 +142,26 @@ public class InterfazPresentacion
 		interfazPresentacion.getContentPane().add(btnAmbos);
 	}
 	
-	private void asignarCaracteristicas(JButton btn, int posX, int posY, int ancho, int largo) 
-	{
-		btn.setForeground(Color.BLACK);
-		btn.setBackground(Color.WHITE);
-		btn.setFont(tipografiaBoton);
-		btn.setBounds(posX, posY, ancho, largo);
-		btn.addMouseListener(new MouseAdapter() 
-		{
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				btn.setForeground(Color.WHITE);
-				btn.setBackground(Color.BLACK);
-				btn.setBounds(posX-10, posY-10, ancho+35, largo+15);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				btn.setForeground(Color.BLACK);
-				btn.setBackground(Color.WHITE);
-				btn.setBounds(posX, posY, ancho, largo);
-			}
-		});
-	}
+//	private void asignarCaracteristicas(JButton btn, int posX, int posY, int ancho, int largo) 
+//	{
+//		btn.setForeground(Color.BLACK);
+//		btn.setBackground(Color.WHITE);
+//		btn.setFont(tipografiaBoton);
+//		btn.setBounds(posX, posY, ancho, largo);
+//		btn.addMouseListener(new MouseAdapter() 
+//		{
+//			@Override
+//			public void mouseEntered(MouseEvent e) {
+//				btn.setForeground(Color.WHITE);
+//				btn.setBackground(Color.BLACK);
+//				btn.setBounds(posX-10, posY-10, ancho+35, largo+15);
+//			}
+//			@Override
+//			public void mouseExited(MouseEvent e) {
+//				btn.setForeground(Color.BLACK);
+//				btn.setBackground(Color.WHITE);
+//				btn.setBounds(posX, posY, ancho, largo);
+//			}
+//		});
+//	}
 }

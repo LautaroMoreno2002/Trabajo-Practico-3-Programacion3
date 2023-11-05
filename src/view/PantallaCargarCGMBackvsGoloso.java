@@ -7,16 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
-import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
-import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
-import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import model.Vertice;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -118,7 +111,7 @@ public class PantallaCargarCGMBackvsGoloso extends PantallaDibujar
 		_planoBacktracking.setDisplayPosition(coordinada, 11); // PARA CAMBIAR EL ZOOM
 
 		JButton btnVolver = new JButton("Volver a cargar CGM");
-		asignarCaracteristicas(btnVolver, 305, 547, 188, 40);
+		asignarCaracteristicas(btnVolver,tipografiaBoton, 305, 547, 188, 40);
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
@@ -140,110 +133,115 @@ public class PantallaCargarCGMBackvsGoloso extends PantallaDibujar
 			double latitudPunto = centroLatitud + radio * Math.sin(angulo);
 			double longitudPunto = centroLongitud + radio * Math.cos(angulo);
 			// Crea el punto en el plano usando latitudPunto y longitudPunto
-			crearNuevoPuntoEnElPlanoG(latitudPunto, longitudPunto, i);
-			crearNuevoPuntoEnElPlanoB(latitudPunto, longitudPunto, i);
-			dibujarAristasEnPlanoGoloso();
+//			crearNuevoPuntoEnElPlanoG(latitudPunto, longitudPunto, i);
+//			crearNuevoPuntoEnElPlanoB(latitudPunto, longitudPunto, i);
+			crearNuevoPuntoEnElPlano(_planoGoloso,_cgmGoloso,_setConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, i);
+			crearNuevoPuntoEnElPlano(_planoBacktracking,_cgmBacktracking,_setConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, i);
+//			dibujarAristasEnPlanoGoloso();
+			dibujarAristasEnPlano(_setConVecinos,_planoGoloso,coordenadasConIndice);
+			dibujarAristasEnPlano(_setConVecinos,_planoBacktracking,coordenadasConIndice);
 		}
 	}
-	private void crearNuevoPuntoEnElPlanoG(double latitud, double longitud, int punto) 
-	{
-		Coordinate coordinadasPunto = new Coordinate(latitud, longitud);
-		MapMarker marker = new MapMarkerDot("" + _setConVecinos.get(punto).getIdVertice(), coordinadasPunto);
-		// Agregamos las coordenadasConIndice al poligono
-		coordenadasConIndice.put(coordinadasPunto, punto);
 
-		if (_cgmGoloso.contains(_setConVecinos.get(punto).getIdVertice())) 
-		{
-			marker.getStyle().setBackColor(Color.GREEN);
-			marker.getStyle().setColor(Color.BLACK);
-		} else {
-			marker.getStyle().setBackColor(Color.BLACK);
-			marker.getStyle().setColor(Color.WHITE);
-		}
-		_planoGoloso.addMapMarker(marker);
-	}
-	private void crearNuevoPuntoEnElPlanoB(double latitud, double longitud, int punto) 
-	{
-		Coordinate coordinadasPunto = new Coordinate(latitud, longitud);
-		MapMarker marker = new MapMarkerDot("" + _setConVecinos.get(punto).getIdVertice(), coordinadasPunto);
-		// Agregamos las coordenadasConIndice al poligono
-		coordenadasConIndice.put(coordinadasPunto, punto);
-		System.out.println(coordinadasPunto + "Indice" + punto);
-
-		if (_cgmBacktracking.contains(_setConVecinos.get(punto).getIdVertice()))
-{
-			marker.getStyle().setBackColor(Color.GREEN);
-			marker.getStyle().setColor(Color.BLACK);
-		} else 
-		{
-			marker.getStyle().setBackColor(Color.BLACK);
-			marker.getStyle().setColor(Color.WHITE);
-		}
-		_planoBacktracking.addMapMarker(marker);
-	}
-	private void dibujarAristasEnPlanoGoloso() 
-	{
-		Integer contador = 0;
-		for (HashSet<Integer> conjuntoVecinosVertice : obtenerVecinos(_setConVecinos)) 
-		{
-			for (Integer vecino : conjuntoVecinosVertice) 
-			{ 
-				Integer valorBuscado = vecino - 1;
-				Coordinate coordenadaCorrespondiente = null;
-				for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet()) 
-				{
-					if (entry.getValue().equals(valorBuscado)) 
-					{
-						coordenadaCorrespondiente = entry.getKey();
-						break;
-					}
-				}
-				List<Coordinate> route2 = new ArrayList<Coordinate>(Arrays.asList(obtenerCoordenadaNodoActual(contador),
-						coordenadaCorrespondiente, coordenadaCorrespondiente));
-				_planoGoloso.addMapPolygon(new MapPolygonImpl(route2));
-				_planoBacktracking.addMapPolygon(new MapPolygonImpl(route2));
-			}
-			contador++;
-		}
-	}
-	private void asignarCaracteristicas(JButton btn, int posX, int posY, int ancho, int largo) 
-	{
-		btn.setForeground(Color.BLACK);
-		btn.setBackground(Color.WHITE);
-		btn.setFont(tipografiaBoton);
-		btn.setBounds(300, 547, ancho, largo);
-		btn.addMouseListener(new MouseAdapter() 
-		{
-			@Override
-			public void mouseEntered(MouseEvent e) 
-			{
-				btn.setForeground(Color.WHITE);
-				btn.setBackground(Color.BLACK);
-				btn.setBounds(posX - 10, posY - 5, ancho + 30, largo + 10);
-			}
-			@Override
-			public void mouseExited(MouseEvent e)
-			{
-				btn.setForeground(Color.BLACK);
-				btn.setBackground(Color.WHITE);
-				btn.setBounds(posX, posY, ancho, largo);
-			}
-		});
-	}
-	public Coordinate obtenerCoordenadaNodoActual(Integer contador) 
-	{
-		Integer valorBuscado = contador;
-		Coordinate coordenadaCorrespondiente = null;
-		for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet()) 
-		{
-			if (entry.getValue().equals(valorBuscado))
-			{
-				coordenadaCorrespondiente = entry.getKey();
-				break; 
-			}
-		}
-		return coordenadaCorrespondiente;
-	}
+//	private void crearNuevoPuntoEnElPlanoG(double latitud, double longitud, int punto) 
+//	{
+//		Coordinate coordinadasPunto = new Coordinate(latitud, longitud);
+//		MapMarker marker = new MapMarkerDot("" + _setConVecinos.get(punto).getIdVertice(), coordinadasPunto);
+//		// Agregamos las coordenadasConIndice al poligono
+//		coordenadasConIndice.put(coordinadasPunto, punto);
+//
+//		if (_cgmGoloso.contains(_setConVecinos.get(punto).getIdVertice())) 
+//		{
+//			marker.getStyle().setBackColor(Color.GREEN);
+//			marker.getStyle().setColor(Color.BLACK);
+//		} else {
+//			marker.getStyle().setBackColor(Color.BLACK);
+//			marker.getStyle().setColor(Color.WHITE);
+//		}
+//		_planoGoloso.addMapMarker(marker);
+//	}
+//	private void crearNuevoPuntoEnElPlanoB(double latitud, double longitud, int punto) 
+//	{
+//		Coordinate coordinadasPunto = new Coordinate(latitud, longitud);
+//		MapMarker marker = new MapMarkerDot("" + _setConVecinos.get(punto).getIdVertice(), coordinadasPunto);
+//		// Agregamos las coordenadasConIndice al poligono
+//		coordenadasConIndice.put(coordinadasPunto, punto);
+//		System.out.println(coordinadasPunto + "Indice" + punto);
+//
+//		if (_cgmBacktracking.contains(_setConVecinos.get(punto).getIdVertice()))
+//{
+//			marker.getStyle().setBackColor(Color.GREEN);
+//			marker.getStyle().setColor(Color.BLACK);
+//		} else 
+//		{
+//			marker.getStyle().setBackColor(Color.BLACK);
+//			marker.getStyle().setColor(Color.WHITE);
+//		}
+//		_planoBacktracking.addMapMarker(marker);
+//	}
+//	private void dibujarAristasEnPlanoGoloso() 
+//	{
+//		Integer contador = 0;
+//		for (HashSet<Integer> conjuntoVecinosVertice : obtenerVecinos(_setConVecinos)) 
+//		{
+//			for (Integer vecino : conjuntoVecinosVertice) 
+//			{ 
+//				Integer valorBuscado = vecino - 1;
+//				Coordinate coordenadaCorrespondiente = null;
+//				for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet()) 
+//				{
+//					if (entry.getValue().equals(valorBuscado)) 
+//					{
+//						coordenadaCorrespondiente = entry.getKey();
+//						break;
+//					}
+//				}
+//				List<Coordinate> route2 = new ArrayList<Coordinate>(Arrays.asList(obtenerCoordenadaNodoActual(contador),
+//						coordenadaCorrespondiente, coordenadaCorrespondiente));
+//				_planoGoloso.addMapPolygon(new MapPolygonImpl(route2));
+//				_planoBacktracking.addMapPolygon(new MapPolygonImpl(route2));
+//			}
+//			contador++;
+//		}
+//	}
+//	private void asignarCaracteristicas(JButton btn, int posX, int posY, int ancho, int largo) 
+//	{
+//		btn.setForeground(Color.BLACK);
+//		btn.setBackground(Color.WHITE);
+//		btn.setFont(tipografiaBoton);
+//		btn.setBounds(300, 547, ancho, largo);
+//		btn.addMouseListener(new MouseAdapter() 
+//		{
+//			@Override
+//			public void mouseEntered(MouseEvent e) 
+//			{
+//				btn.setForeground(Color.WHITE);
+//				btn.setBackground(Color.BLACK);
+//				btn.setBounds(posX - 10, posY - 5, ancho + 30, largo + 10);
+//			}
+//			@Override
+//			public void mouseExited(MouseEvent e)
+//			{
+//				btn.setForeground(Color.BLACK);
+//				btn.setBackground(Color.WHITE);
+//				btn.setBounds(posX, posY, ancho, largo);
+//			}
+//		});
+//	}
+//	public Coordinate obtenerCoordenadaNodoActual(Integer contador) 
+//	{
+//		Integer valorBuscado = contador;
+//		Coordinate coordenadaCorrespondiente = null;
+//		for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet()) 
+//		{
+//			if (entry.getValue().equals(valorBuscado))
+//			{
+//				coordenadaCorrespondiente = entry.getKey();
+//				break; 
+//			}
+//		}
+//		return coordenadaCorrespondiente;
+//	}
 	public JFrame getPantallaCargarCGM()
 	{
 		return pantallaCargarCGM;
