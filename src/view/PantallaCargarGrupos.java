@@ -86,28 +86,45 @@ public class PantallaCargarGrupos {
 		plano.setDisplayPosition(coordinada, 8); //PARA CAMBIAR EL ZOOM
 		
 		
-		double latitud = -38.990380;
-		double longitud = -30.197439;
-		double cont= 0.0;
+//		double latitud = -38.990380;
+//		double longitud = -30.197439;
+//		double cont= 0.0;
+//		
+//		
+//		for (int i = 0; i < _setConVecinos.size(); i++) {
+//			
+//			crearNuevoPuntoEnElPlano(latitud,longitud,i);
+//			
+//
+//		    double deltaLat = -0.1;
+//		    double deltaLon = -0.2;
+//		    
+//		    if (i % 2 == 0) {
+//		        latitud += deltaLat;
+//		        longitud += deltaLon + cont;
+//		    } else {
+//		        latitud += deltaLat;
+//		        longitud -= deltaLon + cont;
+//		    }
+//		    
+//		    cont+=0.2;
+//		}
 		
-		
-		for (int i = 0; i < _setConVecinos.size(); i++) {
-			
-			crearNuevoPuntoEnElPlano(latitud,longitud,i);
-			
+		double centroLatitud = -38.990380; // Latitud del centro del círculo
+		double centroLongitud = -30.197439; // Longitud del centro del círculo
+		double radio = 0.1; // Radio del círculo en grados (ajusta según tus necesidades)
+		int numPuntos = _setConVecinos.size();
 
-		    double deltaLat = -0.1;
-		    double deltaLon = -0.2;
-		    
-		    if (i % 2 == 0) {
-		        latitud += deltaLat;
-		        longitud += deltaLon + cont;
-		    } else {
-		        latitud += deltaLat;
-		        longitud -= deltaLon + cont;
-		    }
-		    
-		    cont+=0.2;
+		for (int i = 0; i < numPuntos; i++) {
+		    // Calcular el ángulo para distribuir los puntos uniformemente en el círculo
+		    double angulo = (2 * Math.PI * i) / numPuntos;
+
+		    // Calcular las coordenadas del punto en el círculo
+		    double latitudPunto = centroLatitud + radio * Math.sin(angulo);
+		    double longitudPunto = centroLongitud + radio * Math.cos(angulo);
+
+		    // Crea el punto en el plano usando latitudPunto y longitudPunto
+		    crearNuevoPuntoEnElPlano(latitudPunto, longitudPunto, i);
 		}
 		
 		Integer contador = 0;
