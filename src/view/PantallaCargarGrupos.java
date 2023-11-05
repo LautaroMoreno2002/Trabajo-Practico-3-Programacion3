@@ -82,8 +82,8 @@ public class PantallaCargarGrupos {
 		interfazGrafos.getContentPane().add(btnCargarNuevoCGM);
 		
 		
-		Coordinate coordinada = new Coordinate(-39.4, -30.19);
-		plano.setDisplayPosition(coordinada, 8); //PARA CAMBIAR EL ZOOM
+		Coordinate coordinada = new Coordinate(-38.99, -30.19);
+		plano.setDisplayPosition(coordinada, 11); //PARA CAMBIAR EL ZOOM
 		
 		
 //		double latitud = -38.990380;
