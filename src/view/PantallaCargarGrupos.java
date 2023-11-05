@@ -35,7 +35,6 @@ public class PantallaCargarGrupos {
 	private HashMap<Coordinate, Integer> coordenadasConIndice = new HashMap<>();
 	private ArrayList<Coordinate> coordinadas = new ArrayList<Coordinate>();
 	private ArrayList<Integer> _cgmGoloso;
-	private HashSet<Integer> _vecinos;
 	private JFrame _interfazPresentacion;
     /**
      * Create the application.
@@ -43,11 +42,9 @@ public class PantallaCargarGrupos {
 
      */
 
-	public PantallaCargarGrupos(ArrayList<Vertice> _setConVecinos, ArrayList<Integer> _cgmGoloso,
-			HashSet<Integer> _vecinos, JFrame _interfazPresentacion) {
+	public PantallaCargarGrupos(ArrayList<Vertice> _setConVecinos, ArrayList<Integer> _cgmGoloso, JFrame _interfazPresentacion) {
 		this._setConVecinos = _setConVecinos;
 		this._cgmGoloso = _cgmGoloso;
-		this._vecinos = _vecinos;
 		this._interfazPresentacion = _interfazPresentacion;
 		initialize();
 	}
@@ -97,6 +94,7 @@ public class PantallaCargarGrupos {
 		for (int i = 0; i < _setConVecinos.size(); i++) {
 			
 			crearNuevoPuntoEnElPlano(latitud,longitud,i);
+			
 
 		    double deltaLat = -0.1;
 		    double deltaLon = -0.2;
@@ -112,21 +110,50 @@ public class PantallaCargarGrupos {
 		    cont+=0.2;
 		}
 		
-//		for (int vertice = 0; vertice < _vecinos.size(); vertice++) {
-//			ArrayList<Coordinate> coordinates = armarArregloConVecinosDelVertice(vertice);
-//			crearArista(coordinates, vertice);
-//		}
-		
+		Integer contador = 0;
+		for (HashSet<Integer> conjuntoVecinosVertice : obtenerVecinos()) { //accedes a cada conjuntoVecinosVertice
+			
+			for(Integer vecino : conjuntoVecinosVertice) { //accedes a cada vecino de ese conjunto en esa pos
+				
+				Integer valorBuscado = vecino-1; //ACÁ ESTABA EL MALDITO PROBLEMA
+				Coordinate coordenadaCorrespondiente = null;
+				for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet()) {
+				    if (entry.getValue().equals(valorBuscado)) {
+				        coordenadaCorrespondiente = entry.getKey();
+				        System.out.println(entry.getKey());
+				        System.out.println(entry.getValue());
+				        break; // Si encontramos el valor, podemos salir del bucle
+				    }																		//CAMBIAR
+				}
+				List<Coordinate> route2 = new ArrayList<Coordinate>(Arrays.asList(obtenerCoordenadaNodoActual(contador), coordenadaCorrespondiente, coordenadaCorrespondiente));
+				plano.addMapPolygon(new MapPolygonImpl(route2));
+			}
+			contador++;
+		}
     }
     
-	private void crearNuevoPuntoEnElPlano(double latitud, double longitud, int i) {
+    public Coordinate obtenerCoordenadaNodoActual(Integer contador) {
+    	Integer valorBuscado = contador;
+    	Coordinate coordenadaCorrespondiente = null;
+		for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet()) {
+		    if (entry.getValue().equals(valorBuscado)) {
+		        coordenadaCorrespondiente = entry.getKey();
+		        break; // Si encontramos el valor, podemos salir del bucle
+		    }																		//CAMBIAR
+		}
+		return coordenadaCorrespondiente;
+    }
+    
+    
+	private void crearNuevoPuntoEnElPlano(double latitud, double longitud, int i) { //el i sería el punto
 	    Coordinate coordinadasPunto = new Coordinate(latitud, longitud); // Crea una nueva instancia en cada iteración
 	    
 	    MapMarker marker = new MapMarkerDot(_setConVecinos.get(i).toString(),coordinadasPunto);//En realidad acá tenemos que usar el getId()
 	    
 	    
 	    //Agregamos las coordenadasConIndice al poligono
-	    coordenadasConIndice.put(coordinadasPunto,i);
+	    coordenadasConIndice.put(coordinadasPunto,i); //acá se guarda las coordenadas adjuntadas al punto
+	    System.out.println(coordinadasPunto + "Indice" + i);
 	    coordinadas.add(coordinadasPunto);
 	    
 	    if(_cgmGoloso.contains(_setConVecinos.get(i).getIdVertice())) {
@@ -136,11 +163,24 @@ public class PantallaCargarGrupos {
 		    marker.getStyle().setBackColor(Color.BLACK);
 		    marker.getStyle().setColor(Color.WHITE);
 	    }
-//	    System.out.println(_cgmGoloso);
+
 	    plano.addMapMarker(marker);
+	    System.out.println(obtenerVecinos());
 	}
 
     public JFrame getInterfazGrafos() {
         return interfazGrafos;
     }
+
+	private ArrayList<HashSet<Integer>> obtenerVecinos(){
+		ArrayList<HashSet<Integer>> vecinosDeVertices = new ArrayList<>();
+
+		for (Vertice vertice : _setConVecinos) {
+		    HashSet<Integer> vecinos = vertice.getVecinos();
+		    vecinosDeVertices.add(vecinos);
+		}
+		
+		return vecinosDeVertices;
+	}
+
 }

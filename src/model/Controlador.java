@@ -49,6 +49,7 @@ public class Controlador
 	public ArrayList<Vertice> get_setConVecinos() {
 		return _grafo.getVerticesConVecinos();
 	}
+
 	
 	public HashSet<Integer> listaDeVecinos(){
 		HashSet<Integer> listaDeVecinos = new HashSet<>();
