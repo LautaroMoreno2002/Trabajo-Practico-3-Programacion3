@@ -10,12 +10,10 @@ import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
 
 public class Grafo 
 {
 	private ArrayList<Vertice> _verticesConVecinos;
-	private static Boolean jsonEsCorrecto;
 	
 	public Grafo(int cantVertices) 
 	{ // Para crear el grafo de 0
@@ -31,6 +29,7 @@ public class Grafo
 	public void agregarArista(int verticeA,int verticeB) 
 	{
 		validarIndices(verticeA, verticeB);
+		
 		agregarVecinosEnLosVertices(verticeA,verticeB);
 	}
 	public boolean existeArista(int verticeA,int verticeB) 
@@ -140,19 +139,15 @@ public class Grafo
 	        
 	        if (validarEstructuraJSON(json)) {
 	            ret = gson.fromJson(json, Grafo.class);
-	            jsonEsCorrecto = true;
 	        } else {
 	            System.err.println("El JSON no cumple con la estructura esperada.");
-	            jsonEsCorrecto = false;
 	        }
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
 	    return ret;
 	}
-	
 
-	
 	public ArrayList<Vertice> getVerticesConVecinos()
 	{
 		return _verticesConVecinos;
@@ -163,16 +158,23 @@ public class Grafo
 	        // Parsea el JSON a un objeto Java usando Gson
 	        Gson gson = new Gson();
 	        Grafo grafo = gson.fromJson(json, Grafo.class);
-
+	        
 	        if (grafo != null && grafo.getVerticesConVecinos() != null) {
 	            for (Vertice vertice : grafo.getVerticesConVecinos()) {
 	                if (vertice.getIdVertice() >= 0 && vertice.getVecinos() != null) {
-	                    // La estructura es correcta
-	                    return true;
+	                    // Verificar si hay bucles en el grafo
+	                    for (int vecino : vertice.getVecinos()) {
+	                        if (vecino == vertice.getIdVertice()) {
+	                            System.err.println("El grafo contiene un bucle en el vértice " + vertice.getIdVertice() + ".");
+	                            return false;
+	                        }
+	                    }
 	                }
 	            }
+	            // La estructura es correcta y no hay bucles
+	            return true;
 	        }
-	    } catch (JsonSyntaxException e) {
+	    } catch (com.google.gson.JsonSyntaxException e) {
 	        // Error de sintaxis en el JSON
 	        System.err.println("Excepción de sintaxis JSON: " + e.getMessage());
 	    } catch (NumberFormatException e) {
@@ -182,13 +184,10 @@ public class Grafo
 	        // Otras excepciones generales
 	        System.err.println("Excepción general: " + e.getMessage());
 	    }
-	    
-	    // La estructura no es correcta
+	    // La estructura no es correcta o hay bucles en el grafo
 	    return false;
 	}
+
 	
 	
-	public static Boolean getJsonEsCorrecto() {
-		return jsonEsCorrecto;
-	}
 }

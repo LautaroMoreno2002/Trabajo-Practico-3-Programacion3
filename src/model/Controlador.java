@@ -39,6 +39,7 @@ public class Controlador
 			case 2 -> _grafo = Grafo.leerGrafoJSON("EjemploGrafo3.JSON");
 			case 3 -> _grafo = Grafo.leerGrafoJSON("templateGrafo.JSON");
 		}
+
 	}
 	public ArrayList<Vertice> get_setConVecinos()
 	{
