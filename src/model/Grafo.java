@@ -116,19 +116,7 @@ public class Grafo
 			e.printStackTrace();
 		}
 	}
-//	public static Grafo leerGrafoJSON(String archivo) 
-//	{
-//		Gson gson = new Gson();
-//		Grafo ret = null;
-//		try {
-//			BufferedReader br = new BufferedReader(new FileReader(archivo));
-//			ret = gson.fromJson(br, Grafo.class);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		return ret;
-//	}
-	
+
 	public static Grafo leerGrafoJSON(String archivo) {
 	    Gson gson = new Gson();
 	    Grafo ret = null;
@@ -153,35 +141,15 @@ public class Grafo
 		return _verticesConVecinos;
 	}
 	
-	public static boolean validarEstructuraJSON(String json) {
+	private static boolean validarEstructuraJSON(String json) {
 	    try {
-	        // Parsea el JSON a un objeto Java usando Gson
 	        Gson gson = new Gson();
 	        Grafo grafo = gson.fromJson(json, Grafo.class);
 	        
-	        if (grafo != null && grafo.getVerticesConVecinos() != null) {
-	            HashSet<Integer> idSet = new HashSet<>();
-	            for (Vertice vertice : grafo.getVerticesConVecinos()) {
-	                if (vertice.getIdVertice() >= 0 && vertice.getVecinos() != null) {
-	                    // Verificar si el ID del vértice ya ha sido encontrado
-	                    if (idSet.contains(vertice.getIdVertice())) {
-	                        System.err.println("El grafo contiene vértices con el mismo ID (" + vertice.getIdVertice() + ").");
-	                        return false;
-	                    } else {
-	                        idSet.add(vertice.getIdVertice());
-	                    }
-	                    // Verificar si hay bucles en el grafo
-	                    for (int vecino : vertice.getVecinos()) {
-	                        if (vecino == vertice.getIdVertice()) {
-	                            System.err.println("El grafo contiene un bucle en el vértice " + vertice.getIdVertice() + ".");
-	                            return false;
-	                        }
-	                    }
-	                }
-	            }
-	            // La estructura es correcta y no hay vértices con el mismo ID ni bucles
+	        if (grafo != null && grafo.getVerticesConVecinos() != null && !idVerticeRepetido(grafo) && !bucleEnElGrafo(grafo)) {
 	            return true;
 	        }
+	        
 	    } catch (com.google.gson.JsonSyntaxException e) {
 	        // Error de sintaxis en el JSON
 	        System.err.println("Excepción de sintaxis JSON: " + e.getMessage());
@@ -192,10 +160,36 @@ public class Grafo
 	        // Otras excepciones generales
 	        System.err.println("Excepción general: " + e.getMessage());
 	    }
-	    // La estructura no es correcta o hay vértices con el mismo ID o bucles en el grafo
 	    return false;
 	}
 
+	private static boolean idVerticeRepetido (Grafo grafo) {
+        HashSet<Integer> idSet = new HashSet<>();
+        for (Vertice vertice : grafo.getVerticesConVecinos()) {
+            if (vertice.getIdVertice() >= 0 && vertice.getVecinos() != null) {
+                if (idSet.contains(vertice.getIdVertice())) {
+                    System.err.println("El grafo contiene vértices con el mismo ID (" + vertice.getIdVertice() + ").");
+                    return true;
+                } else {
+                    idSet.add(vertice.getIdVertice());
+                }
+            }
+        }
+        return false;
+	}
+	
+	private static boolean bucleEnElGrafo (Grafo grafo) {
+        for (Vertice vertice : grafo.getVerticesConVecinos()) {
+            for (int vecino : vertice.getVecinos()) {
+                if (vecino == vertice.getIdVertice()) {
+                    System.err.println("El grafo contiene un bucle en el vértice " + vertice.getIdVertice() + ".");
+                    return true;
+                }
+            }
+        }
+        return false;
+	}
+	
 
 	
 	
