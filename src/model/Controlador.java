@@ -58,4 +58,8 @@ public class Controlador
 		return new ArrayList<Integer>(set);
 		
 	}
+	
+//	public boolean validarSiElJsonEsCorrecto() {
+//		return _grafo.getJsonEsCorrecto();
+//	}
 }

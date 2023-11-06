@@ -1,10 +1,10 @@
 {
   "_verticesConVecinos": [
     {
-      "_verticdwdewfd": 0,
-      "_vecinos": [
-        
-      ]
+      "_vertice": 1
+    },
+    {
+      "_vertice": 0
     }
   ]
 }

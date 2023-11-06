@@ -51,7 +51,7 @@ public class ProcesoGoloso extends SwingWorker<ArrayList<Integer>,Long>
 			}
 		} catch (ExecutionException | InterruptedException e) 
 		{
-			e.printStackTrace();
+			System.out.println("Formato del JSON incorrecto: " + e.getMessage());
 		}
 	}
 }

@@ -33,4 +33,7 @@ public class Presenter
 	{
 		return _controlador.listaDeVecinos();
 	}
+//	public Boolean jsonEsCorrecto() {
+//		return _controlador.validarSiElJsonEsCorrecto();
+//	}
 }

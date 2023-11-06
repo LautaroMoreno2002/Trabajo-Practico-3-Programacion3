@@ -6,12 +6,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.stream.Collectors;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 
 public class Grafo 
 {
 	private ArrayList<Vertice> _verticesConVecinos;
+	private static Boolean jsonEsCorrecto;
 	
 	public Grafo(int cantVertices) 
 	{ // Para crear el grafo de 0
@@ -113,20 +117,78 @@ public class Grafo
 			e.printStackTrace();
 		}
 	}
-	public static Grafo leerGrafoJSON(String archivo) 
-	{
-		Gson gson = new Gson();
-		Grafo ret = null;
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(archivo));
-			ret = gson.fromJson(br, Grafo.class);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return ret;
+//	public static Grafo leerGrafoJSON(String archivo) 
+//	{
+//		Gson gson = new Gson();
+//		Grafo ret = null;
+//		try {
+//			BufferedReader br = new BufferedReader(new FileReader(archivo));
+//			ret = gson.fromJson(br, Grafo.class);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return ret;
+//	}
+	
+	public static Grafo leerGrafoJSON(String archivo) {
+	    Gson gson = new Gson();
+	    Grafo ret = null;
+	    try {
+	        BufferedReader br = new BufferedReader(new FileReader(archivo));
+	        String json = br.lines().collect(Collectors.joining()); // Lee todo el contenido del archivo como una sola cadena
+	        br.close();
+	        
+	        if (validarEstructuraJSON(json)) {
+	            ret = gson.fromJson(json, Grafo.class);
+	            jsonEsCorrecto = true;
+	        } else {
+	            System.err.println("El JSON no cumple con la estructura esperada.");
+	            jsonEsCorrecto = false;
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    return ret;
 	}
+	
+
+	
 	public ArrayList<Vertice> getVerticesConVecinos()
 	{
 		return _verticesConVecinos;
+	}
+	
+	public static boolean validarEstructuraJSON(String json) {
+	    try {
+	        // Parsea el JSON a un objeto Java usando Gson
+	        Gson gson = new Gson();
+	        Grafo grafo = gson.fromJson(json, Grafo.class);
+
+	        if (grafo != null && grafo.getVerticesConVecinos() != null) {
+	            for (Vertice vertice : grafo.getVerticesConVecinos()) {
+	                if (vertice.getIdVertice() >= 0 && vertice.getVecinos() != null) {
+	                    // La estructura es correcta
+	                    return true;
+	                }
+	            }
+	        }
+	    } catch (JsonSyntaxException e) {
+	        // Error de sintaxis en el JSON
+	        System.err.println("Excepción de sintaxis JSON: " + e.getMessage());
+	    } catch (NumberFormatException e) {
+	        // Error al convertir una cadena en un número
+	        System.err.println("Excepción de formato de número: " + e.getMessage());
+	    } catch (Exception e) {
+	        // Otras excepciones generales
+	        System.err.println("Excepción general: " + e.getMessage());
+	    }
+	    
+	    // La estructura no es correcta
+	    return false;
+	}
+	
+	
+	public static Boolean getJsonEsCorrecto() {
+		return jsonEsCorrecto;
 	}
 }

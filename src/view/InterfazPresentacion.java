@@ -17,6 +17,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JProgressBar;
+import javax.swing.JTextField;
 
 public class InterfazPresentacion extends DiseñoInterfaz
 {
@@ -106,6 +107,11 @@ public class InterfazPresentacion extends DiseñoInterfaz
 		progressBar.setBounds(31, 407, 725, 28);
 		interfazPresentacion.getContentPane().add(progressBar);
 		
+//		JLabel lblNewLabel = new JLabel("El JSON no cumple con la estructura esperada");
+//		lblNewLabel.setForeground(new Color(255, 255, 255));
+//		lblNewLabel.setBounds(442, 253, 221, 13);
+//		interfazPresentacion.getContentPane().add(lblNewLabel);
+		
 		JButton btnAlgGoloso = new JButton("CGM con algoritmo Goloso");
 		btnAlgGoloso.setToolTipText("CGM con una posible solución");
 		asignarCaracteristicas(btnAlgGoloso,tipografiaBoton,166,341,192,35);
@@ -113,7 +119,12 @@ public class InterfazPresentacion extends DiseñoInterfaz
 		{
 			@Override
 			public void mouseClicked(MouseEvent e) 
-			{
+			{	
+//				if(presenter.jsonEsCorrecto()) {
+//					lblNewLabel.setVisible(false);
+//				} else {
+//					lblNewLabel.setVisible(true);
+//				}
 				int idOpcion = comboBoxGrafo.getSelectedIndex();
 				presenter.elegirGrafo(idOpcion);
 				ProcesoGoloso procesoGoloso = new ProcesoGoloso(presenter, progressBar,interfazPresentacion);
@@ -137,6 +148,9 @@ public class InterfazPresentacion extends DiseñoInterfaz
 			}
 		});
 		interfazPresentacion.getContentPane().add(btnAmbos);
+			
+
+
 	}
 	public JFrame getInterfazPresentacion() {
 		return interfazPresentacion;
