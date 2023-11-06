@@ -160,8 +160,16 @@ public class Grafo
 	        Grafo grafo = gson.fromJson(json, Grafo.class);
 	        
 	        if (grafo != null && grafo.getVerticesConVecinos() != null) {
+	            HashSet<Integer> idSet = new HashSet<>();
 	            for (Vertice vertice : grafo.getVerticesConVecinos()) {
 	                if (vertice.getIdVertice() >= 0 && vertice.getVecinos() != null) {
+	                    // Verificar si el ID del vértice ya ha sido encontrado
+	                    if (idSet.contains(vertice.getIdVertice())) {
+	                        System.err.println("El grafo contiene vértices con el mismo ID (" + vertice.getIdVertice() + ").");
+	                        return false;
+	                    } else {
+	                        idSet.add(vertice.getIdVertice());
+	                    }
 	                    // Verificar si hay bucles en el grafo
 	                    for (int vecino : vertice.getVecinos()) {
 	                        if (vecino == vertice.getIdVertice()) {
@@ -171,7 +179,7 @@ public class Grafo
 	                    }
 	                }
 	            }
-	            // La estructura es correcta y no hay bucles
+	            // La estructura es correcta y no hay vértices con el mismo ID ni bucles
 	            return true;
 	        }
 	    } catch (com.google.gson.JsonSyntaxException e) {
@@ -184,9 +192,10 @@ public class Grafo
 	        // Otras excepciones generales
 	        System.err.println("Excepción general: " + e.getMessage());
 	    }
-	    // La estructura no es correcta o hay bucles en el grafo
+	    // La estructura no es correcta o hay vértices con el mismo ID o bucles en el grafo
 	    return false;
 	}
+
 
 	
 	
