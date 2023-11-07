@@ -130,10 +130,11 @@ public class PantallaCargarCGMBackvsGoloso extends DiseñoInterfaz
 			double latitudPunto = centroLatitud + radio * Math.sin(angulo);
 			double longitudPunto = centroLongitud + radio * Math.cos(angulo);
 			// Crea el punto en el plano usando latitudPunto y longitudPunto
-			crearNuevoPuntoEnElPlano(_planoGoloso,_cgmGoloso,_setConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, i);
-			crearNuevoPuntoEnElPlano(_planoBacktracking,_cgmBacktracking,_setConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, i);
+			crearNuevoPuntoEnElPlano(_planoGoloso,_cgmGoloso,_setConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, _setConVecinos.get(i).getIdVertice()); //Para que guarde el id correcto
+			crearNuevoPuntoEnElPlano(_planoBacktracking,_cgmBacktracking,_setConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, _setConVecinos.get(i).getIdVertice());
 			dibujarAristasEnPlano(_setConVecinos,_planoGoloso,coordenadasConIndice);
 			dibujarAristasEnPlano(_setConVecinos,_planoBacktracking,coordenadasConIndice);
+			
 		}
 	}
 	public JFrame getPantallaCargarCGM()

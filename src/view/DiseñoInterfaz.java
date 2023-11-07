@@ -22,43 +22,59 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import model.Vertice;
 
 public abstract class DiseñoInterfaz {
-	public static ArrayList<HashSet<Integer>> obtenerVecinos(ArrayList<Vertice> setConVecinos) 
-	{
-		ArrayList<HashSet<Integer>> vecinosDeVertices = new ArrayList<>();
-		for (Vertice vertice : setConVecinos) 
-		{
-			HashSet<Integer> vecinos = vertice.getVecinos();
-			vecinosDeVertices.add(vecinos);
-		}
-		return vecinosDeVertices;
-	}
+//	public static ArrayList<HashSet<Integer>> obtenerVecinos(ArrayList<Vertice> setConVecinos) 
+//	{
+//		ArrayList<HashSet<Integer>> vecinosDeVertices = new ArrayList<>();
+//		for (Vertice vertice : setConVecinos) 
+//		{
+//			HashSet<Integer> vecinos = vertice.getVecinos();
+//			vecinosDeVertices.add(vecinos);
+//		}
+//		return vecinosDeVertices;
+//	}
 	public void dibujarAristasEnPlano(ArrayList<Vertice> setConVecinos,JMapViewer plano,HashMap<Coordinate, Integer> coordenadasConIndice) 
 	{
-		Integer contador = 0;
-		for (HashSet<Integer> conjuntoVecinosVertice : obtenerVecinos(setConVecinos)) 
-		{
-			for (Integer vecino : conjuntoVecinosVertice) 
-			{ 
-				Integer valorBuscado = vecino - 1;
+//		Integer contador = 0;
+//		for (HashSet<Integer> conjuntoVecinosVertice : obtenerVecinos(setConVecinos)) 
+//		{
+//			for (Integer vecino : conjuntoVecinosVertice) 
+//			{ 
+//				Integer valorBuscado = vecino - 1;
+//				Coordinate coordenadaCorrespondiente = null;
+//				for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet()) 
+//				{
+//					if (entry.getValue().equals(valorBuscado)) 
+//					{
+//						coordenadaCorrespondiente = entry.getKey();
+//						break;
+//					}
+//				}
+//				List<Coordinate> route2 = new ArrayList<Coordinate>(Arrays.asList(obtenerCoordenadaNodoActual(contador,coordenadasConIndice),
+//						coordenadaCorrespondiente, coordenadaCorrespondiente));
+//				plano.addMapPolygon(new MapPolygonImpl(route2));
+//			}
+//			contador++;
+//		}
+		
+		for(Vertice vertice : setConVecinos) {
+			for(Integer vecino : vertice.getVecinos()) {
+				Integer valorBuscado=vecino;
 				Coordinate coordenadaCorrespondiente = null;
-				for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet()) 
-				{
-					if (entry.getValue().equals(valorBuscado)) 
-					{
+				for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet()) {
+					if (entry.getValue().equals(valorBuscado)) {
 						coordenadaCorrespondiente = entry.getKey();
 						break;
 					}
 				}
-				List<Coordinate> route2 = new ArrayList<Coordinate>(Arrays.asList(obtenerCoordenadaNodoActual(contador,coordenadasConIndice),
-						coordenadaCorrespondiente, coordenadaCorrespondiente));
+				List<Coordinate> route2 = new ArrayList<Coordinate>(Arrays.asList(obtenerCoordenadaNodoActual(vertice.getIdVertice(),coordenadasConIndice),
+				coordenadaCorrespondiente, coordenadaCorrespondiente));
 				plano.addMapPolygon(new MapPolygonImpl(route2));
 			}
-			contador++;
 		}
 	}
-	public Coordinate obtenerCoordenadaNodoActual(Integer contador,HashMap<Coordinate, Integer> coordenadasConIndice)
+	public Coordinate obtenerCoordenadaNodoActual(Integer idVertice,HashMap<Coordinate, Integer> coordenadasConIndice)
     {
-    	Integer valorBuscado = contador;
+    	Integer valorBuscado = idVertice;
     	Coordinate coordenadaCorrespondiente = null;
 		for (Map.Entry<Coordinate, Integer> entry : coordenadasConIndice.entrySet())
 		{
@@ -94,16 +110,18 @@ public abstract class DiseñoInterfaz {
 			}
 		});
 	}
+	
+	//acá no tuve que tocar nada
 	public void crearNuevoPuntoEnElPlano(JMapViewer plano, ArrayList<Integer> cgm,
 			ArrayList<Vertice> setConVecinos, HashMap<Coordinate, Integer> coordenadasConIndice, double latitud,
 			double longitud, int punto) 
 	{
 		Coordinate coordinadasPunto = new Coordinate(latitud, longitud);
-		MapMarker marker = new MapMarkerDot("" + setConVecinos.get(punto).getIdVertice(), coordinadasPunto);
+		MapMarker marker = new MapMarkerDot("" + punto, coordinadasPunto);
 		// Agregamos las coordenadasConIndice al poligono
 		coordenadasConIndice.put(coordinadasPunto, punto);
 
-		if (cgm.contains(setConVecinos.get(punto).getIdVertice())) 
+		if (cgm.contains(punto)) 
 		{
 			marker.getStyle().setBackColor(Color.GREEN);
 			marker.getStyle().setColor(Color.BLACK);

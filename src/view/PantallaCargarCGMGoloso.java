@@ -88,7 +88,7 @@ public class PantallaCargarCGMGoloso extends DiseñoInterfaz
 		    // Calcular las coordenadas del punto en el círculo
 		    double latitudPunto = centroLatitud + radio * Math.sin(angulo);
 		    double longitudPunto = centroLongitud + radio * Math.cos(angulo);
-		    crearNuevoPuntoEnElPlano(plano,_cgmGoloso,_setConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, i);
+		    crearNuevoPuntoEnElPlano(plano,_cgmGoloso,_setConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, _setConVecinos.get(i).getIdVertice());
 		}
 		dibujarAristasEnPlano(_setConVecinos,plano,coordenadasConIndice);
     }
