@@ -28,9 +28,6 @@ public class InterfazPresentacion extends DiseñoInterfaz
 	private final Font tipografiaEtiqueta = new Font("Arial", Font.BOLD, 14);
 	private final Font tipografiaTitulo = new Font("Arial", Font.BOLD, 18);
 	
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) 
 	{
 		EventQueue.invokeLater(new Runnable()
@@ -49,17 +46,11 @@ public class InterfazPresentacion extends DiseñoInterfaz
 			}
 		});
 	}
-	/**
-	 * Create the application.
-	 */
 	public InterfazPresentacion() 
 	{
 		presenter = new Presenter();
 		initialize();
 	}
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() 
 	{
 		interfazPresentacion = new JFrame();
@@ -138,7 +129,8 @@ public class InterfazPresentacion extends DiseñoInterfaz
 		});
 		interfazPresentacion.getContentPane().add(btnAmbos);
 	}
-	public JFrame getInterfazPresentacion() {
+	public JFrame getInterfazPresentacion() 
+	{
 		return interfazPresentacion;
 	}
 }

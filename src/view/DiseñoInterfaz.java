@@ -10,18 +10,16 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-
 import javax.swing.JButton;
-
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
-
 import model.Vertice;
 
-public abstract class DiseñoInterfaz {
+public abstract class DiseñoInterfaz 
+{
 	public static ArrayList<HashSet<Integer>> obtenerVecinos(ArrayList<Vertice> setConVecinos) 
 	{
 		ArrayList<HashSet<Integer>> vecinosDeVertices = new ArrayList<>();

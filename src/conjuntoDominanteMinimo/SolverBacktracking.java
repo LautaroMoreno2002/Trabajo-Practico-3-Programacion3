@@ -23,14 +23,6 @@ public class SolverBacktracking
 		resolverBack(_grafo.getVerticesConVecinos().get(0).getIdVertice()); 
 		return _conjuntoDominanteMinimo;
 	}
-	public void run()
-	{
-		resolver();
-	}
-	public Set<Integer> get_conjuntoDominanteMinimo() 
-	{
-		return _conjuntoDominanteMinimo;
-	}
 	// Resuelve el problema de conjunto dominante de forma recursiva, usando backtracking
 	private void resolverBack(int vertice) 
 	{

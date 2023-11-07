@@ -16,46 +16,41 @@ import java.awt.event.ActionEvent;
 
 public class PantallaCargarCGMGoloso extends DiseñoInterfaz
 {
-    private JFrame interfazGrafos;
+    private JFrame pantallaCargarCGMGoloso;
     private JMapViewer plano;
-    private ArrayList<Vertice> _setConVecinos;
+    private ArrayList<Vertice> _verticesConVecinos;
 	private HashMap<Coordinate, Integer> coordenadasConIndice = new HashMap<>();
 	private ArrayList<Integer> _cgmGoloso;
 	private JFrame _interfazPresentacion;
     /**
-     * Create the application.
      @wbp.parser.constructor
-
      */
-	public PantallaCargarCGMGoloso(ArrayList<Vertice> _setConVecinos, ArrayList<Integer> _cgmGoloso, JFrame _interfazPresentacion) 
+	public PantallaCargarCGMGoloso(ArrayList<Vertice> setConVecinos, ArrayList<Integer> cgmGoloso, JFrame interfazPresentacion) 
 	{
-		this._setConVecinos = _setConVecinos;
-		this._cgmGoloso = _cgmGoloso;
-		this._interfazPresentacion = _interfazPresentacion;
+		this._verticesConVecinos = setConVecinos;
+		this._cgmGoloso = cgmGoloso;
+		this._interfazPresentacion = interfazPresentacion;
 		initialize();
 	}
-	/**
-     * Initialize the contents of the frame.
-     */
     private void initialize() 
     {
-		interfazGrafos = new JFrame();
-		interfazGrafos.setResizable(false);
-		interfazGrafos.setType(Type.POPUP);
-		interfazGrafos.setTitle("Trabajo Práctico 3 - Conjunto Generador Mínimo");
-		interfazGrafos.getContentPane().setBackground(new Color(0, 0, 0));
-		interfazGrafos.setBounds(400, 200, 800, 500);
-		interfazGrafos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		interfazGrafos.getContentPane().setLayout(null);
+		pantallaCargarCGMGoloso = new JFrame();
+		pantallaCargarCGMGoloso.setResizable(false);
+		pantallaCargarCGMGoloso.setType(Type.POPUP);
+		pantallaCargarCGMGoloso.setTitle("Trabajo Práctico 3 - Conjunto Generador Mínimo con algoritmo Goloso");
+		pantallaCargarCGMGoloso.getContentPane().setBackground(new Color(0, 0, 0));
+		pantallaCargarCGMGoloso.setBounds(400, 200, 800, 500);
+		pantallaCargarCGMGoloso.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pantallaCargarCGMGoloso.getContentPane().setLayout(null);
 		
 		plano = new JMapViewer();
 		plano.setBounds(10, 11, 774, 390);
 		
 		JPanel panelMapa = new JPanel();
-		panelMapa.setBackground(new Color(0, 0, 0));
+		panelMapa.setBackground(Color.BLACK);
 		panelMapa.setBounds(0, 0, 784, 412);
 		
-		interfazGrafos.getContentPane().add(panelMapa);
+		pantallaCargarCGMGoloso.getContentPane().add(panelMapa);
 		panelMapa.setLayout(null);
 		panelMapa.add(plano);
 		plano.setZoomControlsVisible(false);
@@ -66,34 +61,35 @@ public class PantallaCargarCGMGoloso extends DiseñoInterfaz
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				interfazGrafos.setVisible(false);
+				pantallaCargarCGMGoloso.setVisible(false);
 				_interfazPresentacion.setVisible(true);
+				pantallaCargarCGMGoloso.dispose();
 			}
 		});
 		asignarCaracteristicas(btnCargarNuevoCGM,new Font("Arial", Font.BOLD, 12),288, 422, 205, 30);
-		interfazGrafos.getContentPane().add(btnCargarNuevoCGM);
+		pantallaCargarCGMGoloso.getContentPane().add(btnCargarNuevoCGM);
 		
 		Coordinate coordinada = new Coordinate(-38.99, -30.19);
-		plano.setDisplayPosition(coordinada, 11); //PARA CAMBIAR EL ZOOM
+		plano.setDisplayPosition(coordinada, 11);
 		
-		double centroLatitud = -38.990380; // Latitud del centro del círculo
-		double centroLongitud = -30.197439; // Longitud del centro del círculo
-		double radio = 0.1; // Radio del círculo en grados (ajusta según tus necesidades)
-		int numPuntos = _setConVecinos.size();
+		double centroLatitudCirculo = -38.990380;
+		double centroLongitudCirculo = -30.197439;
+		double radioCirculo = 0.1;
+		int numeroDePuntos = _verticesConVecinos.size();
 
-		for (int i = 0; i < numPuntos; i++) 
+		for (int i = 0; i < numeroDePuntos; i++) 
 		{
 		    // Calcular el ángulo para distribuir los puntos uniformemente en el círculo
-		    double angulo = (2 * Math.PI * i) / numPuntos;
+		    double anguloDeDistribucion = (2 * Math.PI * i) / numeroDePuntos;
 		    // Calcular las coordenadas del punto en el círculo
-		    double latitudPunto = centroLatitud + radio * Math.sin(angulo);
-		    double longitudPunto = centroLongitud + radio * Math.cos(angulo);
-		    crearNuevoPuntoEnElPlano(plano,_cgmGoloso,_setConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, i);
+		    double latitudPunto = centroLatitudCirculo + radioCirculo * Math.sin(anguloDeDistribucion);
+		    double longitudPunto = centroLongitudCirculo + radioCirculo * Math.cos(anguloDeDistribucion);
+		    crearNuevoPuntoEnElPlano(plano,_cgmGoloso,_verticesConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, i);
 		}
-		dibujarAristasEnPlano(_setConVecinos,plano,coordenadasConIndice);
+		dibujarAristasEnPlano(_verticesConVecinos,plano,coordenadasConIndice);
     }
-    public JFrame getInterfazGrafos() 
+    public JFrame getPantallaCargarCGMGoloso() 
     {
-        return interfazGrafos;
+        return pantallaCargarCGMGoloso;
     }
 }
