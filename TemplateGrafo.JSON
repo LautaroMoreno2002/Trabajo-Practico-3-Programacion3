@@ -3,11 +3,12 @@
     {
       "_vertice": 0,
       "_vecinos": [
-        
+        1
       ]
     },{
       "_vertice": 1,
       "_vecinos": [
+        0
       ]
     }
   ]

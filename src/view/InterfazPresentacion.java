@@ -17,7 +17,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JProgressBar;
-import javax.swing.JTextField;
 
 public class InterfazPresentacion extends DiseñoInterfaz
 {

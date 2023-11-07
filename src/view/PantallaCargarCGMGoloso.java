@@ -38,7 +38,7 @@ public class PantallaCargarCGMGoloso extends DiseñoInterfaz
 		pantallaCargarCGMGoloso.setResizable(false);
 		pantallaCargarCGMGoloso.setType(Type.POPUP);
 		pantallaCargarCGMGoloso.setTitle("Trabajo Práctico 3 - Conjunto Generador Mínimo con algoritmo Goloso");
-		pantallaCargarCGMGoloso.getContentPane().setBackground(new Color(0, 0, 0));
+		pantallaCargarCGMGoloso.getContentPane().setBackground(Color.BLACK);
 		pantallaCargarCGMGoloso.setBounds(400, 200, 800, 500);
 		pantallaCargarCGMGoloso.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pantallaCargarCGMGoloso.getContentPane().setLayout(null);
