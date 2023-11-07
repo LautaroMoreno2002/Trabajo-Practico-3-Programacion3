@@ -27,7 +27,7 @@ public class Presenter
 	}
 	public ArrayList<Vertice> get_setConVecinos() 
 	{
-		return _controlador.get_setConVecinos();
+		return _controlador.getSetConVecinos();
 	}
 	public HashSet<Integer> listaDeVecinos()
 	{

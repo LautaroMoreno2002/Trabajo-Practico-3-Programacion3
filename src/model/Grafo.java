@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.stream.Collectors;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -16,7 +15,7 @@ public class Grafo
 	private ArrayList<Vertice> _verticesConVecinos;
 	
 	public Grafo(int cantVertices) 
-	{ // Para crear el grafo de 0
+	{ // Para crear el grafo desde cero
 		if (cantVertices < 0) 
 			throw new IllegalArgumentException("La cantidad de vértices para un grafo debe ser mayor o igual a cero");
 		_verticesConVecinos = new ArrayList<Vertice>();
@@ -29,7 +28,6 @@ public class Grafo
 	public void agregarArista(int verticeA,int verticeB) 
 	{
 		validarIndices(verticeA, verticeB);
-		
 		agregarVecinosEnLosVertices(verticeA,verticeB);
 	}
 	public boolean existeArista(int verticeA,int verticeB) 
@@ -39,7 +37,7 @@ public class Grafo
 		boolean existeAristaBA = false;
 		for (Vertice v : _verticesConVecinos)
 		{
-				existeAristaAB |= (v.getIdVertice() == verticeA && v.getVecinos().contains(verticeB));
+			existeAristaAB |= (v.getIdVertice() == verticeA && v.getVecinos().contains(verticeB));
 			if (v.getIdVertice() == verticeB && v.getVecinos().contains(verticeA))
 				existeAristaBA |= (v.getIdVertice() == verticeB && v.getVecinos().contains(verticeA));
 		}
@@ -72,10 +70,10 @@ public class Grafo
 	}
 	private void inicializarVertices(int cantVertices)
 	{
-		for (int id = 0; id < cantVertices; id++) 
+		for (int numeroVertice = 0; numeroVertice < cantVertices; numeroVertice++) 
 		{
-			Vertice v = new Vertice(id);
-			v.setIdVertice(id);
+			Vertice v = new Vertice(numeroVertice);
+			v.setIdVertice(numeroVertice);
 			_verticesConVecinos.add(v);
 		}
 	}
@@ -103,7 +101,6 @@ public class Grafo
 	{
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(this);
-		
 		return json;
 	}
 	public static void guardarGrafoEnJSON(String grafo, String nombreArchivo)
@@ -116,40 +113,32 @@ public class Grafo
 			e.printStackTrace();
 		}
 	}
-
 	public static Grafo leerGrafoJSON(String archivo) {
 	    Gson gson = new Gson();
-	    Grafo ret = null;
+	    Grafo grafoJSON = null;
 	    try {
 	        BufferedReader br = new BufferedReader(new FileReader(archivo));
 	        String json = br.lines().collect(Collectors.joining()); // Lee todo el contenido del archivo como una sola cadena
 	        br.close();
-	        
-	        if (validarEstructuraJSON(json)) {
-	            ret = gson.fromJson(json, Grafo.class);
-	        } else {
+	        if (validarEstructuraJSON(json)) 
+	            grafoJSON = gson.fromJson(json, Grafo.class);
+	        else 
 	            System.err.println("El JSON no cumple con la estructura esperada.");
-	        }
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
-	    return ret;
+	    return grafoJSON;
 	}
-
 	public ArrayList<Vertice> getVerticesConVecinos()
 	{
 		return _verticesConVecinos;
 	}
-	
 	private static boolean validarEstructuraJSON(String json) {
 	    try {
 	        Gson gson = new Gson();
 	        Grafo grafo = gson.fromJson(json, Grafo.class);
-	        
-	        if (grafo != null && grafo.getVerticesConVecinos() != null && !idVerticeRepetido(grafo) && !bucleEnElGrafo(grafo)) {
+	        if (grafo != null && grafo.getVerticesConVecinos() != null && !numeroVerticeRepetido(grafo) && !bucleEnElGrafo(grafo))
 	            return true;
-	        }
-	        
 	    } catch (com.google.gson.JsonSyntaxException e) {
 	        // Error de sintaxis en el JSON
 	        System.err.println("Excepción de sintaxis JSON: " + e.getMessage());
@@ -162,26 +151,31 @@ public class Grafo
 	    }
 	    return false;
 	}
-
-	private static boolean idVerticeRepetido (Grafo grafo) {
-        HashSet<Integer> idSet = new HashSet<>();
-        for (Vertice vertice : grafo.getVerticesConVecinos()) {
-            if (vertice.getIdVertice() >= 0 && vertice.getVecinos() != null) {
-                if (idSet.contains(vertice.getIdVertice())) {
+	private static boolean numeroVerticeRepetido(Grafo grafo) 
+	{
+        HashSet<Integer> numeroVertices = new HashSet<>();
+        for (Vertice vertice : grafo.getVerticesConVecinos()) 
+        {
+            if (vertice.getIdVertice() >= 0 && vertice.getVecinos() != null) 
+            {
+                if (numeroVertices.contains(vertice.getIdVertice()))
+                {
                     System.err.println("El grafo contiene vértices con el mismo ID (" + vertice.getIdVertice() + ").");
                     return true;
-                } else {
-                    idSet.add(vertice.getIdVertice());
-                }
+                } else              
+                    numeroVertices.add(vertice.getIdVertice());
             }
         }
         return false;
 	}
-	
-	private static boolean bucleEnElGrafo (Grafo grafo) {
-        for (Vertice vertice : grafo.getVerticesConVecinos()) {
-            for (int vecino : vertice.getVecinos()) {
-                if (vecino == vertice.getIdVertice()) {
+	private static boolean bucleEnElGrafo (Grafo grafo) 
+	{
+        for (Vertice vertice : grafo.getVerticesConVecinos()) 
+        {
+            for (int vecino : vertice.getVecinos()) 
+            {
+                if (vecino == vertice.getIdVertice())
+                {
                     System.err.println("El grafo contiene un bucle en el vértice " + vertice.getIdVertice() + ".");
                     return true;
                 }
@@ -189,8 +183,4 @@ public class Grafo
         }
         return false;
 	}
-	
-
-	
-	
 }
