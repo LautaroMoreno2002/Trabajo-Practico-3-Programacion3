@@ -27,7 +27,7 @@ public class Controlador
 	}
 	public ArrayList<Integer> armarCGMBacktracking()
 	{
-		_conjuntoMinimoBacktracking = convertir(new SolverBacktracking(_grafo).resolver());
+		_conjuntoMinimoBacktracking = convertirSetEnArrayList(new SolverBacktracking(_grafo).resolver());
 		return _conjuntoMinimoBacktracking;
 	}
 	private void iniciarGrafo() 
@@ -40,22 +40,21 @@ public class Controlador
 			case 3 -> _grafo = Grafo.leerGrafoJSON("templateGrafo.JSON");
 		}
 	}
-	public ArrayList<Vertice> get_setConVecinos()
+	public ArrayList<Vertice> getSetConVecinos()
 	{
 		return _grafo.getVerticesConVecinos();
 	}
 	public HashSet<Integer> listaDeVecinos()
 	{
 		HashSet<Integer> listaDeVecinos = new HashSet<>();
-		for(Vertice vertice: get_setConVecinos()) 
+		for(Vertice vertice: getSetConVecinos()) 
 		{
 			listaDeVecinos.addAll(vertice.getVecinos());
 		}
 		return listaDeVecinos;
 	}
-	private ArrayList<Integer> convertir(Set<Integer> set) 
+	private ArrayList<Integer> convertirSetEnArrayList(Set<Integer> set) 
 	{
 		return new ArrayList<Integer>(set);
-		
 	}
 }

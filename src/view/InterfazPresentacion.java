@@ -17,6 +17,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JProgressBar;
+import javax.swing.JTextField;
 
 public class InterfazPresentacion extends DiseñoInterfaz
 {
@@ -104,7 +105,7 @@ public class InterfazPresentacion extends DiseñoInterfaz
 		{
 			@Override
 			public void mouseClicked(MouseEvent e) 
-			{
+			{	
 				int idOpcion = comboBoxGrafo.getSelectedIndex();
 				presenter.elegirGrafo(idOpcion);
 				ProcesoGoloso procesoGoloso = new ProcesoGoloso(presenter, progressBar,interfazPresentacion);
@@ -128,6 +129,7 @@ public class InterfazPresentacion extends DiseñoInterfaz
 			}
 		});
 		interfazPresentacion.getContentPane().add(btnAmbos);
+
 	}
 	public JFrame getInterfazPresentacion() 
 	{
