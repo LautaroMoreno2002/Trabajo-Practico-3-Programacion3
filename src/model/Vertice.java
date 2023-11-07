@@ -22,7 +22,7 @@ public class Vertice implements Comparable<Vertice>
 		if (_vecinos.contains(vecino))
 			_vecinos.remove(vecino);
 	}
-	public int getIdVertice() 
+	public int getNumeroVertice() 
 	{
 		return _vertice;
 	}
@@ -42,9 +42,9 @@ public class Vertice implements Comparable<Vertice>
 	{
 		_vecinos = vecinos;
 	}
-	public void setIdVertice(int id) 
+	public void setNumeroVertice(int numeroVertice) 
 	{
-		_vertice = id;
+		_vertice = numeroVertice;
 	}
 	@Override
 	public int compareTo(Vertice otroVertice) 

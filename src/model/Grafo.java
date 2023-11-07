@@ -37,9 +37,9 @@ public class Grafo
 		boolean existeAristaBA = false;
 		for (Vertice v : _verticesConVecinos)
 		{
-			existeAristaAB |= (v.getIdVertice() == verticeA && v.getVecinos().contains(verticeB));
-			if (v.getIdVertice() == verticeB && v.getVecinos().contains(verticeA))
-				existeAristaBA |= (v.getIdVertice() == verticeB && v.getVecinos().contains(verticeA));
+			existeAristaAB |= (v.getNumeroVertice() == verticeA && v.getVecinos().contains(verticeB));
+			if (v.getNumeroVertice() == verticeB && v.getVecinos().contains(verticeA))
+				existeAristaBA |= (v.getNumeroVertice() == verticeB && v.getVecinos().contains(verticeA));
 		}
 		return (existeAristaAB && existeAristaBA);
 	}
@@ -51,7 +51,7 @@ public class Grafo
 	public HashSet<Integer> vecinoDelVertice(int vertice)
 	{
 		for (Vertice verticeActual : _verticesConVecinos)
-			if (verticeActual.getIdVertice() == vertice) 
+			if (verticeActual.getNumeroVertice() == vertice) 
 				return verticeActual.getVecinos();
 		return null;
 	}
@@ -73,7 +73,7 @@ public class Grafo
 		for (int numeroVertice = 0; numeroVertice < cantVertices; numeroVertice++) 
 		{
 			Vertice v = new Vertice(numeroVertice);
-			v.setIdVertice(numeroVertice);
+			v.setNumeroVertice(numeroVertice);
 			_verticesConVecinos.add(v);
 		}
 	}
@@ -81,9 +81,9 @@ public class Grafo
 	{
 		for (Vertice vertice : _verticesConVecinos) 
 		{
-			if (vertice.getIdVertice() == verticeA)
+			if (vertice.getNumeroVertice() == verticeA)
 				vertice.agregarVecino(verticeB);
-			if (vertice.getIdVertice() == verticeB)
+			if (vertice.getNumeroVertice() == verticeB)
 				vertice.agregarVecino(verticeA);
 		}	
 	}
@@ -91,9 +91,9 @@ public class Grafo
 	{
 		for (Vertice vertice : _verticesConVecinos)
 		{
-			if (vertice.getIdVertice() == verticeA)
+			if (vertice.getNumeroVertice() == verticeA)
 				vertice.eliminarVecino(verticeB);
-			if (vertice.getIdVertice() == verticeB)
+			if (vertice.getNumeroVertice() == verticeB)
 				vertice.eliminarVecino(verticeA);
 		}	
 	}
@@ -156,14 +156,14 @@ public class Grafo
         HashSet<Integer> numeroVertices = new HashSet<>();
         for (Vertice vertice : grafo.getVerticesConVecinos()) 
         {
-            if (vertice.getIdVertice() >= 0 && vertice.getVecinos() != null) 
+            if (vertice.getNumeroVertice() >= 0 && vertice.getVecinos() != null) 
             {
-                if (numeroVertices.contains(vertice.getIdVertice()))
+                if (numeroVertices.contains(vertice.getNumeroVertice()))
                 {
-                    System.err.println("El grafo contiene vértices con el mismo ID (" + vertice.getIdVertice() + ").");
+                    System.err.println("El grafo contiene vértices con el mismo ID (" + vertice.getNumeroVertice() + ").");
                     return true;
                 } else              
-                    numeroVertices.add(vertice.getIdVertice());
+                    numeroVertices.add(vertice.getNumeroVertice());
             }
         }
         return false;
@@ -174,9 +174,9 @@ public class Grafo
         {
             for (int vecino : vertice.getVecinos()) 
             {
-                if (vecino == vertice.getIdVertice())
+                if (vecino == vertice.getNumeroVertice())
                 {
-                    System.err.println("El grafo contiene un bucle en el vértice " + vertice.getIdVertice() + ".");
+                    System.err.println("El grafo contiene un bucle en el vértice " + vertice.getNumeroVertice() + ".");
                     return true;
                 }
             }

@@ -12,23 +12,23 @@ public class ProcesoGolosoBacktracking extends SwingWorker<ArrayList<ArrayList<I
 	Presenter _presenter;
 	JProgressBar _barraProgreso;
 	JFrame _interfazPresentacion;
-	public ProcesoGolosoBacktracking(Presenter p, JProgressBar bar,JFrame interfazPresentacion) 
+	public ProcesoGolosoBacktracking(Presenter presenter, JProgressBar barraProgreso,JFrame interfazPresentacion) 
 	{
-		_presenter = p;
-		_barraProgreso = bar;
+		_presenter = presenter;
+		_barraProgreso = barraProgreso;
 		_interfazPresentacion = interfazPresentacion;
 	}
 	@Override
 	protected ArrayList<ArrayList<Integer>> doInBackground() throws Exception 
 	{
-		ArrayList<ArrayList<Integer>> soluciones = new ArrayList<ArrayList<Integer>>();
+		ArrayList<ArrayList<Integer>> solucionesCGM = new ArrayList<ArrayList<Integer>>();
 		_barraProgreso.setIndeterminate(true);
 		Thread.sleep(1500);
-		ArrayList<Integer> cmG = _presenter.calcularCGMGoloso();
-		ArrayList<Integer> cmB = _presenter.calcularCGMBacktracking();
-		soluciones.add(cmG);
-		soluciones.add(cmB);
-		return soluciones;
+		ArrayList<Integer> cgmGoloso = _presenter.calcularCGMGoloso();
+		ArrayList<Integer> cgmBacktracking = _presenter.calcularCGMBacktracking();
+		solucionesCGM.add(cgmGoloso);
+		solucionesCGM.add(cgmBacktracking);
+		return solucionesCGM;
 	}
 	@Override
 	protected void done() 

@@ -23,9 +23,7 @@ public class PantallaCargarCGMGoloso extends DiseñoInterfaz
 	private ArrayList<Integer> _cgmGoloso;
 	private JFrame _interfazPresentacion;
     /**
-     * Create the application.
      @wbp.parser.constructor
-
      */
 	public PantallaCargarCGMGoloso(ArrayList<Vertice> _setConVecinos, ArrayList<Integer> _cgmGoloso, JFrame _interfazPresentacion) 
 	{
@@ -34,9 +32,6 @@ public class PantallaCargarCGMGoloso extends DiseñoInterfaz
 		this._interfazPresentacion = _interfazPresentacion;
 		initialize();
 	}
-	/**
-     * Initialize the contents of the frame.
-     */
     private void initialize() 
     {
 		interfazGrafos = new JFrame();
@@ -74,21 +69,20 @@ public class PantallaCargarCGMGoloso extends DiseñoInterfaz
 		interfazGrafos.getContentPane().add(btnCargarNuevoCGM);
 		
 		Coordinate coordinada = new Coordinate(-38.99, -30.19);
-		plano.setDisplayPosition(coordinada, 11); //PARA CAMBIAR EL ZOOM
+		plano.setDisplayPosition(coordinada, 11);
 		
-		double centroLatitud = -38.990380; // Latitud del centro del círculo
-		double centroLongitud = -30.197439; // Longitud del centro del círculo
-		double radio = 0.1; // Radio del círculo en grados (ajusta según tus necesidades)
-		int numPuntos = _setConVecinos.size();
-
-		for (int i = 0; i < numPuntos; i++) 
+		double latitudCentroDelCirculo = -38.990380;
+		double longitudCentroDelCirculo = -30.197439;
+		double radioDelCirculo = 0.1;
+		int numeroDePuntos = _setConVecinos.size();
+		for (int i = 0; i < numeroDePuntos; i++) 
 		{
 		    // Calcular el ángulo para distribuir los puntos uniformemente en el círculo
-		    double angulo = (2 * Math.PI * i) / numPuntos;
+		    double anguloDeDistribucion = (2 * Math.PI * i) / numeroDePuntos;
 		    // Calcular las coordenadas del punto en el círculo
-		    double latitudPunto = centroLatitud + radio * Math.sin(angulo);
-		    double longitudPunto = centroLongitud + radio * Math.cos(angulo);
-		    crearNuevoPuntoEnElPlano(plano,_cgmGoloso,_setConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, _setConVecinos.get(i).getIdVertice());
+		    double latitudPunto = latitudCentroDelCirculo + radioDelCirculo * Math.sin(anguloDeDistribucion);
+		    double longitudPunto = longitudCentroDelCirculo + radioDelCirculo * Math.cos(anguloDeDistribucion);
+		    crearNuevoPuntoEnElPlano(plano,_cgmGoloso,_setConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, _setConVecinos.get(i).getNumeroVertice());
 		}
 		dibujarAristasEnPlano(_setConVecinos,plano,coordenadasConIndice);
     }

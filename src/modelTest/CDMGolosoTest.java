@@ -63,7 +63,7 @@ public class CDMGolosoTest
 		for (int i = 0; i < 20; i++)
 		{
 			ArrayList<Integer> solucion = new SolverGoloso(grafo).conjuntoGeneradorMinimo();
-			if (!soluciones.contains(solucion)) // Corregir, {2,4} y {4,2} son el mismo conjunto
+			if (!soluciones.contains(solucion))
 				soluciones.add(solucion);
 		}
 		assertTrue(soluciones.size() == 2);

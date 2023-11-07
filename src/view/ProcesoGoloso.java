@@ -11,7 +11,6 @@ public class ProcesoGoloso extends SwingWorker<ArrayList<Integer>,Long>
 {
 	Presenter _presenter;
 	JProgressBar _barraProgreso;
-	ArrayList<Integer> cm;
 	JFrame _interfazPresentacion;
 
 	public ProcesoGoloso(Presenter _presenter, JProgressBar _barraProgreso, JFrame _interfazPresentacion)
@@ -24,17 +23,17 @@ public class ProcesoGoloso extends SwingWorker<ArrayList<Integer>,Long>
 	protected ArrayList<Integer> doInBackground() throws Exception
 	{
 		_barraProgreso.setStringPainted(true);
-		ArrayList<Integer> cm = new ArrayList<Integer>();
-		for (long carga= 1; carga <= 100;carga++) 
+		ArrayList<Integer> cgmGoloso = new ArrayList<Integer>();
+		for (long cargaBarraProgreso= 1; cargaBarraProgreso <= 100;cargaBarraProgreso++) 
 		{
-			if (carga % 10 == 0) 
+			if (cargaBarraProgreso % 10 == 0) 
 				Thread.sleep(100);
-			if (carga == 50) 
-				cm = _presenter.calcularCGMGoloso();
-			_barraProgreso.setValue((int) carga);
-			_barraProgreso.setString(carga + "%");
+			if (cargaBarraProgreso == 50) 
+				cgmGoloso = _presenter.calcularCGMGoloso();
+			_barraProgreso.setValue((int) cargaBarraProgreso);
+			_barraProgreso.setString(cargaBarraProgreso + "%");
 		}
-		return cm;
+		return cgmGoloso;
 	}
 	@Override
 	protected void done() 
@@ -47,7 +46,6 @@ public class ProcesoGoloso extends SwingWorker<ArrayList<Integer>,Long>
 				PantallaCargarCGMGoloso pantallaCargarGrupos = new PantallaCargarCGMGoloso(_presenter.get_setConVecinos(),get(),_interfazPresentacion);
 				pantallaCargarGrupos.getInterfazGrafos().setVisible(true);
 				_interfazPresentacion.setVisible(false);
-
 			}
 		} catch (ExecutionException | InterruptedException e) 
 		{

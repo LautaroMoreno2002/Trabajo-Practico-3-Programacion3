@@ -20,13 +20,12 @@ public class SolverBacktracking
 	{
 		if (_grafo.cantidadVertices()==0) 
 			return _conjuntoDominanteMinimo;
-		resolverBack(_grafo.getVerticesConVecinos().get(0).getIdVertice()); 
+		resolverBack(_grafo.getVerticesConVecinos().get(0).getNumeroVertice()); 
 		return _conjuntoDominanteMinimo;
 	}
 	// Resuelve el problema de conjunto dominante de forma recursiva, usando backtracking
 	private void resolverBack(int vertice) 
 	{
-		// Llegamos a una hoja.
 		if(vertice == _grafo.cantidadVertices()) 
 		{
 			if(esConjuntoDominante()) 
@@ -36,10 +35,8 @@ public class SolverBacktracking
 			}
 			return;
 		}
-		// Si superamos el que tenemos, cortamos. (Backtracking)
 		if(!_conjuntoDominanteMinimo.isEmpty() &&_marcados.size() >  _conjuntoDominanteMinimo.size())
 			return;	
-		// Caso recursivo
 		_marcados.add(vertice);
 		resolverBack(vertice + 1);
 		_marcados.remove(vertice);

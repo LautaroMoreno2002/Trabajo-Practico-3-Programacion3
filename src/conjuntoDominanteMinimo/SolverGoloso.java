@@ -24,7 +24,7 @@ public class SolverGoloso
 		int i = 0;
 		while (verticesMarcados.size() < verticesOrdenados.size()) {
 			marcarVecinos(verticesOrdenados.get(i),verticesMarcados);
-			_conjuntoDominanteMinimo.add(verticesOrdenados.get(i).getIdVertice());
+			_conjuntoDominanteMinimo.add(verticesOrdenados.get(i).getNumeroVertice());
 			i++;
 		}
 		return _conjuntoDominanteMinimo;
@@ -43,7 +43,7 @@ public class SolverGoloso
 		ArrayList<Vertice> copias = new ArrayList<Vertice>();
 		for (Vertice v: verticesConVecinos) 
 		{
-			Vertice copia = new Vertice(v.getIdVertice());
+			Vertice copia = new Vertice(v.getNumeroVertice());
 			copia.setVecinos(v.getVecinos());
 			copias.add(copia);
 		}
@@ -57,8 +57,8 @@ public class SolverGoloso
 			if (!_verticesMarcados.contains(vecino))
 				_verticesMarcados.add(vecino);
 		}
-		if (!_verticesMarcados.contains(vertice.getIdVertice()))
-			_verticesMarcados.add(vertice.getIdVertice());
+		if (!_verticesMarcados.contains(vertice.getNumeroVertice()))
+			_verticesMarcados.add(vertice.getNumeroVertice());
 	}
 	private boolean revertir() 
 	{

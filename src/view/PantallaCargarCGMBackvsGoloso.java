@@ -28,10 +28,6 @@ public class PantallaCargarCGMBackvsGoloso extends DiseñoInterfaz
 	private JFrame pantallaCargarCGM;
 	private final Font tipografiaBoton = new Font("Arial", Font.BOLD, 12);
 	private final Font tipografiaEtiqueta = new Font("Arial", Font.BOLD, 14);
-
-	/**
-	 * Create the application.
-	 */
 	/**
 	 * @wbp.parser.constructor
 	 */
@@ -44,9 +40,6 @@ public class PantallaCargarCGMBackvsGoloso extends DiseñoInterfaz
 		_interfazPresentacion = interfazPresentacion;
 		initialize();
 	}
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() 
 	{
 		pantallaCargarCGM = new JFrame();
@@ -103,8 +96,8 @@ public class PantallaCargarCGMBackvsGoloso extends DiseñoInterfaz
 		_planoBacktracking.setZoomControlsVisible(false);
 
 		Coordinate coordinada = new Coordinate(-38.99, -30.19);
-		_planoGoloso.setDisplayPosition(coordinada, 11); // PARA CAMBIAR EL ZOOM
-		_planoBacktracking.setDisplayPosition(coordinada, 11); // PARA CAMBIAR EL ZOOM
+		_planoGoloso.setDisplayPosition(coordinada, 11);
+		_planoBacktracking.setDisplayPosition(coordinada, 11);
 
 		JButton btnVolver = new JButton("Volver a cargar CGM");
 		asignarCaracteristicas(btnVolver,tipografiaBoton, 305, 547, 188, 40);
@@ -119,27 +112,25 @@ public class PantallaCargarCGMBackvsGoloso extends DiseñoInterfaz
 		});
 		pantallaCargarCGM.getContentPane().add(btnVolver);
 
-		double centroLatitud = -38.990380; // Latitud del centro del círculo
-		double centroLongitud = -30.197439; // Longitud del centro del círculo
-		double radio = 0.1; // Radio del círculo en grados (ajusta según tus necesidades)
-		int numPuntos = _setConVecinos.size();
-		for (int i = 0; i < numPuntos; i++) {
+		double latitudCentroDelCirculo = -38.990380;
+		double longitudCentroDelCirculo = -30.197439;
+		double radioDelCirculo = 0.1;
+		int numeroDePuntos = _setConVecinos.size();
+		for (int i = 0; i < numeroDePuntos; i++) {
 			// Calcular el ángulo para distribuir los puntos uniformemente en el círculo
-			double angulo = (2 * Math.PI * i) / numPuntos;
+			double anguloDeDistribucion = (2 * Math.PI * i) / numeroDePuntos;
 			// Calcular las coordenadas del punto en el círculo
-			double latitudPunto = centroLatitud + radio * Math.sin(angulo);
-			double longitudPunto = centroLongitud + radio * Math.cos(angulo);
+			double latitudPunto = latitudCentroDelCirculo + radioDelCirculo * Math.sin(anguloDeDistribucion);
+			double longitudPunto = longitudCentroDelCirculo + radioDelCirculo * Math.cos(anguloDeDistribucion);
 			// Crea el punto en el plano usando latitudPunto y longitudPunto
-			crearNuevoPuntoEnElPlano(_planoGoloso,_cgmGoloso,_setConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, _setConVecinos.get(i).getIdVertice()); //Para que guarde el id correcto
-			crearNuevoPuntoEnElPlano(_planoBacktracking,_cgmBacktracking,_setConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, _setConVecinos.get(i).getIdVertice());
-			dibujarAristasEnPlano(_setConVecinos,_planoGoloso,coordenadasConIndice);
-			dibujarAristasEnPlano(_setConVecinos,_planoBacktracking,coordenadasConIndice);
-			
+			crearNuevoPuntoEnElPlano(_planoGoloso,_cgmGoloso,_setConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, _setConVecinos.get(i).getNumeroVertice());
+			crearNuevoPuntoEnElPlano(_planoBacktracking,_cgmBacktracking,_setConVecinos,coordenadasConIndice,latitudPunto, longitudPunto, _setConVecinos.get(i).getNumeroVertice());			
 		}
+		dibujarAristasEnPlano(_setConVecinos,_planoGoloso,coordenadasConIndice);
+		dibujarAristasEnPlano(_setConVecinos,_planoBacktracking,coordenadasConIndice);
 	}
 	public JFrame getPantallaCargarCGM()
 	{
 		return pantallaCargarCGM;
 	}
-
 }
